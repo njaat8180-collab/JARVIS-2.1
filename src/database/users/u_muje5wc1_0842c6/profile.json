@@ -1,0 +1,23 @@
+{
+  "name": "ContextActivity",
+  "preferredName": "ContextActivity",
+  "email": "",
+  "phone": "",
+  "address": "",
+  "dateOfBirth": "",
+  "language": "en",
+  "secondaryLanguage": "",
+  "autoLanguageDetect": false,
+  "country": "",
+  "region": "",
+  "city": "",
+  "timezone": "",
+  "occupation": "",
+  "education": "",
+  "interests": [],
+  "hobbies": [],
+  "avatarColor": "#18FFFF",
+  "avatarInitials": "CO",
+  "userId": "u_muje5wc1_0842c6",
+  "version": 2
+}

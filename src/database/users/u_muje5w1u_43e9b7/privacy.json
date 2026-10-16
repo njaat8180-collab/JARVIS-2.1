@@ -1,0 +1,12 @@
+{
+  "saveProfile": true,
+  "saveConversationMemory": true,
+  "savePreferences": true,
+  "saveLearningData": false,
+  "saveVoiceData": true,
+  "saveBrowserActivity": false,
+  "saveSearchHistory": false,
+  "saveBackgroundLearning": false,
+  "userId": "u_muje5w1u_43e9b7",
+  "version": 2
+}

@@ -1,0 +1,23 @@
+{
+  "name": "User",
+  "preferredName": "User",
+  "email": "",
+  "phone": "",
+  "address": "",
+  "dateOfBirth": "",
+  "language": "auto",
+  "secondaryLanguage": "",
+  "autoLanguageDetect": false,
+  "country": "",
+  "region": "",
+  "city": "",
+  "timezone": "",
+  "occupation": "",
+  "education": "",
+  "interests": [],
+  "hobbies": [],
+  "avatarColor": "#69F0AE",
+  "avatarInitials": "US",
+  "userId": "u_muwr2x1b_1a3328",
+  "version": 2
+}

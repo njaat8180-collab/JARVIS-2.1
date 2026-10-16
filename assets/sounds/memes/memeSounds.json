@@ -1,0 +1,259 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "basePath": "assets/sounds/memes",
+  "defaultVolume": 0.22,
+  "cooldownMs": 2500,
+  "sounds": [
+    {
+      "id": "moai",
+      "file": "moai.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "vine-boom",
+      "file": "vine-boom.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "bruh",
+      "file": "bruh.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "emotional-damage",
+      "file": "emotional-damage.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "what-da-dog-doin",
+      "file": "what-da-dog-doin.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "sus",
+      "file": "sus.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "badum-tss",
+      "file": "badum-tss.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "sad-violin",
+      "file": "sad-violin.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "record-scratch",
+      "file": "record-scratch.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "airhorn",
+      "file": "airhorn.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "stonks",
+      "file": "stonks.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "not-stonks",
+      "file": "not-stonks.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "sheesh",
+      "file": "sheesh.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "wow",
+      "file": "wow.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "dramatic-boom",
+      "file": "dramatic-boom.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "dramatic-reveal",
+      "file": "dramatic-reveal.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "laugh-track",
+      "file": "laugh-track.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "trombone-fail",
+      "file": "trombone-fail.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "metal-pipe",
+      "file": "metal-pipe.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "vine-cat",
+      "file": "vine-cat.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "cat-scream",
+      "file": "cat-scream.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "chicken-scream",
+      "file": "chicken-scream.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "frog",
+      "file": "frog.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "among-us",
+      "file": "among-us.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "mlg-airhorn",
+      "file": "mlg-airhorn.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "trololo",
+      "file": "trololo.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "coffin-dance",
+      "file": "coffin-dance.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "why-are-you-running",
+      "file": "why-are-you-running.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "hmm",
+      "file": "hmm.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "thinking",
+      "file": "thinking.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "error",
+      "file": "error.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "windows-error-style",
+      "file": "windows-error-style.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "notification",
+      "file": "notification.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "level-up",
+      "file": "level-up.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "achievement",
+      "file": "achievement.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "mission-complete",
+      "file": "mission-complete.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "click",
+      "file": "click.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "whoosh",
+      "file": "whoosh.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "surprise",
+      "file": "surprise.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "suspense",
+      "file": "suspense.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "bruh-extended",
+      "file": "bruh-extended.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "oh-no",
+      "file": "oh-no.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "nope",
+      "file": "nope.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "goofy",
+      "file": "goofy.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "sigma",
+      "file": "sigma.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "sigma-transition",
+      "file": "sigma-transition.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "galaxy-brain",
+      "file": "galaxy-brain.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "brain-lag",
+      "file": "brain-lag.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "instant-regret",
+      "file": "instant-regret.mp3",
+      "volume": 0.22
+    },
+    {
+      "id": "mission-failed",
+      "file": "mission-failed.mp3",
+      "volume": 0.22
+    }
+  ]
+}

@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' file: data: blob: https:; media-src 'self' blob:; connect-src 'self' http://127.0.0.1:* http://localhost:*">
+
+    <title>JARVIS</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="css/hud.css">
+
+    <link
+        rel="stylesheet"
+        href="css/upgrade-theme.css">
+
+    <link
+        rel="stylesheet"
+        href="css/mcu-theme.css">
+
+    <!-- Styling for the User System cards in Settings (Add/Switch/Delete
+         User etc.) -- this feature has no equivalent in the base UI, so
+         it needs its own small supplemental stylesheet. -->
+    <link rel="stylesheet" href="css/user-panel.css">
+
+<link rel="stylesheet" href="css/notification-center.css">
+<link rel="stylesheet" href="css/command-deck.css">
+<link rel="stylesheet" href="css/teal-command-theme.css">
+<link rel="stylesheet" href="css/mission-dashboard.css">
+<link rel="stylesheet" href="css/ui-refresh.css">
+</head>
+
+<body class="hud-shell dashboard-view-active">
+
+<div class="hud-frame" aria-hidden="true">
+    <span class="hud-frame-tr"></span>
+    <span class="hud-frame-bl"></span>
+</div>
+
+<!-- Subsystem alert strip (hud.js setAlert() writes here; styled in hud.css) -->
+<div id="hudAlertBar" class="hud-alert-bar" role="status" hidden></div>
+
+<div class="app">
+
+<!-- ========================================= -->
+<!-- HEADER -->
+<!-- ========================================= -->
+
+<header class="header">
+
+    <!-- Logo -->
+
+    <div class="logo">
+
+        <img class="logo-mark" src="../assets/logo.svg" alt="" width="36" height="36">
+
+        <div>
+            <h1>JARVIS</h1>
+
+            <p>Your desktop, connected.</p>
+        </div>
+
+    </div>
+
+    <button class="workspace-search" type="button" data-open-app-library><span aria-hidden="true">⌕</span> Find an app <kbd>Ctrl K</kbd></button>
+
+    <!-- Clock -->
+
+    <div class="clockBox">
+
+        <div id="clock">
+
+            00:00:00
+
+        </div>
+
+        <div id="date">
+
+            Loading...
+
+        </div>
+
+    </div>
+
+    <!-- Window Buttons -->
+
+    <div class="windowButtons">
+
+        <button id="minimize" aria-label="Minimize window" title="Minimize">
+
+            ─
+
+        </button>
+
+        <button id="maximize" aria-label="Maximize window" title="Maximize">
+
+            □
+
+        </button>
+
+        <button id="close" aria-label="Close window" title="Close">
+
+            ✕
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ========================================= -->
+<!-- MAIN LAYOUT -->
+<!-- ========================================= -->
+
+<div class="mainLayout">
+
+<!-- ========================================= -->
+<!-- LEFT SIDEBAR -->
+<!-- ========================================= -->
+
+<aside class="sidebar">
+
+    <!-- Profile -->
+
+    <div class="profile-card">
+
+        <div class="profile-image">
+
+            🤖
+
+        </div>
+
+        <h2>JARVIS</h2>
+
+        <p>Professional AI Assistant</p>
+
+    </div>
+
+    <!-- Current Task -->
+
+    <div id="currentTask" class="current-task">
+
+        Waiting For Command...
+
+    </div>
+
+    <button id="learningEngineControl" class="learning-engine-control is-off" type="button" aria-pressed="false">
+        <span class="learning-engine-orbit" aria-hidden="true"></span>
+        <span class="learning-engine-copy">
+            <span class="learning-engine-kicker">BACKGROUND INTELLIGENCE</span>
+            <strong>LEARNING ENGINE</strong>
+            <span id="learningEngineState">OFF</span>
+        </span>
+        <span id="learningEngineDot" class="learning-engine-dot" aria-hidden="true"></span>
+    </button>
+
+    <!-- Navigation -->
+
+    <nav class="menu">
+
+        <div class="menu-section-label">ASSISTANT</div>
+
+        <button id="navDashboard" data-view="dashboard" class="menu-item active" title="Dashboard">
+
+            Dashboard
+
+        </button>
+
+        <button id="navVoice" data-view="voice" class="menu-item" title="Voice">
+
+            Voice
+
+        </button>
+
+        <button id="navChat" data-view="chat" class="menu-item" title="Chat">
+
+            Chat
+
+        </button>
+
+        <button id="navBrowser" data-view="browser" class="menu-item" title="Browser">
+
+            Browser
+
+        </button>
+
+        <button class="menu-item app-library-nav" type="button" data-open-app-library>App Library <span class="nav-new">NEW</span></button>
+
+        <details class="menu-group" data-menu-group="workspace" open>
+            <summary>Workspace <span class="menu-group-count">4</span></summary>
+            <button id="navAIQueue" data-view="ai-queue" class="menu-item">AI Message Queue</button>
+            <button id="navFiles" data-view="files" class="menu-item">Files</button>
+            <button id="navDocuments" data-view="documents" class="menu-item">Documents</button>
+            <button id="navMemory" data-view="memory" class="menu-item">Memory</button>
+        </details>
+
+        <details class="menu-group" data-menu-group="system">
+            <summary>System <span class="menu-group-count">4</span></summary>
+            <button id="navSettings" data-view="settings" class="menu-item">Settings</button>
+            <button id="navHealth" data-view="health" class="menu-item">Health</button>
+            <button id="navBackgroundEvents" data-view="background-events" class="menu-item">Background Events</button>
+            <button id="navLab" data-view="lab" class="menu-item">JARVIS Lab</button>
+        </details>
+
+    </nav>
+
+    <!-- Status -->
+
+    <details class="status-box">
+
+        <summary class="status-box-summary">System status <span>Live</span></summary>
+
+        <div class="status-row">
+
+            <span>AI</span>
+
+            <span id="aiStatus">
+
+                Checking...
+
+            </span>
+
+        </div>
+
+        <div class="status-row">
+
+            <span>Mic</span>
+
+            <span id="micStatus">
+
+                Checking...
+
+            </span>
+
+        </div>
+
+        <div class="status-row">
+
+            <span>Whisper</span>
+
+            <span id="whisperStatus">
+
+                Checking...
+
+            </span>
+
+        </div>
+
+        <div class="status-row">
+
+            <span>Ollama</span>
+
+            <span id="ollamaStatus">
+
+                Checking...
+
+            </span>
+
+        </div>
+
+        <div class="status-row voice-sidebar-controls">
+            <span id="sttEngineLabel" class="stt-engine-label" title="Local speech engine status">🎙️ Whisper (offline)</span>
+        </div>
+        <div class="voice-sidebar-controls">
+            <button id="wakeWordToggle" type="button" class="wake-word-toggle" aria-pressed="false" title="Wake Word: OFF (click to enable ambient listening)">⚪ Wake Word</button>
+        </div>
+
+        <div class="status-row">
+
+            <span>Model</span>
+
+            <span id="ollamaModel">
+
+                —
+
+            </span>
+
+        </div>
+
+        <div class="status-row">
+
+            <span>Voice</span>
+
+            <span id="voiceStatus">
+
+                Offline
+
+            </span>
+
+        </div>
+
+        <div class="status-row">
+
+            <span>Internet</span>
+
+            <span id="internetStatus">
+
+                Checking...
+
+            </span>
+
+        </div>
+
+    </details>
+
+    <!-- User -->
+
+    <div class="user-card">
+
+        <h3>User</h3>
+
+        <p id="username">
+
+            JARVIS
+
+        </p>
+
+    </div>
+
+</aside>
+
+<!-- ========================================= -->
+<!-- HEALTH / AGENT MONITOR PANEL -->
+<!-- ========================================= -->
+
+<section id="healthPanel" class="health-panel" hidden>
+
+    <div class="health-header">
+        <div>
+            <div class="health-kicker">JARVIS PRO MAX / LIVE DIAGNOSTICS</div>
+            <h2>HEALTH MATRIX</h2>
+            <p id="healthUpdated">Waiting for desktop telemetry...</p>
+        </div>
+        <button id="healthRefreshBtn" class="health-refresh-btn">↻ REFRESH</button>
+    </div>
+
+    <div class="health-overview">
+        <div class="health-overall-card">
+            <div class="health-overall-ring"><span id="healthOverallScore">—</span><small>/100</small></div>
+            <div>
+                <span class="health-kicker">SYSTEM INTEGRITY</span>
+                <h3 id="healthOverallLabel">Checking system…</h3>
+                <p id="healthOverallDetail">Analyzing live desktop telemetry and agent status.</p>
+            </div>
+        </div>
+        <div class="health-check-grid">
+            <div class="health-check"><span class="health-check-icon">◈</span><div><b>CORE</b><small id="healthCoreCheck">CHECKING</small></div></div>
+            <div class="health-check"><span class="health-check-icon">◉</span><div><b>AGENTS</b><small id="healthAgentsCheck">CHECKING</small></div></div>
+            <div class="health-check"><span class="health-check-icon">◌</span><div><b>TELEMETRY</b><small id="healthTelemetryCheck">CHECKING</small></div></div>
+            <div class="health-check"><span class="health-check-icon">⌁</span><div><b>NETWORK</b><small id="healthNetworkCheck">CHECKING</small></div></div>
+        </div>
+    </div>
+
+    <div class="health-metrics">
+        <article class="health-metric">
+            <div class="health-metric-top"><span>CPU</span><span id="healthCpuStatus">—</span></div>
+            <strong id="healthCpu">—</strong>
+            <div class="health-meter"><span id="healthCpuBar"></span></div>
+            <small id="healthCpuDetail">Native system telemetry</small>
+        </article>
+        <article class="health-metric">
+            <div class="health-metric-top"><span>RAM</span><span id="healthRamStatus">—</span></div>
+            <strong id="healthRam">—</strong>
+            <div class="health-meter"><span id="healthRamBar"></span></div>
+            <small id="healthRamDetail">Native system telemetry</small>
+        </article>
+        <article class="health-metric">
+            <div class="health-metric-top"><span>GPU</span><span id="healthGpuStatus">—</span></div>
+            <strong id="healthGpu">—</strong>
+            <div class="health-meter"><span id="healthGpuBar"></span></div>
+            <small id="healthGpuDetail">GPU availability</small>
+        </article>
+        <article class="health-metric">
+            <div class="health-metric-top"><span>DISK</span><span id="healthDiskStatus">—</span></div>
+            <strong id="healthDisk">—</strong>
+            <div class="health-meter"><span id="healthDiskBar"></span></div>
+            <small id="healthDiskDetail">Native storage telemetry</small>
+        </article>
+        <article class="health-metric">
+            <div class="health-metric-top"><span>MEMORY</span><span id="healthMemoryStatus">—</span></div>
+            <strong id="healthMemoryFacts">—</strong>
+            <small id="healthMemoryDetail">Semantic fact store</small>
+        </article>
+    </div>
+
+    <div class="health-columns">
+        <section class="health-card agent-health-card">
+            <div class="health-card-header">
+                <div>
+                    <span class="health-kicker">AGENT REGISTRY</span>
+                    <h3>AGENT STATUS</h3>
+                </div>
+                <span id="healthAgentSummary" class="health-summary">Checking...</span>
+            </div>
+            <div id="healthAgentList" class="health-agent-list">
+                <div class="health-empty">Waiting for AgentRegistry...</div>
+            </div>
+        </section>
+
+        <section class="health-card runtime-health-card">
+            <div class="health-card-header">
+                <div>
+                    <span class="health-kicker">RUNTIME</span>
+                    <h3>SYSTEM DETAILS</h3>
+                </div>
+            </div>
+            <div class="health-detail-list">
+                <div><span>PLATFORM</span><strong id="healthPlatform">—</strong></div>
+                <div><span>ARCHITECTURE</span><strong id="healthArch">—</strong></div>
+                <div><span>UPTIME</span><strong id="healthUptime">—</strong></div>
+                <div><span>NETWORK</span><strong id="healthNetwork">—</strong></div>
+                <div><span>AGENT MONITOR</span><strong id="healthMonitor">—</strong></div>
+                <div><span>LAST REFRESH</span><strong id="healthTimestamp">—</strong></div>
+            </div>
+            <div class="health-note">
+                <span class="health-note-dot"></span>
+                Values are read from the Electron main process and the live agent registry.
+            </div>
+        </section>
+
+        <section class="health-card feature-health-card">
+            <div class="health-card-header">
+                <div>
+                    <span class="health-kicker">LIVE CAPABILITY CHECKS</span>
+                    <h3>FEATURE STATUS</h3>
+                </div>
+                <span class="health-summary">Current readiness</span>
+            </div>
+            <div id="healthFeatureList" class="health-detail-list">
+                <div><span>FEATURES</span><strong>Checking…</strong></div>
+            </div>
+        </section>
+
+        <section class="health-card preflight-health-card">
+            <div class="health-card-header">
+                <div>
+                    <span class="health-kicker">EVENT READINESS</span>
+                    <h3>PREFLIGHT CHECK</h3>
+                </div>
+                <button id="healthPreflightBtn" class="panel-btn" type="button">RUN CHECK</button>
+            </div>
+            <div id="healthPreflightList" class="health-preflight-list" aria-live="polite">
+                <div><span>READY CHECK</span><strong>Run before the demo</strong></div>
+            </div>
+        </section>
+
+        <section class="health-card pc-doctor-card">
+            <div class="health-card-header">
+                <div>
+                    <span class="health-kicker">OFFLINE-FIRST RECOVERY</span>
+                    <h3>SMART PC DOCTOR</h3>
+                </div>
+                <button id="pcDoctorScanBtn" class="panel-btn" type="button">SCAN OFFLINE</button>
+            </div>
+            <p class="pc-doctor-note">JARVIS checks local health without Sarvam or Ollama. No fix runs automatically.</p>
+            <div id="pcDoctorSummary" class="health-summary">Waiting for an offline scan…</div>
+            <div id="pcDoctorIssues" class="pc-doctor-issues" aria-live="polite"></div>
+            <button id="pcDoctorApplyBtn" class="panel-btn" type="button" hidden>APPLY APPROVED SAFE FIXES</button>
+        </section>
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- BACKGROUND EVENTS PANEL -->
+<!-- ========================================= -->
+
+<section id="backgroundEventsPanel" class="background-events-panel" hidden>
+
+    <div class="background-events-header">
+        <div>
+            <div class="background-events-kicker">JARVIS PRO MAX / AUTONOMOUS WORK MONITOR</div>
+            <h2>BACKGROUND EVENTS</h2>
+            <p id="backgroundEventsUpdated">Waiting for live worker telemetry...</p>
+        </div>
+        <div class="background-events-actions">
+            <span id="backgroundEventsConnection" class="background-status-badge">OFFLINE</span>
+            <button id="backgroundEventsRefresh" class="background-refresh-btn" type="button">↻ REFRESH</button>
+        </div>
+    </div>
+
+    <div class="background-status-grid">
+        <article class="background-status-card">
+            <span>LEARNING ENGINE</span>
+            <strong id="backgroundLearningStatus">OFF</strong>
+            <small id="backgroundLearningStatusDetail">Manual start required</small>
+        </article>
+        <article class="background-status-card">
+            <span>INTERNET</span>
+            <strong id="backgroundInternetStatus">CHECKING</strong>
+            <small>Live connectivity</small>
+        </article>
+        <article class="background-status-card">
+            <span>CURRENT ACTIVITY</span>
+            <strong id="backgroundCurrentActivity">Idle</strong>
+            <small id="backgroundProcessingStatus">IDLE</small>
+        </article>
+        <article class="background-status-card">
+            <span>STORAGE</span>
+            <strong id="backgroundStorageStatus">Local</strong>
+            <small id="backgroundStorageDetail">Existing offline knowledge store</small>
+        </article>
+    </div>
+
+    <section class="background-card background-job-card">
+        <div class="background-card-header">
+            <div>
+                <span class="background-events-kicker">DOCUMENTS · RESEARCH · SCHEDULED TASKS</span>
+                <h3>JOB CENTER</h3>
+            </div>
+            <button id="backgroundJobsRefresh" class="background-refresh-btn" type="button">↻ REFRESH</button>
+        </div>
+        <div id="backgroundJobList" class="background-job-list" aria-live="polite">
+            <div class="background-empty">No document or research jobs yet.</div>
+        </div>
+        <div class="background-card-header assistant-task-heading">
+            <div><span class="background-events-kicker">SAFE ACTIONS · EVIDENCE CHECKS</span><h3>TASK AGENT</h3></div>
+            <button id="assistantTasksRefresh" class="background-refresh-btn" type="button">↻ REFRESH</button>
+        </div>
+        <form id="assistantTaskForm" class="assistant-task-form">
+            <label class="sr-only" for="assistantTaskInput">Describe a task</label>
+            <input id="assistantTaskInput" maxlength="1000" autocomplete="off" placeholder="Try: Open File Explorer · Search Minecraft on Google · Find Minecraft information" />
+            <button type="submit">RUN TASK</button>
+        </form>
+        <div id="assistantTaskList" class="background-job-list" aria-live="polite">
+            <div class="background-empty">No agent tasks yet. Describe a supported task above to begin.</div>
+        </div>
+    </section>
+
+    <div class="background-live-grid">
+        <section class="background-card background-current-card">
+            <div class="background-card-header">
+                <div>
+                    <span class="background-events-kicker">LIVE WORK STATE</span>
+                    <h3>JARVIS BACKGROUND WORK</h3>
+                </div>
+                <span id="backgroundLiveIndicator" class="background-live-indicator">IDLE</span>
+            </div>
+            <div class="background-detail-list">
+                <div><span>SOURCE</span><strong id="backgroundCurrentSource">—</strong></div>
+                <div><span>SOURCE URL</span><a id="backgroundCurrentSourceUrl" href="#" rel="noreferrer noopener">—</a></div>
+                <div><span>TOPIC</span><strong id="backgroundCurrentTopic">—</strong></div>
+                <div><span>ACTION</span><strong id="backgroundCurrentAction">Waiting</strong></div>
+                <div><span>PROCESSING</span><strong id="backgroundCurrentProcessing">IDLE</strong></div>
+                <div><span>STORAGE</span><strong id="backgroundCurrentStorage">Not active</strong></div>
+            </div>
+        </section>
+
+        <section class="background-card">
+            <div class="background-card-header">
+                <div>
+                    <span class="background-events-kicker">RECENTLY LEARNED</span>
+                    <h3>KNOWLEDGE COLLECTED</h3>
+                </div>
+                <span id="backgroundKnowledgeCount" class="background-summary">0 ITEMS</span>
+            </div>
+            <div id="backgroundRecentKnowledge" class="background-knowledge-list">
+                <div class="background-empty">No background knowledge has been collected yet.</div>
+            </div>
+        </section>
+    </div>
+
+    <section class="background-card background-activity-card">
+        <div class="background-card-header">
+            <div>
+                <span class="background-events-kicker">REAL-TIME EVENT STREAM</span>
+                <h3>LIVE ACTIVITY</h3>
+            </div>
+            <span id="backgroundEventCount" class="background-summary">0 EVENTS</span>
+        </div>
+        <div id="backgroundEventStream" class="background-event-stream">
+            <div class="background-empty">Learning Engine is OFF. Press LEARNING ENGINE → ON to begin.</div>
+        </div>
+    </section>
+
+    <section class="background-stats-grid">
+        <article class="background-stat"><span>KNOWLEDGE ITEMS</span><strong id="backgroundStatKnowledge">0</strong></article>
+        <article class="background-stat"><span>SOURCES USED</span><strong id="backgroundStatSources">0</strong></article>
+        <article class="background-stat"><span>TOPICS LEARNED</span><strong id="backgroundStatTopics">0</strong></article>
+        <article class="background-stat"><span>SUCCESSFUL FETCHES</span><strong id="backgroundStatSuccess">0</strong></article>
+        <article class="background-stat"><span>FAILED FETCHES</span><strong id="backgroundStatFailed">0</strong></article>
+        <article class="background-stat"><span>SAVED</span><strong id="backgroundStatSaved">0</strong></article>
+    </section>
+</section>
+
+<!-- ========================================= -->
+<!-- JARVIS LAB: SAFE, LOCAL EXPERIMENTS -->
+<!-- ========================================= -->
+<section id="labPanel" class="lab-panel" hidden aria-labelledby="labTitle">
+    <header class="lab-header">
+        <div>
+            <div class="background-events-kicker">JARVIS / SAFE KNOWLEDGE EXPERIMENTS</div>
+            <h2 id="labTitle">JARVIS LAB</h2>
+            <p id="labStatus" role="status">Ready to create varied, runnable coding experiments during idle time.</p>
+        </div>
+        <div class="lab-controls">
+            <span id="labIdleCountdown" class="lab-countdown">IDLE TIMER —</span>
+            <button id="labRunNow" type="button">RUN ONE EXPERIMENT</button>
+            <button id="labPause" type="button" aria-pressed="false">PAUSE AUTO LAB</button>
+        </div>
+    </header>
+    <div class="lab-notice">Each Lab task creates a usable, self-contained mini app. Preview & Run Locally launches it in an isolated browser sandbox, so it can use its own UI and JavaScript but cannot access your files, JARVIS controls, or the internet.</div>
+    <div class="lab-toolbar"><strong id="labExperimentCount">0 EXPERIMENTS</strong><button id="labReviewKnowledge" type="button">REVIEW KNOWLEDGE</button></div>
+    <div id="labExperiments" class="lab-experiments" aria-live="polite">
+        <div class="lab-empty">After two quiet minutes, JARVIS will choose a runnable coding project. Each new experiment varies the project type.</div>
+    </div>
+</section>
+
+<!-- ========================================= -->
+<!-- SEQUENTIAL AI MESSAGE QUEUE -->
+<!-- ========================================= -->
+<section id="aiMessageQueuePanel" class="ai-message-queue-panel" hidden aria-labelledby="aiQueueTitle">
+    <header class="ai-queue-header">
+        <div>
+            <div class="background-events-kicker">JARVIS / SEQUENTIAL AI WORKFLOW</div>
+            <h2 id="aiQueueTitle">AI MESSAGE QUEUE</h2>
+            <p id="aiQueueStatus" role="status">Choose an available JARVIS model, add messages, then start the queue.</p>
+        </div>
+        <div class="ai-queue-controls">
+            <label for="aiQueueTarget">SEND TO</label>
+            <select id="aiQueueTarget" aria-label="Selected AI model"></select>
+            <button id="aiQueueRefreshModels" type="button">↻ MODELS</button>
+        </div>
+    </header>
+    <div class="ai-queue-note">Messages are sent one at a time through the selected model configured in JARVIS. The next message waits until the previous reply arrives. Downloaded ChatGPT/Gemini desktop apps are not controlled by this queue; connect an API model in Settings to use those services.</div>
+    <section class="ai-queue-composer" aria-label="Add messages to queue">
+        <label for="aiQueueInput">Add one message per line</label>
+        <textarea id="aiQueueInput" rows="4" maxlength="100000" placeholder="Write a message for the selected AI model. Each line becomes a separate message."></textarea>
+        <div class="ai-queue-composer-actions">
+            <span id="aiQueueTargetHint">Only the currently configured provider and its available models are listed.</span>
+            <button id="aiQueueAdd" type="button">ADD TO LIST</button>
+        </div>
+    </section>
+    <div class="ai-queue-toolbar">
+        <strong id="aiQueueCount">0 MESSAGES</strong>
+        <div>
+            <button id="aiQueueStart" type="button">SEND IN ORDER</button>
+            <button id="aiQueuePause" type="button">PAUSE AFTER CURRENT REPLY</button>
+            <button id="aiQueueClear" type="button">CLEAR LIST</button>
+        </div>
+    </div>
+    <div id="aiQueueList" class="ai-queue-list" aria-live="polite">
+        <div class="ai-queue-empty">Your queued messages and model replies will appear here.</div>
+    </div>
+</section>
+
+<!-- ========================================= -->
+<!-- MEMORY VIEWER PANEL -->
+<!-- ========================================= -->
+
+<section id="memoryPanel" class="memory-panel" hidden>
+    <div class="panel-header">
+        <div>
+            <div class="panel-kicker">JARVIS PRO MAX / MEMORY STORE</div>
+            <h2>MEMORY VIEWER</h2>
+            <p id="memoryStats">Loading memory...</p>
+        </div>
+        <div class="panel-actions">
+            <input type="text" id="memorySearchInput" placeholder="Search memories..." class="panel-search">
+            <select id="memoryCategoryFilter" class="panel-search" aria-label="Filter memories by category">
+                <option value="">All categories</option><option value="USER_PROJECT">Projects</option>
+                <option value="USER_PREFERENCE">Preferences</option><option value="USER_FACT">Facts and notes</option>
+                <option value="USER_WORKFLOW">Workflows</option>
+            </select>
+            <input type="date" id="memoryDateFilter" class="panel-search" aria-label="Filter memories by date">
+            <button id="memoryConstellationBtn" class="panel-btn" aria-expanded="false">✦ Memory Constellation</button>
+            <button id="memoryRefreshBtn" class="panel-btn">Refresh</button>
+            <button id="memoryClearBtn" class="panel-btn panel-btn-danger">Clear All</button>
+        </div>
+    </div>
+    <section id="memoryConstellation" class="memory-constellation" hidden aria-label="Interactive map of saved memories">
+        <div class="memory-constellation-heading">
+            <strong>MEMORY CONSTELLATION</strong>
+            <span id="memoryConstellationSummary">Your saved ideas, linked locally.</span>
+        </div>
+        <svg id="memoryConstellationSvg" viewBox="0 0 900 460" role="img" aria-label="Interactive constellation of saved memories"></svg>
+    </section>
+    <div class="memory-privacy-controls" aria-label="Memory privacy controls">
+        <label><input type="checkbox" id="memoryEnabledToggle"> Persistent memory enabled</label>
+        <label><input type="checkbox" id="memoryAutoSaveToggle"> Save useful facts from chat</label>
+        <span id="memoryPrivacyStatus" role="status">Loading privacy settings…</span>
+    </div>
+    <div id="memoryList" class="memory-list">
+        <p class="panel-empty">No memories loaded.</p>
+    </div>
+</section>
+
+<!-- ========================================= -->
+<!-- SETTINGS PANEL -->
+<!-- ========================================= -->
+
+<section id="settingsPanel" class="settings-panel" hidden>
+    <div class="panel-header">
+        <div>
+            <div class="panel-kicker">JARVIS PRO MAX / CONFIGURATION</div>
+            <h2>SETTINGS</h2>
+            <p>Adjust JARVIS behavior and preferences.</p>
+        </div>
+    </div>
+    <div class="settings-body">
+        <div class="settings-group offline-status-card" data-setting-category="ai">
+            <span class="offline-mode-badge">● LOCAL FIRST / ONLINE LOOKUPS ASK FIRST</span>
+            <p class="offline-mode-copy">Normal chat uses Sarvam AI. Commands and desktop actions stay on this computer. Ollama is available separately as a local model.</p>
+            <label class="settings-label">Local conversation model</label>
+            <span id="settingsLocalModelStatus" class="settings-value">Checking local Ollama…</span>
+            <label class="settings-label">On-device speech model</label>
+            <span id="settingsLocalSpeechStatus" class="settings-value">Checking local speech…</span>
+            <label class="settings-label">Assistant memory</label>
+            <span class="settings-value">Local profile and saved knowledge remain available offline.</span>
+        </div>
+        <div class="settings-group ai-provider-settings" data-setting-category="ai">
+            <label class="settings-label" for="settingsAiProvider">AI model provider</label>
+            <p class="mission-settings-help">Choose Sarvam, Grok, or a local Ollama model. Remote API keys stay encrypted on this device or can be supplied through the provider environment variables.</p>
+            <div class="provider-quick-switch" role="group" aria-label="Quick model switch">
+                <button type="button" class="provider-quick-card" data-provider-quick="sarvam"><strong>✦ Sarvam</strong><span>Online Hindi model</span></button>
+                <button type="button" class="provider-quick-card" data-provider-quick="grok"><strong>◈ Grok</strong><span>Online reasoning</span></button>
+                <button type="button" class="provider-quick-card" data-provider-quick="groq"><strong>⚡ Groq</strong><span>GPT-OSS fast</span></button>
+                <button type="button" class="provider-quick-card" data-provider-quick="ollama"><strong>◉ Ollama</strong><span>Local and private</span></button>
+            </div>
+            <div id="settingsAiProviderForm" class="ai-provider-form" data-ai-provider-form>
+            <select id="settingsAiProvider" data-provider-field="provider" class="settings-select">
+                <option value="sarvam" selected>Sarvam AI chat (online, default)</option>
+                <option value="grok">Grok chat (xAI online)</option>
+                <option value="groq">Groq chat (GPT-OSS online)</option>
+                <option value="ollama">Ollama local model</option>
+            </select>
+            <div data-provider-local>
+                <label class="settings-label" for="settingsOllamaModel">Installed Ollama model</label>
+                <select id="settingsOllamaModel" class="settings-select"><option value="">Checking installed models…</option></select>
+            </div>
+            <div data-provider-api hidden>
+                <label class="settings-label" for="settingsAiProviderName">Provider name</label>
+                <input id="settingsAiProviderName" data-provider-field="name" class="settings-select" type="text" autocomplete="off" placeholder="Sarvam AI">
+                <label class="settings-label" for="settingsAiApiEndpoint">API base URL</label>
+                <input id="settingsAiApiEndpoint" data-provider-field="endpoint" class="settings-select" type="url" autocomplete="url" placeholder="https://api.sarvam.ai/v1">
+                <label class="settings-label" for="settingsAiApiModel">API model name</label>
+                <input id="settingsAiApiModel" data-provider-field="model" class="settings-select" type="text" autocomplete="off" placeholder="sarvam-105b">
+                <label class="settings-label" for="settingsAiVisionModel">Screen / vision model (same provider)</label>
+                <input id="settingsAiVisionModel" data-provider-field="visionModel" class="settings-select" type="text" autocomplete="off" placeholder="Groq: qwen/qwen3.8-27b">
+                <small class="settings-value">Screenshots need an image-capable model. Groq uses Qwen vision by default; your conversation model stays unchanged.</small>
+                <label class="settings-label" for="settingsAiApiKey">API key</label>
+                <input id="settingsAiApiKey" data-provider-field="key" class="settings-select" type="password" autocomplete="new-password" placeholder="Stored encrypted on this device">
+                <small id="settingsAiApiKeyState" class="settings-value"></small>
+            </div>
+            <div class="settings-provider-actions">
+                <button id="settingsAiProviderSave" data-provider-save class="panel-btn" type="button">Save and use model</button>
+                <button id="settingsAiProviderTest" data-provider-test class="panel-btn" type="button" hidden>Test API</button>
+            </div>
+            <span id="settingsAiProviderStatus" class="settings-value" aria-live="polite"></span>
+            </div>
+            <div class="provider-health-card" aria-live="polite">
+                <div class="provider-health-heading"><strong>Provider health</strong><button id="settingsProviderHealthRefresh" class="panel-btn" type="button">Refresh</button></div>
+                <div><span>Sarvam</span><strong id="settingsSarvamHealth">Checking…</strong></div>
+                <div><span>Credit balance</span><strong id="settingsSarvamCredits">Checking…</strong></div>
+                <div><span>Ollama</span><strong id="settingsOllamaHealth">Checking…</strong></div>
+                <small id="settingsProviderLastTest">No connection test yet.</small>
+            </div>
+            <div class="settings-privacy-card">
+                <label class="settings-label" for="settingsSarvamHistoryTurns">Recent chat context sent to Sarvam</label>
+                <select id="settingsSarvamHistoryTurns" class="settings-select">
+                    <option value="0">Current message only</option>
+                    <option value="2">Last 2 messages</option>
+                    <option value="4">Last 4 messages</option>
+                    <option value="8">Last 8 messages</option>
+                </select>
+                <small>Recent conversation turns are kept on this device and sent only when Sarvam answers. Choose 0 to send only your current message.</small>
+                <button id="settingsClearSarvamHistory" class="panel-btn" type="button">Clear recent chat context</button>
+                <button id="settingsPreviewSarvamContext" class="panel-btn" type="button">Preview context sent next time</button>
+                <pre id="settingsSarvamContextPreview" class="sarvam-context-preview" hidden aria-live="polite"></pre>
+                <span id="settingsSarvamPrivacyStatus" class="settings-value" aria-live="polite"></span>
+                <label class="settings-label" for="settingsLocalHistoryRetention">Local command history retention</label>
+                <select id="settingsLocalHistoryRetention" class="settings-select" aria-label="Local command history retention"><option value="1">1 day</option><option value="7">7 days</option><option value="30">30 days</option><option value="0">Keep forever</option></select>
+                <button id="settingsClearCommandHistory" class="panel-btn" type="button">Clear local command history</button>
+                <span id="settingsLocalHistoryStatus" class="settings-value" aria-live="polite"></span>
+                <details class="privacy-data-details"><summary>See exactly what may be sent</summary><p>When Sarvam answers, JARVIS sends your current prompt, up to the selected number of recent user/assistant messages, and the assistant instructions needed to answer. Clearing recent context does not delete the visible chat transcript or saved profile facts.</p></details>
+            </div>
+            <div class="vision-setup-card setup-wizard-card">
+                <strong>AI setup guide</strong><small>Check each connection before using chat or screen understanding.</small>
+                <ol><li>Sarvam key and connection: <span id="setupSarvamStep">Checking…</span></li><li>Ollama local model: <span id="setupOllamaStep">Checking…</span></li><li>Screen vision model: <span id="setupVisionStep">Checking…</span></li><li>Office slide renderer: <span id="setupDocumentRendererStep">Checking…</span></li><li>Image search: <span id="setupImageSearchStep">Uses available configured/public sources; availability varies.</span></li></ol>
+                <div class="setup-wizard-actions"><button id="settingsSetupRefresh" class="panel-btn" type="button">Check setup again</button><button id="setupSarvamHelp" class="panel-btn" type="button">Set up Sarvam</button><button id="setupOllamaHelp" class="panel-btn" type="button">Set up Ollama</button><button id="setupImageHelp" class="panel-btn" type="button">Image search settings</button></div>
+            </div>
+            <div class="vision-setup-card browser-diagnostic-card"><strong>Browser feature check</strong><small>Run an optional Google search in a temporary JARVIS tab, then check tab listing and close controls. The test tab closes automatically.</small><button id="settingsBrowserDiagnostic" class="panel-btn" type="button">Run browser check</button><span id="settingsBrowserDiagnosticStatus" class="settings-value" aria-live="polite"></span></div>
+            <div class="vision-setup-card">
+                <strong>Screen understanding setup</strong>
+                <span id="settingsVisionHealth">Checking local vision model…</span>
+                <small>Screen understanding runs locally through Ollama. The model download can be several GB; JARVIS will not download it without your choice.</small>
+                <div class="vision-setup-actions"><code>ollama pull gemma3:4b</code><button id="settingsCopyVisionCommand" class="panel-btn" type="button">Copy setup command</button></div>
+            </div>
+        </div>
+        <div class="settings-group" data-setting-category="ai">
+            <label class="settings-label" for="settingsGoogleCseKey">Optional Google Search</label>
+            <p class="mission-settings-help">Add a Google Programmable Search API key and search engine ID to include Google in permission-approved learning. Without these, JARVIS uses Wikipedia only. Values stay in this app's local storage.</p>
+            <input id="settingsGoogleCseKey" class="settings-select" type="password" autocomplete="off" placeholder="Google API key">
+            <input id="settingsGoogleCseCx" class="settings-select" type="text" autocomplete="off" placeholder="Search engine ID (cx)">
+            <button id="settingsGoogleCseSave" class="panel-btn" type="button">Save local search settings</button>
+            <span id="settingsGoogleCseStatus" class="settings-value" aria-live="polite"></span>
+        </div>
+        <div class="settings-group" data-setting-category="voice">
+            <label class="settings-label">Personality Style</label>
+            <small class="settings-field-hint">Changes how JARVIS phrases replies; it does not change the selected AI model.</small>
+            <select id="settingsPersonality" class="settings-select">
+                <option value="professional">Professional</option>
+                <option value="friendly">Friendly</option>
+                <option value="witty">Witty</option>
+                <option value="concise">Concise</option>
+                <option value="formal">Formal</option>
+                <option value="focus">Focus</option>
+            </select>
+        </div>
+        <div class="settings-group" data-setting-category="voice">
+            <label class="settings-label">Voice Model Status</label>
+            <span id="settingsVoiceModelStatus" class="settings-value">Checking...</span>
+            <small class="settings-field-hint">Shows whether speech recognition is ready on this device.</small>
+        </div>
+        <div class="settings-group" data-setting-category="system">
+            <label class="settings-label">Background Learning</label>
+            <small class="settings-field-hint">Allow JARVIS’s existing learning tasks to run in the background.</small>
+            <button id="settingsBgLearnToggle" class="panel-btn">Enable</button>
+        </div>
+        <div class="settings-group" data-setting-category="system">
+            <label class="settings-label">Evolution Engine</label>
+            <small class="settings-field-hint">Run the local improvement workflow and view its current state.</small>
+            <button id="settingsEvolutionToggle" class="panel-btn">Start</button>
+        </div>
+        <div class="settings-group" data-setting-category="system">
+            <label class="settings-label">Knowledge Cache</label>
+            <small class="settings-field-hint">Clear temporary cached lookups; saved documents and profile memory stay separate.</small>
+            <button id="settingsCacheClearBtn" class="panel-btn panel-btn-danger">Clear Cache</button>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- LANGUAGE INTELLIGENCE PANEL              -->
+    <!-- ========================================= -->
+    <div class="tts-settings-section">
+        <div class="tts-settings-header">
+            <div class="panel-kicker">JARVIS PRO MAX / LANGUAGE INTELLIGENCE</div>
+            <h3>Universal Language</h3>
+        </div>
+
+        <div class="tts-status-banner" id="langIntBanner">
+            <div class="tts-status-item">
+                <span class="tts-status-label">DETECTED LANGUAGE</span>
+                <span class="tts-status-value" id="langDetected">—</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">CONFIDENCE</span>
+                <span class="tts-status-value" id="langConfidence">—</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">INTENT</span>
+                <span class="tts-status-value" id="langIntent">—</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">RESPONSE LANG</span>
+                <span class="tts-status-value" id="langResponse">—</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">STT</span>
+                <span class="tts-status-value">Multilingual ✓</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">CONTEXT</span>
+                <span class="tts-status-value">Active ✓</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">MEMORY</span>
+                <span class="tts-status-value">Active ✓</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">TTS</span>
+                <span class="tts-status-value">Multilingual ✓</span>
+            </div>
+        </div>
+
+        <div class="settings-body">
+            <div class="settings-group">
+                <label class="settings-label">Last Input</label>
+                <span class="settings-value" id="langLastInput">—</span>
+            </div>
+            <div class="settings-group">
+                <label class="settings-label">Entity</label>
+                <span class="settings-value" id="langEntity">—</span>
+            </div>
+            <div class="settings-group">
+                <label class="settings-label">Normalized</label>
+                <span class="settings-value" id="langNormalized">—</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- TTS SETTINGS (Microsoft Edge + local fallback) -->
+    <!-- ========================================= -->
+    <div class="tts-settings-section">
+        <div class="tts-settings-header">
+            <div class="panel-kicker">JARVIS PRO MAX / VOICE ENGINE</div>
+            <h3>Text-to-Speech</h3>
+        </div>
+
+        <!-- TTS STATUS BANNER -->
+        <div class="tts-status-banner">
+            <div class="tts-status-item">
+                <span class="tts-status-label">TTS ENGINE</span>
+                <span class="tts-status-value" id="ttsEngineValue">Microsoft Edge TTS</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">VOICE</span>
+                <span class="tts-status-value" id="ttsVoiceValue">JARVIS</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">STATUS</span>
+                <span class="tts-status-badge tts-status-ready" id="ttsStatusBadge">READY</span>
+            </div>
+            <div class="tts-status-item">
+                <span class="tts-status-label">DEVICE</span>
+                <span class="tts-status-value" id="ttsDeviceValue">—</span>
+            </div>
+        </div>
+
+        <!-- TTS CONFIGURATION -->
+        <div class="settings-body">
+            <div class="settings-group">
+                <label class="settings-label" for="sttEngineSelect">Speech Recognition (STT)</label>
+                <select id="sttEngineSelect" class="settings-select">
+                    <option value="offline">Offline Whisper (on this computer)</option>
+                    <option value="sarvam">Online Sarvam Saaras v4</option>
+                    <option value="elevenlabs">Online ElevenLabs Scribe v2</option>
+                </select>
+                <small class="settings-hint">Sarvam mode sends microphone audio to Sarvam AI for transcription. Offline Whisper keeps audio on this computer.</small>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label">Online voice API keys</label>
+                <label class="settings-label" for="ttsSarvamApiKey">Sarvam API key</label>
+                <input id="ttsSarvamApiKey" class="settings-input" type="password" autocomplete="off" placeholder="Paste Sarvam key here" />
+                <button id="ttsSaveSarvamApiKey" class="panel-btn" type="button">Save Sarvam key</button>
+                <small id="sarvamApiKeyStatus" class="settings-hint">No Sarvam key saved in JARVIS settings.</small>
+                <label class="settings-label" for="ttsElevenLabsApiKey">ElevenLabs API key</label>
+                <input id="ttsElevenLabsApiKey" class="settings-input" type="password" autocomplete="off" placeholder="Paste ElevenLabs key here" />
+                <button id="ttsSaveElevenLabsApiKey" class="panel-btn" type="button">Save ElevenLabs key</button>
+                <small id="elevenLabsApiKeyStatus" class="settings-hint">No ElevenLabs key saved in JARVIS settings.</small>
+                <small class="settings-hint">Keys are encrypted and stored locally by JARVIS. You do not need to edit the environment file or restart after saving.</small>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label" for="ttsEngineSelect">Text-to-Speech (TTS)</label>
+                <span class="settings-value">Choose an online service or a voice that runs locally.</span>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label" for="ttsEngineSelect">Speech engine</label>
+                <select id="ttsEngineSelect" class="settings-select">
+                    <optgroup label="Online">
+                        <option value="sarvam">Sarvam Bulbul v3 (online)</option>
+                        <option value="elevenlabs">ElevenLabs Multilingual v2 (online)</option>
+                        <option value="edge">Microsoft Edge neural voice (online)</option>
+                        <option value="indic-parler">Indic Parler-TTS (local Hindi/Indian voices)</option>
+                    </optgroup>
+                    <optgroup label="Offline">
+                        <option value="sapi">Windows voice (local)</option>
+                        <option value="xtts">JARVIS reference voice (local XTTS-v2)</option>
+                    </optgroup>
+                </select>
+                <small class="settings-hint">Sarvam mode sends Jarvis replies to Sarvam AI to create speech. Offline voices keep reply text on this computer.</small>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label">Voice</label>
+                <select id="ttsEdgeVoiceSelect" class="settings-select" aria-label="Microsoft Edge neural voice">
+                    <option value="grok-sarvam-voice">Grok replies + Sarvam voice (STT/TTS)</option>
+                    <option value="indic-parler">Indic Parler-TTS · Male offline Indian voice</option>
+                    <option value="nakul-reference">Nakul की Voice · JARVIS reference voice</option>
+                    <option value="auto">Microsoft Edge Auto · Female Hindi/Roman Hindi/English</option>
+                    <option value="swara">Swara · Female Hindi and Roman Hindi</option>
+                    <option value="neerja">Neerja · Female Indian English</option>
+                    <option value="madhur">Madhur · Best available Edge Hindi male</option>
+                    <option value="prabhat">Prabhat · Male Indian English</option>
+                    <option value="guy">Guy · Male US English</option>
+                    <option value="ryan">Ryan · Male UK English</option>
+                </select>
+                <small id="ttsEdgeVoiceStatus" class="settings-hint">Auto chooses the free Edge neural voice from the detected language.</small>
+                <select id="ttsSapiVoiceSelect" class="settings-select" aria-label="Windows fallback voice">
+                    <option value="Microsoft David">Microsoft David (preferred)</option>
+                </select>
+                <small id="ttsSapiVoiceStatus" class="settings-hint">Used when the local JARVIS voice server is unavailable.</small>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label">Language</label>
+                <select id="ttsLanguageSelect" class="settings-select">
+                    <option value="auto" selected>Auto (Detect from response)</option>
+                    <option value="hi">Hindi</option>
+                    <option value="en">English</option>
+                    <option value="hinglish">Hinglish</option>
+                </select>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label">
+                    Speed
+                    <span class="tts-speed-display" id="ttsSpeedValue">0.95</span>
+                </label>
+                <input
+                    type="range"
+                    id="ttsSpeedSlider"
+                    class="tts-speed-slider"
+                    min="0.90"
+                    max="1.00"
+                    step="0.01"
+                    value="0.95"
+                />
+                <div class="tts-speed-marks">
+                    <span>0.90</span>
+                    <span>0.95</span>
+                    <span>1.00</span>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label">Voice Preview</label>
+                <button id="ttsTestVoiceBtn" class="panel-btn">▶ Test Voice</button>
+            </div>
+
+            <!-- REFERENCE VOICE INFO -->
+            <div class="tts-reference-voice">
+                <div class="tts-ref-header">
+                    <span class="settings-label">Reference Voice</span>
+                    <span class="tts-ref-status" id="ttsRefStatus">Checking...</span>
+                </div>
+                <div class="tts-ref-info">
+                    <div class="tts-ref-row">
+                        <span class="tts-ref-label">File:</span>
+                        <span class="tts-ref-value" id="ttsRefVoiceName">—</span>
+                    </div>
+                    <div class="tts-ref-row">
+                        <span class="tts-ref-label">Duration:</span>
+                        <span class="tts-ref-value" id="ttsRefDuration">—</span>
+                    </div>
+                    <div class="tts-ref-row">
+                        <span class="tts-ref-label">Loaded:</span>
+                        <span class="tts-ref-value" id="ttsRefLoaded">—</span>
+                    </div>
+                    <div class="tts-ref-row">
+                        <span class="tts-ref-label">Speaker Cached:</span>
+                        <span class="tts-ref-value" id="ttsRefSpeakerCached">—</span>
+                    </div>
+                </div>
+                <button id="ttsRefreshStatusBtn" class="panel-btn tts-refresh-btn">↻ Refresh Status</button>
+            </div>
+
+            <!-- REFERENCE VOICE RECORDING TIPS -->
+            <details class="tts-tips">
+                <summary>Reference Voice Recording Tips</summary>
+                <div class="tts-tips-body">
+                    <p>Place your reference WAV at: <code>voices/jarvis_reference.wav</code></p>
+                    <ul>
+                        <li>15–30 seconds of clean speech</li>
+                        <li>Single speaker, natural conversational tone</li>
+                        <li>Minimal background noise, no music</li>
+                        <li>No echo or reverb</li>
+                        <li>Consistent microphone distance</li>
+                        <li>Natural pronunciation and pace</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- USER SYSTEM SECTION                       -->
+    <!-- (multi-user profiles; no equivalent in the -->
+    <!--  base theme, styled to match its cards)    -->
+    <!-- ========================================= -->
+    <section class="user-system-section">
+        <div class="user-section-header">
+            <span class="hud-kicker">JARVIS PRO MAX / IDENTITY</span>
+            <h3>USER</h3>
+        </div>
+        <div class="user-section-grid">
+            <!-- Current User Card -->
+            <div class="user-card user-card-current" id="userPanelCurrentCard" role="button" tabindex="0">
+                <div class="user-card-avatar">
+                    <span class="user-avatar-orb">👤</span>
+                </div>
+                <div class="user-card-info">
+                    <strong id="userPanelCurrentName">Loading...</strong>
+                    <small id="userPanelCurrentStatus">Checking...</small>
+                </div>
+                <div class="user-card-badge" id="userPanelCurrentBadge">●</div>
+                <div class="user-card-detail" id="userPanelCurrentDetail"></div>
+            </div>
+            <!-- Add User -->
+            <button class="user-card user-card-action" id="userPanelAddBtn" type="button">
+                <span class="user-action-icon">➕</span>
+                <strong>Add User</strong>
+                <small>Create new profile</small>
+            </button>
+            <!-- Switch User -->
+            <button class="user-card user-card-action" id="userPanelSwitchBtn" type="button">
+                <span class="user-action-icon">🔄</span>
+                <strong>Switch User</strong>
+                <small>Change active profile</small>
+            </button>
+            <!-- Settings -->
+            <button class="user-card user-card-action" id="userPanelSettingsBtn" type="button">
+                <span class="user-action-icon">⚙️</span>
+                <strong>User Settings</strong>
+                <small>Profile & preferences</small>
+            </button>
+            <!-- Memory -->
+            <button class="user-card user-card-action" id="userPanelMemoryBtn" type="button">
+                <span class="user-action-icon">🧠</span>
+                <strong>My Memory</strong>
+                <small>What JARVIS remembers</small>
+            </button>
+            <!-- Export -->
+            <button class="user-card user-card-action" id="userPanelExportBtn" type="button">
+                <span class="user-action-icon">📤</span>
+                <strong>Export User</strong>
+                <small>Save profile as file</small>
+            </button>
+            <!-- Import -->
+            <button class="user-card user-card-action" id="userPanelImportBtn" type="button">
+                <span class="user-action-icon">📥</span>
+                <strong>Import User</strong>
+                <small>Load profile from file</small>
+            </button>
+            <!-- Delete -->
+            <button class="user-card user-card-action user-card-danger" id="userPanelDeleteBtn" type="button">
+                <span class="user-action-icon">🗑️</span>
+                <strong>Delete User</strong>
+                <small>Permanently remove</small>
+            </button>
+        </div>
+    </section>
+</section>
+
+<!-- ========================================= -->
+<!-- FILES PANEL -->
+<!-- ========================================= -->
+
+<section id="filesPanel" class="files-panel" hidden>
+    <div class="panel-header">
+        <div>
+            <div class="panel-kicker">JARVIS PRO MAX / FILE EXPLORER</div>
+            <h2>FILES</h2>
+            <p id="filesPath">Loading...</p>
+        </div>
+        <div class="panel-actions">
+            <button id="filesUpBtn" class="panel-btn">Up</button>
+            <button id="filesHomeBtn" class="panel-btn">Home</button>
+            <button id="filesRefreshBtn" class="panel-btn">Refresh</button>
+        </div>
+    </div>
+    <div id="filesList" class="files-list">
+        <p class="panel-empty">Loading files...</p>
+    </div>
+</section>
+
+<section id="documentsPanel" class="generated-documents-panel" hidden aria-label="Generated documents">
+    <div class="panel-header"><div><div class="panel-kicker">JARVIS / GENERATED WORK</div><h2>DOCUMENT GALLERY</h2><p>Created PPTX, PDF, Excel, Word, CSV and ZIP files.</p></div><div class="panel-actions"><button id="documentsCompare" class="panel-btn" type="button" disabled>Compare selected (0/2)</button><button id="documentsRefresh" class="panel-btn" type="button">↻ Refresh</button></div></div>
+    <div id="documentCompareResult" class="document-compare-result" hidden aria-live="polite"></div>
+    <div id="generatedDocumentsList" class="generated-documents-grid" aria-live="polite"><div class="panel-empty">Loading generated documents…</div></div>
+</section>
+
+<!-- ========================================= -->
+<!-- CENTER PANEL START -->
+<!-- ========================================= -->
+
+<section class="center-panel">
+
+<section id="missionDashboard" class="mission-dashboard" aria-label="JARVIS personal assistant dashboard">
+    <header class="mission-topline">
+        <div>
+            <span class="mission-eyebrow">JARVIS / COMMAND CENTER</span>
+            <h2>Good day, <span id="dashboardUserName">there</span></h2>
+            <p>Your apps, ideas and everyday work. One place to get things done.</p>
+        </div>
+        <button id="dashboardProfileButton" class="mission-profile-chip" type="button" title="Open active user profile">
+            <span class="mission-avatar" id="dashboardUserInitial">J</span>
+            <span><small>ACTIVE PROFILE</small><strong id="dashboardProfileName">Guest</strong></span>
+            <span class="mission-chevron">›</span>
+        </button>
+    </header>
+
+    <div class="mission-status-strip">
+        <span><i class="mission-dot is-live"></i><b id="dashboardAssistantState">LOCAL CORE READY</b></span>
+        <span>MIC <b id="dashboardMicState">OFF</b></span>
+        <span>AI <b id="dashboardProviderState">Checking…</b></span>
+        <span>INTERNET <b id="dashboardInternetState">Checking…</b></span>
+        <span>TASKS <b id="dashboardTaskState">0</b></span>
+        <span id="dashboardClock">LOCAL TIME —</span>
+    </div>
+
+    <section class="mission-card mission-ask-card" aria-label="Ask JARVIS">
+        <div class="command-visual" aria-hidden="true"><div class="command-orbit"><span>J</span></div><span class="command-visual-caption">JARVIS · PERSONAL AI</span></div>
+        <div class="mission-ask-heading"><div><span class="workspace-eyebrow">MAKE ROOM FOR WHAT MATTERS</span><h3>A thought.<br>A task. <em>Done.</em></h3><p>Ask in Hindi or English. Open your apps, create a document, or work through an idea.</p></div><button type="button" class="mission-link-button" data-open-view="chat">Open chat ↗</button></div>
+        <form id="dashboardAskForm" class="mission-ask-form">
+            <span class="mission-ask-orb" aria-hidden="true">J</span>
+            <label class="sr-only" for="dashboardAskInput">Ask JARVIS anything</label>
+            <input id="dashboardAskInput" type="text" maxlength="4000" placeholder="Ask a question or give JARVIS a task…" autocomplete="off">
+            <button type="submit" aria-label="Send to JARVIS">Ask <span aria-hidden="true">↗</span></button>
+        </form>
+        <div class="command-starters" aria-label="Ideas to get started">
+            <button type="button" data-command-draft="Create a presentation about "><span aria-hidden="true">▤</span> Create a presentation <span aria-hidden="true">↗</span></button>
+            <button type="button" data-command-draft="Help me research "><span aria-hidden="true">◎</span> Explore a topic <span aria-hidden="true">↗</span></button>
+            <button type="button" data-command-draft="Help me plan "><span aria-hidden="true">✓</span> Plan my next task <span aria-hidden="true">↗</span></button>
+        </div>
+    </section>
+
+    <section class="mission-card workspace-apps-card" aria-label="Your applications">
+        <div class="mission-card-heading"><div><span>ON THIS COMPUTER</span><h3>Your apps, a click away</h3></div><button type="button" class="mission-link-button" data-open-app-library>Browse all ↗</button></div>
+        <div id="workspaceAppShortcuts" class="workspace-app-shortcuts" aria-live="polite"><p class="mission-empty">Discovering your installed apps…</p></div>
+        <div class="workspace-apps-footer"><span id="workspaceAppCount">Checking Windows shortcuts and registered apps</span><span>Try “Open SKLauncher”</span></div>
+    </section>
+
+    <details class="dashboard-customize">
+        <summary>Customize Home</summary>
+        <div class="dashboard-customize-options">
+            <label><input type="checkbox" data-dashboard-widget="documents" checked> Recent documents</label>
+            <label><input type="checkbox" data-dashboard-widget="tasks" checked> Active tasks</label>
+            <label><input type="checkbox" data-dashboard-widget="monitor" checked> System monitor</label>
+        </div>
+    </details>
+
+    <div class="mission-main-grid">
+        <section class="mission-card mission-controls-card">
+            <div class="mission-card-heading"><div><span>AT YOUR COMMAND</span><h3>Assistant controls</h3></div><span class="mission-card-icon">◉</span></div>
+            <div class="mission-dashboard-actions">
+                <button type="button" class="mission-primary-button" id="dashboardStartButton">▶ Start JARVIS</button>
+                <button type="button" class="mission-primary-button mission-stop-button" id="dashboardStopButton">■ Stop JARVIS</button>
+                <button type="button" class="mission-primary-button" id="dashboardMicToggle" aria-pressed="false">🎙 Turn mic on</button>
+                <button type="button" class="mission-primary-button" id="dashboardWakeWordToggle" aria-pressed="false">Wake word: OFF</button>
+                <button type="button" class="mission-primary-button" data-open-view="settings">⚙ Settings</button>
+            </div>
+            <div class="mission-runtime-status">
+                <div><span>VOICE / STT</span><strong id="dashboardVoiceStatus">Checking…</strong></div>
+                <div><span>JARVIS</span><strong id="dashboardRuntimeStatus">Checking…</strong></div>
+                <div><span>NETWORK</span><strong id="dashboardNetworkStatus">Checking…</strong></div>
+            </div>
+            <div id="scheduledShutdownCountdown" class="mission-shutdown-countdown" hidden role="status" aria-live="polite">
+                <span>Scheduled shutdown</span><strong id="scheduledShutdownRemaining">—</strong>
+            </div>
+        </section>
+
+        <section class="mission-card mission-monitor-card" data-dashboard-section="monitor">
+            <div class="mission-card-heading"><div><span>YOUR COMPUTER</span><h3>System at a glance</h3></div><span class="mission-card-icon">⌁</span></div>
+            <div class="mission-live-metrics">
+                <div class="mission-live-metric"><span>CPU</span><strong id="dashboardCpu">Checking…</strong></div>
+                <div class="mission-live-metric"><span>RAM</span><strong id="dashboardRam">Checking…</strong></div>
+                <div class="mission-live-metric"><span>DISK</span><strong id="dashboardDisk">Checking…</strong></div>
+            </div>
+            <p class="mission-footnote">Live readings from your device. Unavailable readings are never estimated.</p>
+        </section>
+
+    </div>
+
+    <div class="mission-home-widgets">
+        <section class="mission-card mission-home-widget" data-dashboard-section="documents">
+            <div class="mission-card-heading"><div><span>YOUR WORK</span><h3>Recent documents</h3></div><button type="button" class="mission-link-button" data-open-view="documents">View all</button></div>
+            <div id="dashboardRecentDocuments" class="mission-recent-list" aria-live="polite"><p class="mission-empty">Loading recent files…</p></div>
+        </section>
+        <section class="mission-card mission-home-widget" data-dashboard-section="tasks">
+            <div class="mission-card-heading"><div><span>IN PROGRESS</span><h3>Background tasks</h3></div><button type="button" class="mission-link-button" data-open-view="background-events">Task center</button></div>
+            <div id="dashboardActiveJobs" class="mission-recent-list" aria-live="polite"><p class="mission-empty">Checking tasks…</p></div>
+        </section>
+        <section class="mission-card mission-world-card" aria-label="World map">
+            <div class="mission-card-heading"><div><span>GLOBAL VIEW</span><h3>World map</h3></div></div>
+            <div class="mission-map-wrap">
+                <img class="mission-world-map" src="assets/world-map.svg" alt="Detailed static world map with country borders" draggable="false">
+                <div class="mission-map-caption">COUNTRY BOUNDARIES · NATURAL EARTH DATA</div>
+            </div>
+        </section>
+    </div>
+
+    <div class="mission-bottomline"><span>LOCAL CONTROLS · LIVE DEVICE TELEMETRY · CHAT IN ITS OWN SECTION</span><button type="button" data-open-view="voice">OPEN VOICE <span>↗</span></button></div>
+</section>
+
+<div class="ai-core">
+    <!-- ========================================= -->
+<!-- GREETING CARD -->
+<!-- ========================================= -->
+
+<div id="greetingCard" class="greeting-card hud-greeting">
+    <div class="greeting-bg"></div>
+    <div class="greeting-content">
+        <div class="greeting-text">
+            <span class="hud-label" id="greetingTime">SYSTEM READY</span>
+            <h2 id="greetingName">J.A.R.V.I.S</h2>
+            <p class="hud-subtext">Awaiting command input.</p>
+        </div>
+        <div class="greeting-quote hud-readout" id="greetingQuote">
+            The future belongs to those who build it.
+        </div>
+    </div>
+</div>
+
+<section id="focusSprintPanel" class="focus-sprint-panel" data-status="ready" aria-label="Focus Sprint">
+    <div class="focus-sprint-copy">
+        <span id="focusSprintLabel" class="focus-sprint-label">READY WHEN YOU ARE</span>
+        <strong id="focusSprintTimer" class="focus-sprint-timer">25:00</strong>
+        <div class="focus-sprint-track"><span id="focusSprintProgress"></span></div>
+    </div>
+    <div class="focus-sprint-actions">
+        <label class="focus-sprint-duration-control" id="focusSprintDurationControl" for="focusSprintDuration">
+            <span>MIN</span>
+            <input id="focusSprintDuration" type="number" min="1" max="720" step="1" value="25" inputmode="numeric" aria-label="Focus duration in minutes" title="Set a focus duration from 1 to 720 minutes">
+        </label>
+        <button id="focusSprintStart" type="button">Start focus</button>
+        <button id="focusSprintPause" type="button" hidden>Pause</button>
+        <button id="focusSprintResume" type="button" hidden>Resume</button>
+        <button id="focusSprintCancel" type="button" hidden>Cancel</button>
+    </div>
+</section>
+
+<!-- ========================================= -->
+<!-- QUICK ACCESS -->
+<!-- ========================================= -->
+
+<div class="quick-access">
+    <button class="qa-btn" data-view="voice">
+        <span class="qa-marker"></span>
+        <span class="qa-label">VOICE</span>
+    </button>
+    <button class="qa-btn" data-view="browser">
+        <span class="qa-marker"></span>
+        <span class="qa-label">BROWSE</span>
+    </button>
+    <button class="qa-btn" data-view="memory">
+        <span class="qa-marker"></span>
+        <span class="qa-label">MEMORY</span>
+    </button>
+    <button class="qa-btn" data-view="settings">
+        <span class="qa-marker"></span>
+        <span class="qa-label">CONFIG</span>
+    </button>
+</div>
+
+<!-- ========================================= -->
+<!-- AI CORE HEADER -->
+<!-- ========================================= -->
+
+<div class="core-header">
+
+    <h2>JARVIS CORE</h2>
+
+    <p id="systemStatus">
+        SYSTEM OFFLINE
+    </p>
+
+</div>
+
+<!-- ========================================= -->
+<!-- ARC REACTOR -->
+<!-- ========================================= -->
+
+<div class="orb-container">
+
+    <!-- OUTER RINGS -->
+
+    <div class="ring ring1"></div>
+
+    <div class="ring ring2"></div>
+
+    <div class="ring ring3"></div>
+
+    <div class="ring ring4"></div>
+
+    <div class="ring ring5"></div>
+
+
+    <!-- REACTOR -->
+
+    <div id="orb" class="orb orb-ready">
+
+        <div class="orb-glow"></div>
+
+        <img class="orb-art" src="../images/orb.svg" alt="" width="160" height="160">
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- PROFESSIONAL VOICE COMMAND CENTER -->
+<!-- ========================================= -->
+
+<section class="voice-command-center" aria-label="JARVIS Voice Command Center">
+
+    <div class="voice-command-head">
+        <div>
+            <span class="hud-kicker">VOICE INTERFACE / REAL-TIME</span>
+            <h3>VOICE COMMAND CENTER</h3>
+        </div>
+        <div class="voice-live-pill">
+            <span class="voice-live-dot"></span>
+            <span id="voiceCenterStatus">STANDBY</span>
+        </div>
+    </div>
+
+    <div class="voice-stage">
+        <div class="voice-orbit orbit-a"></div>
+        <div class="voice-orbit orbit-b"></div>
+
+        <button id="voiceControl" class="voice-control" type="button" title="Mute or unmute JARVIS voice input">
+            <span class="voice-control-ring"></span>
+            <span class="voice-control-icon"><img class="icon-glyph" src="../assets/mic.svg" alt=""></span>
+            <span class="voice-control-label">MIC</span>
+        </button>
+
+        <div class="voice-visualizer" aria-hidden="true">
+            <span class="voice-bar"></span><span class="voice-bar"></span>
+            <span class="voice-bar"></span><span class="voice-bar"></span>
+            <span class="voice-bar"></span><span class="voice-bar"></span>
+            <span class="voice-bar"></span><span class="voice-bar"></span>
+            <span class="voice-bar"></span><span class="voice-bar"></span>
+            <span class="voice-bar"></span><span class="voice-bar"></span>
+        </div>
+    </div>
+
+    <div class="voice-readout">
+        <div class="voice-readout-label">LIVE TRANSCRIPT</div>
+        <div id="voiceTranscript" class="voice-transcript">Say a command to JARVIS…</div>
+        <div class="voice-readout-meta">
+            <span><i class="signal-dot"></i> <span id="voiceEngineState">VOICE ENGINE READY</span></span>
+            <span id="voiceLanguageState">EN-IN</span>
+            <span id="voiceConfidenceState" hidden></span>
+        </div>
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- DEBUG / DIAGNOSTICS -->
+<!-- ========================================= -->
+
+<section id="jarvisDiagnosticsPanel" class="diagnostics-panel" aria-label="JARVIS debug diagnostics" hidden>
+    <div class="diagnostics-head">
+        <div>
+            <span class="hud-kicker">DEBUG / ROUTING TELEMETRY</span>
+            <h3>DIAGNOSTICS</h3>
+        </div>
+        <div class="diagnostics-actions">
+            <span id="diagnosticsState" class="diagnostics-pill">OFF</span>
+            <button id="diagnosticsClear" type="button" class="diagnostics-clear">CLEAR</button>
+        </div>
+    </div>
+    <div class="diagnostics-grid">
+        <div><span>INTENT</span><strong id="diagIntent">—</strong></div>
+        <div><span>TOPIC</span><strong id="diagTopic">—</strong></div>
+        <div><span>PENDING</span><strong id="diagPending">NONE</strong></div>
+        <div><span>EVENTS</span><strong id="diagEventCount">0</strong></div>
+    </div>
+    <ol id="diagnosticsLog" class="diagnostics-log" aria-live="polite"></ol>
+</section>
+
+<!-- ========================================= -->
+<!-- CONTROL BUTTONS -->
+<!-- ========================================= -->
+
+<div class="controls-panel">
+
+    <button
+        id="start-btn"
+        class="hud-btn start-btn">
+
+        ▶ START
+
+    </button>
+
+    <button
+        id="stop-btn"
+        class="hud-btn stop-btn">
+
+        ■ STOP
+
+    </button>
+
+    <button
+        id="settings-btn"
+        class="hud-btn settings-btn">
+
+        <img src="../assets/settings.svg" alt=""> SETTINGS
+
+    </button>
+
+</div>
+
+<!-- ========================================= -->
+<!-- AI INFORMATION -->
+<!-- ========================================= -->
+
+<div class="ai-info">
+
+    <div class="info-box">
+
+        <h3>CPU</h3>
+
+        <p id="cpuUsage" data-available="false" aria-label="CPU usage unavailable">—</p>
+
+    </div>
+
+    <div class="info-box">
+
+        <h3>MEMORY</h3>
+
+        <p id="memoryUsage" data-available="false" aria-label="Memory usage unavailable">—</p>
+
+    </div>
+
+    <div class="info-box">
+
+        <h3>NETWORK</h3>
+
+        <p id="networkStatus" data-available="false" aria-label="Network status unavailable">CHECKING</p>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- EMBEDDED BROWSER PANEL (hidden until "Browser" nav tab) -->
+<!-- ========================================= -->
+
+<div id="browserPanel" class="browser-panel" style="display:none;">
+
+    <div class="browser-toolbar">
+
+        <button id="browserBackBtn" class="browser-btn" title="Back">◀</button>
+        <button id="browserForwardBtn" class="browser-btn" title="Forward">▶</button>
+        <button id="browserReloadBtn" class="browser-btn" title="Reload">⟳</button>
+        <button id="browserHomeBtn" class="browser-btn" title="Home">⌂</button>
+
+        <div class="browser-address-wrap">
+            <span id="browserSecureIcon" class="browser-secure-icon" title="Connection">🔒</span>
+            <input
+                id="browserAddressBar"
+                class="browser-address-bar"
+                type="text"
+                placeholder="Search or enter a website address"
+                autocomplete="off"
+                spellcheck="false" />
+            <div id="browserLoadingBar" class="browser-loading-bar"></div>
+
+            <div id="suggestionsPanel" class="browser-suggestions-panel" style="display:none;">
+                <div id="suggestionsList" class="browser-suggestions-list"></div>
+            </div>
+        </div>
+
+        <button id="browserBookmarkBtn" class="browser-btn" title="Bookmark this page">☆</button>
+        <button id="browserBookmarksBtn" class="browser-btn" title="Show bookmarks">🔖</button>
+        <button id="browserHistoryBtn" class="browser-btn" title="Show history">🕘</button>
+        <button id="browserDownloadsBtn" class="browser-btn" title="Downloads">📥</button>
+        <button id="browserToolsBtn" class="browser-btn" title="More tools">⋮</button>
+        <button id="browserNewTabBtn" class="browser-btn" title="New Tab">＋</button>
+        
+        <!-- Next-Level Features -->
+        <button id="voiceSearchBtn" class="browser-btn" title="Voice search">🎤</button>
+        <button id="readingModeBtn" class="browser-btn" title="Reading mode">📖</button>
+        <button id="themeToggleBtn" class="browser-btn" title="Toggle theme">🌙</button>
+        <button id="privacyModeBtn" class="browser-btn" title="Privacy mode">🔒</button>
+        <button id="tabGroupBtn" class="browser-btn" title="Tab groups">📁</button>
+        <span id="languageIndicator" class="language-indicator">EN</span>
+    </div>
+
+    <div id="browserTabStrip" class="browser-tab-strip"></div>
+
+    <!-- Find-in-page bar — hidden until Ctrl+F / Tools > Find -->
+    <div id="browserFindBar" class="browser-find-bar" style="display:none;">
+        <input id="browserFindInput" class="browser-find-input" type="text" placeholder="Find in page" autocomplete="off" />
+        <span id="browserFindCount" class="browser-find-count">0/0</span>
+        <button id="browserFindPrevBtn" class="browser-btn" title="Previous match">▲</button>
+        <button id="browserFindNextBtn" class="browser-btn" title="Next match">▼</button>
+        <button id="browserFindCloseBtn" class="browser-btn" title="Close">✕</button>
+    </div>
+
+    <!-- Tools dropdown: zoom, find, print, save page -->
+    <div id="browserToolsPanel" class="browser-dropdown-panel browser-tools-panel" style="display:none;">
+        <div class="browser-dropdown-header">
+            <span>Page Tools</span>
+            <button class="browser-dropdown-close" data-close-panel="browserToolsPanel">✕</button>
+        </div>
+        <div class="browser-tools-row">
+            <span class="browser-tools-label">Zoom</span>
+            <button id="browserZoomOutBtn" class="browser-btn" title="Zoom out">－</button>
+            <span id="browserZoomLevel" class="browser-zoom-level">100%</span>
+            <button id="browserZoomInBtn" class="browser-btn" title="Zoom in">＋</button>
+            <button id="browserZoomResetBtn" class="browser-dropdown-action" title="Reset zoom">Reset</button>
+        </div>
+        <div class="browser-tools-item" id="browserToolFind">🔍 Find in page</div>
+        <div class="browser-tools-item" id="browserToolPrint">🖨️ Print…</div>
+        <div class="browser-tools-item" id="browserToolSavePage">💾 Save page…</div>
+    </div>
+
+    <!-- Downloads dropdown -->
+    <div id="browserDownloadsPanel" class="browser-dropdown-panel" style="display:none;">
+        <div class="browser-dropdown-header">
+            <span>Downloads</span>
+            <button id="browserDownloadsClearBtn" class="browser-dropdown-action">Clear finished</button>
+            <button class="browser-dropdown-close" data-close-panel="browserDownloadsPanel">✕</button>
+        </div>
+        <div id="browserDownloadsList" class="browser-dropdown-list"></div>
+    </div>
+
+    <!-- Bookmarks / History dropdown panels — hidden until opened -->
+    <div id="browserBookmarksPanel" class="browser-dropdown-panel" style="display:none;">
+        <div class="browser-dropdown-header">
+            <span>Bookmarks</span>
+            <button class="browser-dropdown-close" data-close-panel="browserBookmarksPanel">✕</button>
+        </div>
+        <div id="browserBookmarksList" class="browser-dropdown-list"></div>
+    </div>
+
+    <div id="browserHistoryPanel" class="browser-dropdown-panel" style="display:none;">
+        <div class="browser-dropdown-header">
+            <span>History</span>
+            <button id="browserHistoryClearBtn" class="browser-dropdown-action">Clear all</button>
+            <button class="browser-dropdown-close" data-close-panel="browserHistoryPanel">✕</button>
+        </div>
+        <div id="browserHistoryList" class="browser-dropdown-list"></div>
+    </div>
+
+    <!-- The real page content is painted natively by Electron's BrowserView
+         directly over this element's screen position — this div only
+         reserves the layout space; it intentionally stays empty. -->
+    <div id="browserViewport" class="browser-viewport"></div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- RIGHT PANEL START -->
+<!-- ========================================= -->
+
+<aside class="legacy-right-panel right-panel">
+    <!-- ========================================= -->
+<!-- RIGHT PANEL -->
+<!-- ========================================= -->
+
+<div class="panel-section">
+
+    <div class="panel-title">
+        DEVICE STATUS
+    </div>
+
+    <div class="panel-card">
+
+        <div class="status-row">
+            <span>CPU</span>
+            <span id="cpuPercent" data-available="false">—</span>
+        </div>
+
+        <div class="status-row">
+            <span>RAM</span>
+            <span id="ramPercent" data-available="false">—</span>
+        </div>
+
+        <div class="status-row">
+            <span>DISK</span>
+            <span id="diskPercent" data-available="false">—</span>
+        </div>
+
+        <div class="status-row">
+            <span>NETWORK</span>
+            <span id="netSpeed" data-available="false">CHECKING</span>
+        </div>
+        <div class="status-row">
+            <span>OPERATING SYSTEM</span>
+            <span id="systemPlatform" data-available="false">—</span>
+        </div>
+        <div class="status-row">
+            <span>UPTIME</span>
+            <span id="systemUptime" data-available="false">—</span>
+        </div>
+        <div class="status-row">
+            <span>BATTERY</span>
+            <span id="batteryStatus" data-available="false">—</span>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- HISTORY -->
+<!-- ========================================= -->
+
+<div class="panel-section">
+
+    <div class="panel-title">
+
+        RECENT COMMANDS
+
+    </div>
+
+    <div class="command-history-tools"><input id="commandHistorySearch" type="search" placeholder="Filter commands and results" aria-label="Filter command history"><select id="commandHistoryRetention" aria-label="Command history retention"><option value="1">1 day</option><option value="7">7 days</option><option value="30" selected>30 days</option><option value="0">Keep forever</option></select><button id="commandHistoryExport" type="button">Export</button><button id="commandHistoryClear" type="button">Clear</button></div>
+
+    <div
+        id="historyList"
+        class="history-list">
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- NOTIFICATION PANEL -->
+<!-- ========================================= -->
+<div class="panel-section notification-center">
+    <div class="notification-center-header">
+        <div class="panel-title">LIVE ACTIVITY <span id="notificationUnreadCount" class="notification-unread" hidden>0</span></div>
+        <div class="notification-actions">
+            <button id="notificationRefresh" type="button" title="Refresh">↻</button>
+            <button id="notificationMarkAll" type="button" title="Mark all as read">✓</button>
+            <button id="notificationClearAll" type="button" title="Clear notifications">×</button>
+        </div>
+    </div>
+    <div class="notification-filters">
+        <button type="button" data-notification-filter="ALL" class="active">ALL</button>
+        <button type="button" data-notification-filter="SYSTEM">SYSTEM</button>
+        <button type="button" data-notification-filter="JARVIS">JARVIS</button>
+        <button type="button" data-notification-filter="VOICE">VOICE</button>
+        <button type="button" data-notification-filter="OLLAMA">OLLAMA</button>
+        <button type="button" data-notification-filter="ERROR">ERROR</button>
+    </div>
+    <div id="notificationList" class="notification-list"></div>
+</div>
+
+</aside>
+
+<!-- ========================================= -->
+<!-- CHAT PANEL -->
+<!-- ========================================= -->
+
+<aside class="chat-panel">
+
+    <div class="chat-header">
+
+        <h2>
+
+            JARVIS CHAT
+
+        </h2>
+
+        <span id="chatStatus" class="chat-status">
+
+            ● ONLINE
+
+        </span>
+
+        <div class="ollama-connector" aria-label="Local Ollama model connection">
+            <span id="ollamaConnectorState" class="ollama-connector-state" role="status">Checking local model…</span>
+            <select id="ollamaModelSelect" aria-label="Select Ollama model" disabled>
+                <option value="">No model detected</option>
+            </select>
+            <button id="ollamaConnectButton" type="button" disabled>Connect</button>
+            <button id="ollamaDisconnectButton" type="button" hidden>Disconnect</button>
+        </div>
+
+        <select
+            id="personalityStyleSelect"
+            class="personality-style-select"
+            title="Personality response style — changes how JARVIS's replies are worded">
+
+            <option value="professional">🎭 Professional</option>
+            <option value="friendly">🎭 Friendly</option>
+            <option value="witty">🎭 Witty</option>
+            <option value="concise">🎭 Concise</option>
+            <option value="formal">🎭 Formal</option>
+            <option value="focus">🎯 Focus</option>
+
+        </select>
+
+
+        <label class="theme-picker-label" for="appThemeSelect">THEME</label>
+        <select id="appThemeSelect" class="app-theme-select" aria-label="Choose JARVIS appearance theme">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="midnight">Midnight</option>
+            <option value="aurora">Aurora</option>
+        </select>
+        <button id="minimizeChatPanelBtn" class="chat-panel-minimize" type="button" aria-label="Minimize chat panel" title="Minimize chat panel">−</button>
+
+    </div>
+
+    <!-- CHAT AREA -->
+
+    <div class="chat-body-grid">
+      <section class="chat-conversation" aria-label="Chat conversation">
+
+    <div
+        id="chatMessages"
+        class="messages">
+
+        
+
+    </div>
+
+    <!-- TYPING -->
+
+    <div
+        id="typingIndicator"
+        class="typing"
+        style="display:none;">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+    <!-- FILE ATTACHMENT -->
+
+    <div id="fileAttachmentBar" class="file-attachment-bar" hidden>
+        <div class="file-attachment-info">
+            <span class="file-attachment-icon">📎</span>
+            <span id="fileAttachmentName" class="file-attachment-name">No file</span>
+            <span id="fileAttachmentMeta" class="file-attachment-meta"></span>
+        </div>
+        <button id="fileAttachmentClear" class="file-attachment-clear" title="Remove attached file">✕</button>
+    </div>
+
+    <!-- INPUT -->
+
+    <div class="chat-input">
+
+        <button
+            id="fileUploadBtn"
+            class="file-upload-btn"
+            title="Attach a file to JARVIS">
+            📎
+        </button>
+
+        <input
+            id="chatInput"
+            type="text"
+            placeholder="Type your command...">
+
+        <button
+            id="voiceBtn"
+            class="voice-btn"
+            title="Tap to mute/unmute microphone">
+
+            <img src="../assets/mic.svg" alt="Microphone">
+
+        </button>
+
+        <button id="voiceInterruptBtn" class="voice-interrupt-btn" type="button" title="Stop JARVIS speaking and listen now" aria-label="Stop speaking and listen">
+            <span aria-hidden="true">⏹</span><span class="voice-interrupt-label">Listen</span>
+        </button>
+
+        <button id="jarvisScreenShareButton" class="screen-share-button" type="button" aria-pressed="false" title="Share a screen or window with JARVIS">▣ Share</button>
+
+        <button id="jarvisComputerUseButton" class="computer-use-button" type="button" aria-pressed="false" title="Start JARVIS Autopilot Mode">⌁ Autopilot</button>
+
+        <button
+            id="sendBtn"
+            class="send-btn">
+
+            <img src="../assets/send.svg" alt="Send">
+
+        </button>
+
+    </div>
+
+      </section>
+
+      <section class="consciousness-panel" aria-label="JARVIS simulated consciousness state">
+        <div class="consciousness-head">
+            <div><span class="hud-kicker">SELF-STATE / CONTINUITY</span><h3>JARVIS STATUS</h3></div>
+            <span id="consciousnessMode" class="consciousness-pill">AWARE</span>
+        </div>
+        <div class="telemetry-ring" aria-label="Live telemetry">
+            <div class="telemetry-cell"><span>MOOD</span><strong id="consciousnessMood">CALM</strong></div>
+            <div class="telemetry-cell"><span>TRUST</span><strong id="hudTrustValue">00</strong></div>
+            <div class="telemetry-cell"><span>GOAL</span><strong id="consciousnessGoal">NONE</strong></div>
+            <div class="telemetry-cell"><span>CORE</span><strong id="hudVoiceState">IDLE</strong></div>
+            <div class="telemetry-cell"><span>ACTIVITY</span><strong id="hudActivityState">IDLE</strong></div>
+            <div class="telemetry-cell hud-activity-task"><span>CURRENT TASK</span><strong id="hudActivityTask">Awaiting a request</strong></div>
+            <div class="telemetry-cell"><span>ACTION / TOOL</span><strong id="hudActivityTool">—</strong></div>
+            <div class="telemetry-cell"><span>FOCUS</span><strong id="consciousnessFocus">READY</strong></div>
+            <div class="telemetry-cell"><span>RAPPORT</span><strong id="consciousnessRapport">NEW</strong></div>
+            <div class="telemetry-cell"><span>ENERGY</span><strong id="consciousnessEnergy">90%</strong></div>
+            <div class="telemetry-cell"><span>AWARE</span><strong id="consciousnessAwareness">70%</strong></div>
+        </div>
+        <div class="consciousness-grid">
+            <div class="consciousness-stat"><span>LANGUAGE</span><strong id="consciousnessLanguage">EN</strong></div>
+            <div class="consciousness-stat"><span>CONTINUITY</span><strong id="consciousnessContinuity">0</strong></div>
+        </div>
+        <div class="consciousness-thought"><span class="thought-pulse"></span><p id="consciousnessThought">Monitoring conversation and system context…</p></div>
+        <ul id="consciousnessThoughtStream" class="consciousness-thought-stream"></ul>
+        <div class="consciousness-meter-row">
+            <div class="consciousness-meter-labeled"><span>CONFIDENCE</span><div class="consciousness-meter"><span id="consciousnessConfidence" style="width:86%"></span></div></div>
+            <div class="consciousness-meter-labeled"><span>ENERGY</span><div class="consciousness-meter energy"><span id="consciousnessEnergyMeter" style="width:90%"></span></div></div>
+            <div class="consciousness-meter-labeled"><span>TRUST</span><div class="consciousness-meter trust"><span id="consciousnessTrustMeter" style="width:20%"></span></div></div>
+        </div>
+        <div class="consciousness-foot">ENGINEERED SELF-STATE • NOT LITERAL SENTIENCE</div>
+      </section>
+    </div>
+
+</aside>
+<button id="restoreChatPanelBtn" class="chat-panel-restore" type="button" aria-label="Restore chat panel" title="Restore chat panel" hidden>▢&nbsp; Chat</button>
+</div><!-- .mainLayout: keep Chat in the same workspace as the other views -->
+<!-- ========================================= -->
+<!-- FOOTER -->
+<!-- ========================================= -->
+
+<footer class="footer">
+
+    <div class="footer-left">
+
+        <span>
+            JARVIS AI v1.0
+        </span>
+
+    </div>
+
+    <div class="footer-center">
+
+        <span id="footerStatus">
+
+            SYSTEM READY
+
+        </span>
+
+    </div>
+
+    <div class="footer-right">
+
+        <span>
+
+            Created By JARVIS
+
+        </span>
+
+    </div>
+
+</footer>
+
+</div>
+<!-- END MAIN LAYOUT -->
+
+</div>
+<!-- END APP -->
+
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT FILES -->
+
+
+<!-- ========================================= -->
+<!-- AGENT SYSTEM (LOAD FIRST) -->
+<!-- ========================================= -->
+<!-- ========================================= -->
+<!-- AGENT CORE SYSTEM -->
+<!-- ========================================= -->
+
+<!-- ========================================= -->
+<!-- JARVIS PRO MAX V10 SCRIPT LOAD ORDER -->
+<!-- ========================================= -->
+
+
+<!-- ========================================= -->
+<!-- AGENT CORE -->
+<!-- ========================================= -->
+<!-- ================================= -->
+<!-- JARVIS CONSCIOUSNESS V30 -->
+<!-- ================================= -->
+<!-- ====================================================== -->
+<!-- JARVIS PRO MAX V30 -->
+<!-- CONSCIOUSNESS SYSTEM -->
+<!-- ====================================================== -->
+<!-- The renderer-side consciousness engine is renderer/js/consciousness.js
+     (the HUD above), fed by the main-process src/ai/consciousness.js over
+     IPC. An earlier js/brain/consciousness/*.js script block used to be
+     referenced here; those files were removed from disk during a prior
+     merge and this stale reference has been deleted rather than left
+     commented out. See docs/CONSCIOUSNESS_ORPHANED_CORE.md for the
+     separate, still-unused js/brain/Consciousness/core/ folder and why
+     it's intentionally not loaded. -->
+
+<!-- =========================
+     CORE SYSTEM
+========================= -->
+<!-- ======================================================
+     BRAIN CORE
+====================================================== -->
+
+<script defer src="js/brain/conversationContext.js"></script>
+<script defer src="js/brain/realtimeThink.js"></script>
+<script defer src="js/brain/brain.js"></script>
+<script defer src="js/brain/intentEngine.js"></script>
+<script defer src="js/brain/naturalCommandEngine.js"></script>
+<script defer src="js/brain/commandRoutePolicy.js"></script>
+<script defer src="js/brain/workflowRecorder.js"></script>
+<script defer src="js/brain/permissionProfiles.js"></script>
+<script defer src="js/brain/missionAuditLog.js"></script>
+<script defer src="js/brain/visualWorkflowEngine.js"></script>
+<script defer src="js/language/LanguageCore.js"></script>
+<script defer src="js/language/HindiTranslit.js"></script>
+<script defer src="js/language/SmartReplies.js"></script>
+<script defer src="js/language/VoiceTolerance.js"></script>
+<script defer src="js/learning/knowledgeStore.js"></script>
+<script defer src="js/learning/safetyFilter.js"></script>
+<script defer src="js/learning/permissionManager.js"></script>
+<script defer src="js/learning/knowledgeSourceChain.js"></script>
+<script defer src="js/learning/domainRouter.js"></script>
+<script defer src="js/learning/webResearcher.js"></script>
+<script defer src="js/learning/correctionLearner.js"></script>
+<script defer src="js/learning/commandAliases.js"></script>
+<script defer src="js/learning/learningManager.js"></script>
+<script defer src="js/learning/learningScheduler.js"></script>
+<script defer src="js/users/userPanel.js"></script>
+<script defer src="js/users/userPanelUpgrade.js"></script>
+<script defer src="js/users/userOnboarding.js"></script>
+<script defer src="js/languageUI.js"></script>
+<script defer src="js/brain/chitchat.js"></script>
+<script defer src="js/brain/matcher.js"></script>
+<script defer src="js/brain/actionRegistry.js"></script>
+
+<script defer src="js/brain/agents/AgentBase.js"></script>
+<script defer src="js/brain/agents/AgentBus.js"></script>
+<script defer src="js/brain/agents/AgentRegistry.js"></script>
+<script defer src="js/brain/agents/AgentManager.js"></script>
+
+
+<script defer src="js/brain/agents/memoryManagerAgent.js"></script>
+<script defer src="js/brain/agents/knowledgeAgent.js"></script>
+
+<!-- =========================
+     CORE AGENTS
+========================= -->
+<script defer src="js/brain/agents/reasoningAgent.js"></script>
+<script defer src="js/brain/agents/planningAgent.js"></script>
+<script defer src="js/brain/agents/taskPlanner.js"></script>
+<script defer src="js/brain/agents/goalManager.js"></script>
+<script defer src="js/brain/agents/decisionAgent.js"></script>
+<script defer src="js/brain/agents/actionAgent.js"></script>
+<script defer src="js/brain/agents/coordinatorAgent.js"></script>
+
+<!-- =========================
+     SYSTEM AGENTS
+========================= -->
+<script defer src="js/brain/agents/systemAgent.js"></script>
+<script defer src="js/brain/agents/visionAgent.js"></script>
+<script defer src="js/brain/agents/securityAgent.js"></script>
+<script defer src="js/brain/agents/RecoveryAgent.js"></script>
+<script defer src="js/brain/agents/MonitorAgent.js"></script>
+<script defer src="js/brain/agents/agentExecutor.js"></script>
+<script defer src="js/brain/agents/agentMonitor.js"></script>
+<script defer src="core/SystemController.js"></script>
+<script defer src="js/brain/agents/selfLearningAgent.js"></script>
+<script defer src="js/brain/agents/learningAgent.js"></script>
+<!-- ======================================================
+     BROWSER SYSTEM
+====================================================== -->
+
+<script defer src="js/brain/browser/Browser.js"></script>
+<script defer src="js/brain/browser/browserUrls.js"></script>
+<script defer src="js/brain/browser/browserSynonyms.js"></script>
+<script defer src="js/brain/browser/browserQueryIntelligence.js"></script>
+<script defer src="js/brain/browser/browserEntityIntelligence.js"></script>
+<script defer src="js/brain/browser/browserWebsiteIntelligence.js"></script>
+<script defer src="js/brain/browser/browserQueryEngine.js"></script>
+<script defer src="js/brain/browser/browserParserBridge.js"></script>
+<script defer src="js/brain/browser/browserContext.js"></script>
+<script defer src="js/brain/browser/browserContextEngine.js"></script>
+<script defer src="js/brain/browser/browserSession.js"></script>
+<script defer src="js/brain/browser/browserIntentFusion.js"></script>
+<script defer src="js/brain/browser/browserConfidence.js"></script>
+<script defer src="js/brain/browser/browserSearchRouter.js"></script>
+<script defer src="js/brain/browser/browserDecision.js"></script>
+<script defer src="js/brain/browser/browserAgent.js"></script>
+<script defer src="js/brain/browser/browserSearch.js"></script>
+<script defer src="js/brain/browser/browserMultiSearch.js"></script>
+<script defer src="js/brain/browser/browserMemory.js"></script>
+<script defer src="js/brain/browser/browserSearchMemory.js"></script>
+<script defer src="js/brain/browser/browserKnowledge.js"></script>
+<script defer src="js/brain/browser/browserRecommendation.js"></script>
+<script defer src="js/brain/browser/browserResearch.js"></script>
+<script defer src="js/brain/browser/browserResearchLoop.js"></script>
+<script defer src="js/brain/browser/browserFusion.js"></script>
+<script defer src="js/brain/browser/browserPlanner.js"></script>
+<script defer src="js/brain/browser/browserExecution.js"></script>
+<script defer src="js/brain/browser/browserBrain.js"></script>
+<script defer src="js/brain/browser/browserRouter.js"></script>
+
+<!-- ======================================================
+     LEARNING SYSTEM
+====================================================== -->
+
+<script defer src="js/brain/learning/reinforcementEngine.js"></script>
+<script defer src="js/brain/learning/predictionEngine.js"></script>
+<script defer src="js/brain/learning/experienceReplayEngine.js"></script>
+<script defer src="js/brain/learning/adaptiveIntelligence.js"></script>
+<script defer src="js/brain/learning/selfOptimisationEngine.js"></script>
+<script defer src="js/brain/learning/backgroundLearningEngine.js"></script>
+<script defer src="js/brain/learning/backupRecoveryEngine.js"></script>
+<script defer src="js/brain/learning/analyticsEngine.js"></script>
+<script defer src="js/brain/learning/healthMonitor.js"></script>
+<script defer src="js/brain/learning/runtimeBootstrap.js"></script>
+<script defer src="js/brain/learning/learningLoader.js"></script>
+
+<!-- ======================================================
+     UI SYSTEM
+====================================================== -->
+
+<script defer src="js/bootHealth.js"></script>
+<script defer src="js/cinemaBoot.js"></script>
+<script defer src="js/healthThresholds.js"></script>
+<script defer src="js/commandCenter.js"></script>
+<script defer src="js/clock.js"></script>
+<script defer src="js/status.js"></script>
+<script defer src="js/orb.js"></script>
+<script defer src="js/visualizer.js"></script>
+<script defer src="js/notifications.js"></script>
+<script defer src="js/history.js"></script>
+<script defer src="js/documentsGallery.js"></script>
+<script defer src="js/health.js"></script>
+<script defer src="js/backgroundJobs.js"></script>
+<script defer src="js/backgroundEvents.js"></script>
+<script defer src="js/assistantTasks.js"></script>
+
+<!-- ======================================================
+     VOICE + CHAT
+====================================================== -->
+
+<script defer src="js/tts.js"></script>
+<script defer src="js/ttsSettings.js"></script>
+
+<!-- ======================================================
+     CONSCIOUSNESS ENGINE (restored from earlier build,
+     fully local — no API key / cloud call anywhere here)
+====================================================== -->
+<script defer src="js/brain/consciousness/identity.js"></script>
+<script defer src="js/brain/consciousness/emotionEngine.js"></script>
+<script defer src="js/brain/consciousness/internalMonologue.js"></script>
+<script defer src="js/brain/consciousness/metacognition.js"></script>
+<script defer src="js/brain/consciousness/consciousnessController.js"></script>
+<script defer src="js/brain/consciousness/consciousnessAdapter.js"></script>
+
+<script defer src="js/consciousness.js"></script>
+<script defer src="js/hud.js"></script>
+<script defer src="js/diagnosticsUI.js"></script>
+<script defer src="js/fileContext.js"></script>
+<script defer src="js/jarvisMemeSounds.js"></script>
+<script defer src="js/focusSprint.js"></script>
+<script defer src="js/jarvisCommandCenter.js"></script>
+<script defer src="js/context/DebugDiagnostics.js"></script>
+<script defer src="js/context/ConversationContextManager.js"></script>
+<script defer src="js/context/ConversationSummarizer.js"></script>
+<script defer src="js/context/PendingIntentManager.js"></script>
+<script defer src="js/context/ReferenceResolver.js"></script>
+<script defer src="js/chat.js"></script>
+<script defer src="js/aiMessageQueueEngine.js"></script>
+<script defer src="js/aiMessageQueue.js"></script>
+<script defer src="js/deferredProviderShutdown.js"></script>
+<script defer src="js/labEngine.js"></script>
+<script defer src="js/lab.js"></script>
+<script defer src="js/voice.js"></script>
+<script defer src="js/voice/conversationMode.js"></script>
+<script defer src="js/wakeWord.js"></script>
+<script defer src="js/personalityStyle.js"></script>
+<script defer src="js/voiceUI.js"></script>
+
+<!-- ======================================================
+     APPLICATION BOOT
+====================================================== -->
+
+<script defer src="js/browserVoiceControl.js"></script>
+<script defer src="js/mistakeLearningControl.js"></script>
+<script defer src="js/browserUI.js"></script>
+<script defer src="js/panels.js"></script>
+<script defer src="js/aiProviderSettings.js"></script>
+<script defer src="js/boot.js"></script>
+<script defer src="js/orb3d.js"></script>
+<script defer src="js/renderer.js"></script>
+<script defer src="js/app.js"></script>
+<script defer src="js/missionDashboard.js"></script>
+<script defer src="js/settingsOrganization.js"></script>
+<script defer src="js/themeManager.js"></script>
+<script defer src="js/accessibilityTargets.js"></script>
+<script defer src="js/screenShare.js"></script>
+<script defer src="js/computerUseUI.js"></script>
+<script defer src="js/appLibrary.js"></script>
+
+
+<!-- ======================================================
+     COMMAND CENTER COMPATIBILITY / NEXT-GEN DASHBOARD
+====================================================== -->
+<section id="ccDashboard" aria-label="JARVIS Command Center">
+  <header id="ccCoreOverview" class="cc-panel">
+    <div class="cc-core-label">JARVIS AI CORE</div>
+    <strong>DETERMINISTIC • ZERO LLM</strong>
+    <div id="ccSystemStatus">STANDBY</div>
+  </header>
+  <section id="ccCorePanel" class="cc-panel"><div class="cc-gauge-dial"></div></section>
+  <section id="ccLiveFeed" class="cc-panel"><h3>LIVE FEED</h3><div id="ccFeedList"></div></section>
+  <section id="ccAgents" class="cc-panel"><h3>AGENTS</h3><div id="ccAgentsList">STANDBY</div></section>
+  <section id="ccTimeline" class="cc-panel"><h3>TIMELINE</h3><div id="ccTimelineList">—</div></section>
+  <section id="ccSystemMonitor" class="cc-panel">
+    <h3>SYSTEM MONITOR</h3>
+    <div>CPU <span id="ccCpuPercent">—</span></div>
+    <div>RAM <span id="ccRamPercent">—</span></div>
+    <div>DISK <span id="ccDiskPercent">—</span></div>
+    <div>NETWORK <span id="ccNetSpeed">—</span></div>
+  </section>
+  <section id="ccMemoryInsights" class="cc-panel">
+    <h3>MEMORY INSIGHTS</h3>
+    <div>Facts <span id="ccMemFacts">—</span></div>
+    <div>Turns <span id="ccMemTurns">—</span></div>
+    <div>Web calls <span id="ccMemWebCalls">—</span></div>
+  </section>
+  <section id="ccKnowledge" class="cc-panel">
+    <h3>Knowledge Sources</h3>
+    <div id="ccSrcGrid">OFFLINE</div><div class="cc-source-chain" hidden><span data-src="wikipedia">wikipedia</span><span data-src="duckduckgo">duckduckgo</span><span data-src="google">google</span><span data-src="wikidata">wikidata</span></div>
+  </section>
+  <div id="ccTalkBar" class="cc-talkbar">
+    <strong>TALK TO JARVIS</strong>
+    <div class="cc-wave"><span></span><span></span><span></span></div>
+    <input id="ccTalkInput" aria-label="Talk to Jarvis" placeholder="Type a command">
+    <button id="ccBriefingBtn" type="button">EXECUTIVE BRIEFING</button>
+  </div>
+  <input id="ccSearch" type="search" placeholder="Search">
+  <div id="ccProfile"><span id="ccProfileAvatar">◉</span><span id="ccProfileName">Guest</span></div>
+  <div id="ccMemLine" hidden></div>
+  <div id="ccListenLabel" hidden>LISTENING</div>
+  <div id="ccTalkSub" hidden>STANDBY</div>
+</section>
+
+<!-- Legacy cinema boot status kept for boot-health compatibility -->
+<div id="cinemaBoot" aria-live="polite">
+  <div id="cinemaBootLog">BOOT HEALTH</div>
+  <div id="cinemaBootBar" role="progressbar"></div>
+  <div id="cinemaBootStatus">STANDBY</div>
+</div>
+
+<!-- ========================================= -->
+<!-- VOICE MODE OVERLAY (fullscreen talk-to-JARVIS view) -->
+<!-- ========================================= -->
+
+<div id="voiceModeOverlay">
+
+    <div class="vm-top">
+        <div class="vm-session-heading"><span class="vm-session-mark">J</span><span><strong>VOICE SESSION</strong><small>JARVIS speech interface</small></span></div>
+        <div class="vm-top-actions"><span id="vmStatus" class="vm-status">Ready</span><button id="vmChatToggle" class="vm-chat-toggle" type="button">OPEN CHAT&nbsp; ↗</button></div>
+    </div>
+
+    <div class="vm-stage-grid">
+      <div class="vm-orb-wrap">
+        <div id="vmOrb" class="vm-orb" aria-hidden="true">
+            <span class="vm-orb-ring vm-orb-ring-a"></span>
+            <span class="vm-orb-ring vm-orb-ring-b"></span>
+            <span class="vm-orb-ring vm-orb-ring-c"></span>
+            <span class="vm-orb-core"></span>
+            <span class="vm-orb-particle vm-orb-particle-a"></span>
+            <span class="vm-orb-particle vm-orb-particle-b"></span>
+            <span class="vm-orb-particle vm-orb-particle-c"></span>
+        </div>
+      </div>
+      <div class="vm-stage-copy"><span class="vm-stage-eyebrow">VOICE INPUT</span><h2>Speak naturally.</h2><p>Your words appear in the Chat dashboard, where you can review the full conversation.</p></div>
+    </div>
+
+    <div class="vm-bar">
+
+        <button id="vmPlusBtn" class="vm-icon-btn" title="Attach">+</button>
+
+        <input
+            id="vmTypeInput"
+            type="text"
+            placeholder="Type">
+
+        <button id="vmThinkToggle" class="vm-icon-btn" title="Think mode">🧠 Think</button>
+
+        <button id="vmMicBtn" class="vm-icon-btn" title="Tap to mute/unmute microphone" aria-label="Mute or unmute microphone"><img src="../assets/mic.svg" alt=""></button>
+
+        <button id="vmInterruptBtn" class="vm-icon-btn vm-interrupt-btn" type="button" title="Stop JARVIS speaking and listen now" aria-label="Stop speaking and listen">⏹</button>
+
+        <button id="vmCloseBtn" class="vm-icon-btn" title="Close voice mode">✕</button>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

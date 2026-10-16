@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#0b1c28"/>
+      <stop offset="70%" stop-color="#05080d"/>
+      <stop offset="100%" stop-color="#020305"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#vignette)"/>
+  <g stroke="#00d9ff" stroke-width="1" opacity=".06">
+    <path d="M0 180 H1920 M0 540 H1920 M0 900 H1920 M240 0 V1080 M960 0 V1080 M1680 0 V1080"/>
+  </g>
+  <circle cx="960" cy="430" r="260" fill="#00d9ff" opacity=".05"/>
+</svg>

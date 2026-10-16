@@ -1,0 +1,194 @@
+{
+  "users": [
+    {
+      "userId": "u_mu2df9tz_243625",
+      "name": "Default User",
+      "isGuest": false,
+      "createdAt": "2026-09-15T07:49:20.137Z",
+      "lastActiveAt": "2026-09-15T07:49:20.137Z",
+      "role": "member",
+      "pinHash": null
+    },
+    {
+      "userId": "u_mu2df9u8_042507",
+      "name": "Guest",
+      "isGuest": true,
+      "createdAt": "2026-09-15T07:49:20.144Z",
+      "lastActiveAt": "2026-09-15T07:49:20.144Z",
+      "role": "guest",
+      "pinHash": null
+    },
+    {
+      "userId": "u_muihjpar_4184c2",
+      "name": "Nakul",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:04.084Z",
+      "lastActiveAt": "2026-09-26T14:29:04.084Z"
+    },
+    {
+      "userId": "u_muihkeqb_2e3ab3",
+      "name": "Nakul",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.045Z",
+      "lastActiveAt": "2026-09-26T14:29:37.286Z"
+    },
+    {
+      "userId": "u_muihkf13_3870e0",
+      "name": "Minimal User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.431Z",
+      "lastActiveAt": "2026-09-26T14:29:37.431Z"
+    },
+    {
+      "userId": "u_muihkf1k_56b97c",
+      "name": "Corrupt Test",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.448Z",
+      "lastActiveAt": "2026-09-26T14:29:37.448Z"
+    },
+    {
+      "userId": "u_muihmvlc_1ab7ff",
+      "name": "alert(1)Evil",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:31:32.208Z",
+      "lastActiveAt": "2026-09-26T14:31:32.208Z"
+    },
+    {
+      "userId": "u_muihmvm6_3f8dc0",
+      "name": "NoMem User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:31:32.239Z",
+      "lastActiveAt": "2026-09-26T14:31:32.239Z"
+    },
+    {
+      "userId": "u_muiimc1y_573e7d",
+      "name": "alert(1)Evil",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:59:06.502Z",
+      "lastActiveAt": "2026-09-26T14:59:06.502Z"
+    },
+    {
+      "userId": "u_muiioshh_df9081",
+      "name": "Minimal User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T15:01:01.109Z",
+      "lastActiveAt": "2026-09-26T15:01:01.109Z"
+    },
+    {
+      "userId": "u_muiioskg_c3e833",
+      "name": "NoMem User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T15:01:01.217Z",
+      "lastActiveAt": "2026-09-26T15:01:01.217Z"
+    },
+    {
+      "userId": "u_muipy703_559116",
+      "name": "Nakul",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T18:24:17.142Z",
+      "lastActiveAt": "2026-09-26T18:24:17.274Z"
+    },
+    {
+      "userId": "u_muiq2746_c1cac3",
+      "name": "PinUser",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$15d7c3df539d60b1b040c638b9bb5d6d$2c72f88b8b1b19a432975798a5ad2dbf495b0e7f54a7f30f726886b995b759c6",
+      "hasPin": true,
+      "createdAt": "2026-09-26T18:27:23.951Z",
+      "lastActiveAt": "2026-09-26T18:27:23.952Z"
+    },
+    {
+      "userId": "u_muiq275x_38620c",
+      "name": "PinVerify",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$cbdc4cb45842ff87ad9e454090a8e65e$6eae7ac80843c6dbc20481160a12805b5d162a23a25042ae2d9ab0347c87ac2d",
+      "hasPin": true,
+      "createdAt": "2026-09-26T18:27:24.017Z",
+      "lastActiveAt": "2026-09-26T18:27:24.017Z"
+    },
+    {
+      "userId": "u_muiq278u_37733a",
+      "name": "PinReject",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$84e88a62912cf02cec366b243f59b5ff$4e11bb8b30616a0493b1de9a11f9d2e05445c4558cea9aee6e225d6cc494dc99",
+      "hasPin": true,
+      "createdAt": "2026-09-26T18:27:24.114Z",
+      "lastActiveAt": "2026-09-26T18:27:24.114Z"
+    },
+    {
+      "userId": "u_muiq27bk_9d44f0",
+      "name": "ShortPin",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T18:27:24.177Z",
+      "lastActiveAt": "2026-09-26T18:27:24.177Z"
+    },
+    {
+      "userId": "u_muiq27c0_b0a0b6",
+      "name": "PinUpdate",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$8c4a924e9c73baf90e001f7a3b98f4cf$635f66dc379e9cb8dc74979649d4de6df849084ec199de3f8fca284468b6e927",
+      "hasPin": true,
+      "createdAt": "2026-09-26T18:27:24.222Z",
+      "lastActiveAt": "2026-09-26T18:27:24.222Z"
+    },
+    {
+      "userId": "u_muiq27fs_a0ed27",
+      "name": "PinUpdateFail",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$ae957eb102a48af0f821f0f33f64de55$f64aec0a767b6ffd916dfe9506256058658a9766d098194ab38e028ad0c3186e",
+      "hasPin": true,
+      "createdAt": "2026-09-26T18:27:24.356Z",
+      "lastActiveAt": "2026-09-26T18:27:24.356Z"
+    },
+    {
+      "userId": "u_muiq27hr_28bbcf",
+      "name": "NoMem User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T18:27:24.400Z",
+      "lastActiveAt": "2026-09-26T18:27:24.400Z"
+    }
+  ],
+  "activeUserId": "u_mu2df9u8_042507",
+  "version": 1
+}

@@ -1,0 +1,19 @@
+JARVIS PRO MAX — Consciousness + UI Fix
+Date: 2026-09-07
+
+Fixed:
+1. Main process now actually imports and initializes the authoritative ConsciousnessLayer and MemoryEngine.
+2. Added consciousness:respond IPC and preload API.
+3. ConsciousnessLayer now has a deterministic local respond() path for identity, consciousness, state, memory and general local acknowledgements.
+4. Chat router now falls through to the authoritative consciousness response instead of the old "no engine available" response.
+5. Prevented duplicate consciousness turn recording when the consciousness route already committed the turn.
+6. Consciousness HUD fixed to read both IPC response shapes, including {data:{consciousness:...}}.
+7. Chat UI no longer injects raw message text with innerHTML; messages are rendered safely with textContent.
+8. Renderer now handles response/text/reply/answer result shapes safely.
+9. UI no longer falsely labels the cloud AI as ONLINE when this build has no cloud AI; it reports LOCAL ONLINE.
+10. All changed JavaScript files pass `node --check`.
+11. HTML ID scan found no duplicate IDs.
+
+Architecture after fix:
+User -> Chat Router -> Brain/Agents/Commands -> Consciousness fallback -> main-process ConsciousnessLayer
+                                              -> HUD reads same authoritative state

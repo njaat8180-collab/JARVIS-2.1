@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "checkpointId": "EV-2026-09-27-00005",
+  "currentGoal": "goal-01-core-brain",
+  "currentPhase": "WAITING_APPROVAL",
+  "progress": 60,
+  "nextAction": "Proposal PR-2026-09-27-00004 ready; awaiting session approval.",
+  "status": "ACTIVE",
+  "createdAt": "2026-09-14T00:18:05.124Z",
+  "updatedAt": "2026-09-27T01:42:30.390Z"
+}

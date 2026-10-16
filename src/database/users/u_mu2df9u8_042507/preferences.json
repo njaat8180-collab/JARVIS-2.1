@@ -1,0 +1,16 @@
+{
+  "voice": "",
+  "voiceSpeed": 1,
+  "voicePitch": 1,
+  "ttsEngine": "",
+  "responseStyle": "concise",
+  "responseLength": "",
+  "personality": [],
+  "formality": "",
+  "proactiveBehavior": false,
+  "greetingBehavior": "",
+  "adaptiveMode": false,
+  "useNameInResponses": false,
+  "userId": "u_mu2df9u8_042507",
+  "version": 1
+}

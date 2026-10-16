@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "createdAt": "2026-09-26T16:19:09.510Z",
+  "updatedAt": "2026-09-27T01:42:30.378Z",
+  "records": [
+    {
+      "proposalId": "PR-2026-09-27-00004",
+      "goalId": "goal-01-core-brain",
+      "title": "Advance \"Core Brain\"",
+      "reason": "Goal is at 0% (NOT_STARTED) and is next in priority order.",
+      "observedIssue": "No live research evidence could be retrieved for \"Core Brain\". 2 source(s) attempted, 0 succeeded.",
+      "proposedImprovement": "Address the observed issue for \"Core Brain\" and record verifiable progress.",
+      "expectedBenefit": "Incremental, evidence-backed progress toward the \"Core Brain\" goal.",
+      "riskLevel": "medium",
+      "status": "pending",
+      "createdAt": "2026-09-27T01:42:30.378Z",
+      "approvedAt": null,
+      "rejectedAt": null,
+      "research": {
+        "source": "multi-source-research",
+        "generatedAt": "2026-09-27T01:42:30.376Z",
+        "succeededSources": [],
+        "failedSources": [
+          {
+            "source": "wikipedia",
+            "error": "JARVIS is running offline. No saved local result is available for this request."
+          },
+          {
+            "source": "dataSources.wikidataSearch",
+            "error": "JARVIS is running offline. No saved local result is available for this request."
+          }
+        ]
+      },
+      "provenance": [
+        {
+          "source": "wikipedia",
+          "sourceTitle": null,
+          "query": "Core Brain",
+          "sourceUrl": null,
+          "retrievedAt": "2026-09-27T01:42:30.378Z",
+          "evidenceSummary": null,
+          "success": false,
+          "error": "JARVIS is running offline. No saved local result is available for this request."
+        },
+        {
+          "source": "dataSources.wikidataSearch",
+          "sourceTitle": null,
+          "query": "Core Brain",
+          "sourceUrl": null,
+          "retrievedAt": "2026-09-27T01:42:30.378Z",
+          "evidenceSummary": null,
+          "success": false,
+          "error": "JARVIS is running offline. No saved local result is available for this request."
+        }
+      ]
+    }
+  ]
+}

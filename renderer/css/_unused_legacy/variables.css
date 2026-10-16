@@ -1,0 +1,105 @@
+/* ==========================================
+   JARVIS 4.0
+   PROFESSIONAL HUD UI
+   VARIABLES
+========================================== */
+
+
+:root{
+
+
+/* ================= COLORS ================= */
+
+
+--cyan:#00eaff;
+
+--blue:#008cff;
+
+--dark-blue:#001b33;
+
+--green:#00ff99;
+
+--red:#ff315c;
+
+--orange:#ff9d00;
+
+
+
+/* ================= TEXT ================= */
+
+
+--text-primary:#ffffff;
+
+--text-secondary:#a8b8cc;
+
+--text-muted:#68788c;
+
+
+
+/* ================= GLASS ================= */
+
+
+--glass-bg:
+rgba(8,18,32,0.55);
+
+
+--glass-light:
+rgba(255,255,255,0.05);
+
+
+--glass-border:
+rgba(0,229,255,0.18);
+
+
+
+/* ================= SHADOW ================= */
+
+
+--cyan-shadow:
+
+0 0 20px rgba(0,234,255,.6);
+
+
+
+--strong-shadow:
+
+0 0 50px rgba(0,234,255,.45);
+
+
+
+/* ================= RADIUS ================= */
+
+
+--radius-small:12px;
+
+--radius-medium:20px;
+
+--radius-large:30px;
+
+
+
+/* ================= FONT ================= */
+
+
+--font-hud:
+"Orbitron",
+sans-serif;
+
+
+--font-main:
+"Inter",
+sans-serif;
+
+
+
+/* ================= ANIMATION ================= */
+
+
+--fast:.2s ease;
+
+--normal:.4s ease;
+
+--slow:.8s ease;
+
+
+}

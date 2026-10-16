@@ -1,0 +1,104 @@
+{
+  "users": [
+    {
+      "userId": "u_mu2df9tz_243625",
+      "name": "Default User",
+      "isGuest": false,
+      "createdAt": "2026-09-15T07:49:20.137Z",
+      "lastActiveAt": "2026-09-15T07:49:20.137Z",
+      "role": "member",
+      "pinHash": null
+    },
+    {
+      "userId": "u_mu2df9u8_042507",
+      "name": "Guest",
+      "isGuest": true,
+      "createdAt": "2026-09-15T07:49:20.144Z",
+      "lastActiveAt": "2026-09-15T07:49:20.144Z",
+      "role": "guest",
+      "pinHash": null
+    },
+    {
+      "userId": "u_muihjpar_4184c2",
+      "name": "Nakul",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:04.084Z",
+      "lastActiveAt": "2026-09-26T14:29:04.084Z"
+    },
+    {
+      "userId": "u_muihkeqb_2e3ab3",
+      "name": "Nakul",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.045Z",
+      "lastActiveAt": "2026-09-26T14:29:37.286Z"
+    },
+    {
+      "userId": "u_muihkf13_3870e0",
+      "name": "Minimal User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.431Z",
+      "lastActiveAt": "2026-09-26T14:29:37.431Z"
+    },
+    {
+      "userId": "u_muihkf1k_56b97c",
+      "name": "Corrupt Test",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.448Z",
+      "lastActiveAt": "2026-09-26T14:29:37.448Z"
+    },
+    {
+      "userId": "u_muihmvlc_1ab7ff",
+      "name": "alert(1)Evil",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:31:32.208Z",
+      "lastActiveAt": "2026-09-26T14:31:32.208Z"
+    },
+    {
+      "userId": "u_muihmvm6_3f8dc0",
+      "name": "NoMem User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:31:32.239Z",
+      "lastActiveAt": "2026-09-26T14:31:32.239Z"
+    },
+    {
+      "userId": "u_muiimc1y_573e7d",
+      "name": "alert(1)Evil",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:59:06.502Z",
+      "lastActiveAt": "2026-09-26T14:59:06.502Z"
+    },
+    {
+      "userId": "u_muiioshh_df9081",
+      "name": "Minimal User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T15:01:01.109Z",
+      "lastActiveAt": "2026-09-26T15:01:01.109Z"
+    }
+  ],
+  "activeUserId": "u_mu2df9u8_042507",
+  "version": 1
+}

@@ -1,0 +1,20 @@
+{
+  "name": "MsgUser",
+  "preferredName": "MsgUser",
+  "dateOfBirth": "",
+  "language": "en",
+  "secondaryLanguage": "",
+  "autoLanguageDetect": false,
+  "country": "",
+  "region": "",
+  "city": "",
+  "timezone": "",
+  "occupation": "",
+  "education": "",
+  "interests": [],
+  "hobbies": [],
+  "avatarColor": "#FF5252",
+  "avatarInitials": "MS",
+  "userId": "u_muihjpf9_484e1b",
+  "version": 2
+}

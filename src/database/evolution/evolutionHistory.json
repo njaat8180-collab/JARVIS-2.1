@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "createdAt": "2026-09-26T16:19:09.514Z",
+  "updatedAt": "2026-09-27T01:42:30.386Z",
+  "records": [
+    {
+      "entryId": "EVH-2026-09-27-00001",
+      "event": "transition",
+      "state": "observing",
+      "timestamp": "2026-09-27T01:42:30.358Z",
+      "from": "idle",
+      "to": "observing",
+      "goalId": null
+    },
+    {
+      "entryId": "EVH-2026-09-27-00002",
+      "event": "transition",
+      "state": "selecting",
+      "timestamp": "2026-09-27T01:42:30.365Z",
+      "from": "observing",
+      "to": "selecting",
+      "goalId": null
+    },
+    {
+      "entryId": "EVH-2026-09-27-00003",
+      "event": "transition",
+      "state": "analyzing",
+      "timestamp": "2026-09-27T01:42:30.371Z",
+      "from": "selecting",
+      "to": "analyzing",
+      "goalId": "goal-01-core-brain"
+    },
+    {
+      "entryId": "EVH-2026-09-27-00005",
+      "event": "transition",
+      "state": "waiting_approval",
+      "timestamp": "2026-09-27T01:42:30.386Z",
+      "from": "analyzing",
+      "to": "waiting_approval",
+      "goalId": "goal-01-core-brain"
+    }
+  ]
+}

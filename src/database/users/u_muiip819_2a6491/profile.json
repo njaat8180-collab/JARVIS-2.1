@@ -1,0 +1,20 @@
+{
+  "name": "Minimal User",
+  "preferredName": "Minimal User",
+  "dateOfBirth": "",
+  "language": "en",
+  "secondaryLanguage": "",
+  "autoLanguageDetect": false,
+  "country": "",
+  "region": "",
+  "city": "",
+  "timezone": "",
+  "occupation": "",
+  "education": "",
+  "interests": [],
+  "hobbies": [],
+  "avatarColor": "#00E5FF",
+  "avatarInitials": "MU",
+  "userId": "u_muiip819_2a6491",
+  "version": 2
+}

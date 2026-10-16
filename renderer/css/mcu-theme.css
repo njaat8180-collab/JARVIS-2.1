@@ -1,0 +1,680 @@
+/* ============================================================
+   J.A.R.V.I.S — MCU HOLOGRAPHIC THEME
+   Classic JARVIS: cyan-blue holographic, volumetric
+   depth, particle rings, boot sequence, full animation.
+   This file loads LAST and overrides everything before it.
+   ============================================================ */
+
+/* ========================================= */
+/* VARIABLES                                 */
+/* ========================================= */
+
+:root {
+    --amber:          #38dcff;
+    --amber-bright:   #9df3ff;
+    --amber-dim:      rgba(56, 220, 255, 0.4);
+    --amber-faint:    rgba(56, 220, 255, 0.08);
+    --amber-glow:     rgba(56, 220, 255, 0.25);
+
+    --gold:           #2bb3e6;
+    --gold-deep:      #1687b8;
+    --burnt:          #1a9fd8;
+
+    --bg-void:        #030609;
+    --bg-panel:        rgba(8, 12, 20, 0.88);
+    --bg-panel-solid:  #05080d;
+
+    --border-soft:     rgba(56, 220, 255, 0.12);
+    --border-glow:     rgba(56, 220, 255, 0.3);
+    --border-hud:      rgba(56, 220, 255, 0.15);
+
+    --text-primary:    #e9f7ff;
+    --text-secondary:  #7fa8bb;
+    --text-faint:      #4a6575;
+
+    --cyan:            #38dcff; /* keep var name compat */
+    --cyan-bright:     #9df3ff;
+    --cyan-dim:        rgba(56, 220, 255, 0.4);
+    --green:           #38dcff;
+    --red:             #ff5e47;
+
+    --font-display:    "SF Mono", "Cascadia Mono", "Consolas", monospace;
+    --font-body:       "SF Mono", "Cascadia Mono", "Consolas", monospace;
+
+    --radius:          1px;
+    --transition:      0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================= */
+/* GLOBAL RESET + BACKGROUND                 */
+/* ========================================= */
+
+* {
+    font-family: var(--font-body) !important;
+}
+
+body {
+    background: var(--bg-void) !important;
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+/* Volumetric depth: layered radial gradients + moving particles */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(56, 220, 255, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(26, 159, 216, 0.02) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(56, 220, 255, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: bgPulse 8s ease-in-out infinite;
+}
+
+@keyframes bgPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Scan lines */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(56, 220, 255, 0.008) 40%,
+        rgba(56, 220, 255, 0.012) 50%,
+        rgba(56, 220, 255, 0.008) 60%,
+        transparent 100%
+    );
+    background-size: 100% 6px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: scanMove 12s linear infinite;
+}
+
+@keyframes scanMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100vh; }
+}
+
+/* ========================================= */
+/* BOOT SEQUENCE                             */
+/* ========================================= */
+
+#bootOverlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    color: var(--amber);
+    transition: opacity 1.2s ease;
+}
+#bootOverlay.fade-out { opacity: 0; pointer-events: none; }
+#bootOverlay.hide { display: none; }
+
+.boot-title {
+    font-size: 42px;
+    letter-spacing: 18px;
+    font-weight: 200;
+    margin-bottom: 8px;
+    animation: bootFlicker 0.15s steps(1) infinite alternate, bootGlow 3s ease-in-out infinite;
+    text-shadow: 0 0 30px var(--amber-glow);
+}
+@keyframes bootFlicker {
+    0% { opacity: 1; }
+    100% { opacity: 0.92; }
+}
+@keyframes bootGlow {
+    0%, 100% { text-shadow: 0 0 20px var(--amber-glow); }
+    50% { text-shadow: 0 0 50px var(--amber-glow), 0 0 80px rgba(56, 220, 255, 0.1); }
+}
+
+.boot-subtitle {
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    animation: bootTypeIn 2s ease-out;
+}
+@keyframes bootTypeIn {
+    from { opacity: 0; letter-spacing: 20px; }
+    to { opacity: 1; letter-spacing: 6px; }
+}
+
+.boot-lines {
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: 2px;
+    text-align: left;
+    min-height: 180px;
+    width: 400px;
+}
+.boot-line {
+    opacity: 0;
+    animation: bootLineShow 0.3s ease forwards;
+    padding: 2px 0;
+}
+.boot-line::before { content: "> "; color: var(--gold-deep); }
+.boot-line.ok::after { content: " [OK]"; color: var(--amber); }
+@keyframes bootLineShow {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.boot-bar {
+    width: 400px;
+    height: 2px;
+    background: rgba(56, 220, 255, 0.1);
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.boot-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    animation: bootBarSlide 2s ease-in-out infinite;
+}
+@keyframes bootBarSlide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* ========================================= */
+/* INTERACTIVE 3D ORB (mouse-rotatable)      */
+/* ========================================= */
+
+.orb-stage {
+    width: 300px;
+    height: 300px;
+    perspective: 800px;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    margin: 20px auto;
+}
+.orb-stage:active { cursor: grabbing; }
+
+.orb-3d {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+/* Core sphere — complete, solid full circle (no fade-out edge) */
+.orb-core {
+    position: absolute;
+    inset: 30%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, #ffffff, var(--cyan-bright) 30%, var(--cyan) 70%, var(--cyan-dim) 100%);
+    box-shadow:
+        0 0 40px var(--amber-glow),
+        0 0 100px rgba(56, 220, 255, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+    animation: corePulse 3s ease-in-out infinite;
+}
+@keyframes corePulse {
+    0%, 100% { box-shadow: 0 0 40px var(--amber-glow), 0 0 100px rgba(56, 220, 255, 0.1); }
+    50% { box-shadow: 0 0 60px var(--amber-glow), 0 0 140px rgba(56, 220, 255, 0.2); }
+}
+
+/* Rotating rings (3D planes) */
+.orb-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(56, 220, 255, 0.2);
+    box-shadow: 0 0 4px var(--amber-faint);
+}
+
+.ring-inner { inset: 12%; border-color: rgba(56, 220, 255, 0.35); animation: ringSpinY 8s linear infinite; }
+.ring-mid   { inset: 4%;  border-color: rgba(56, 220, 255, 0.25); animation: ringSpinX 12s linear infinite; }
+.ring-outer { inset: -4%; border-color: rgba(56, 220, 255, 0.15); animation: ringSpinY 20s linear infinite reverse; }
+
+/* Complete solid rings (no dashed/dotted breaks) */
+.ring-segmented {
+    border-style: solid;
+    border-width: 2px;
+    animation: ringSpinX 15s linear infinite;
+}
+.ring-segmented-2 {
+    border-style: solid;
+    animation: ringSpinY 10s linear infinite reverse;
+}
+
+@keyframes ringSpinX {
+    from { transform: rotateX(70deg) rotateZ(0deg); }
+    to   { transform: rotateX(70deg) rotateZ(360deg); }
+}
+@keyframes ringSpinY {
+    from { transform: rotateY(70deg) rotateZ(0deg); }
+    to   { transform: rotateY(70deg) rotateZ(360deg); }
+}
+
+/* Particle orbit points */
+.orb-particles {
+    position: absolute;
+    inset: 0;
+    animation: ringSpinY 6s linear infinite;
+}
+.orb-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--amber-bright);
+    box-shadow: 0 0 6px var(--amber-glow);
+}
+
+/* Status glow on listening — complete circle, bright core */
+.orb-stage.listening .orb-core {
+    background: radial-gradient(circle at 50% 50%, #fff, var(--cyan-bright) 40%, var(--cyan) 80%, var(--cyan-dim) 100%);
+    animation: coreListening 1s ease-in-out infinite;
+}
+@keyframes coreListening {
+    0%, 100% { box-shadow: 0 0 60px var(--amber-glow), 0 0 150px rgba(56, 220, 255, 0.3); }
+    50% { box-shadow: 0 0 100px var(--amber-glow), 0 0 200px rgba(56, 220, 255, 0.4); }
+}
+
+/* ========================================= */
+/* LAYOUT PANELS                             */
+/* ========================================= */
+
+.mainLayout {
+    gap: 2px !important;
+    padding: 6px !important;
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar,
+.right-panel,
+.chat-panel,
+.center-panel {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-soft) !important;
+    border-radius: var(--radius) !important;
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(56, 220, 255, 0.01) !important;
+    backdrop-filter: blur(4px);
+    animation: panelSlideIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.sidebar { animation-delay: 0.1s; }
+.center-panel { animation-delay: 0.25s; }
+.right-panel { animation-delay: 0.4s; }
+.chat-panel { animation-delay: 0.55s; }
+
+@keyframes panelSlideIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* HUD corner brackets — animated draw-in */
+.sidebar::before, .sidebar::after,
+.right-panel::before, .right-panel::after,
+.chat-panel::before, .chat-panel::after,
+.center-panel::before, .center-panel::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    z-index: 2;
+    animation: bracketGlow 4s ease-in-out infinite;
+}
+.sidebar::before, .right-panel::before,
+.chat-panel::before, .center-panel::before {
+    top: 0; left: 0;
+    border-top: 1px solid var(--amber);
+    border-left: 1px solid var(--amber);
+}
+.sidebar::after, .right-panel::after,
+.chat-panel::after, .center-panel::after {
+    bottom: 0; right: 0;
+    border-bottom: 1px solid var(--amber);
+    border-right: 1px solid var(--amber);
+}
+@keyframes bracketGlow {
+    0%, 100% { opacity: 0.4; box-shadow: 0 0 4px var(--amber-faint); }
+    50% { opacity: 1; box-shadow: 0 0 8px var(--amber-glow); }
+}
+
+/* ========================================= */
+/* SIDEBAR                                   */
+/* ========================================= */
+
+.sidebar { padding: 12px !important; }
+
+.profile-card {
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    border-radius: 0 !important;
+    padding: 0 0 14px 0 !important;
+    box-shadow: none !important;
+}
+.profile-name {
+    font-size: 14px !important;
+    letter-spacing: 4px !important;
+    text-transform: uppercase !important;
+    color: var(--text-primary) !important;
+    text-shadow: 0 0 10px var(--amber-faint);
+}
+.profile-role {
+    font-size: 9px !important;
+    letter-spacing: 2px !important;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase !important;
+}
+
+.menu-item {
+    background: none !important;
+    border: none !important;
+    border-left: 2px solid transparent !important;
+    border-radius: 0 !important;
+    color: var(--text-secondary) !important;
+    font-size: 10px !important;
+    letter-spacing: 2.5px !important;
+    text-transform: uppercase !important;
+    padding: 9px 12px !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+}
+.menu-item:hover:not(.active) {
+    background: linear-gradient(90deg, var(--amber-faint), transparent) !important;
+    color: var(--text-primary) !important;
+    border-left-color: var(--amber-dim) !important;
+    padding-left: 18px !important;
+}
+.menu-item.active {
+    background: linear-gradient(90deg, rgba(56, 220, 255, 0.1), transparent) !important;
+    border-left-color: var(--amber) !important;
+    color: var(--amber) !important;
+    padding-left: 18px !important;
+}
+.menu-item.active::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber-glow);
+    animation: activePulse 2s ease-in-out infinite;
+}
+@keyframes activePulse {
+    0%, 100% { opacity: 0.4; box-shadow: 0 0 4px var(--amber-glow); }
+    50% { opacity: 1; box-shadow: 0 0 12px var(--amber-glow); }
+}
+
+/* ========================================= */
+/* GREETING (HUD readout)                    */
+/* ========================================= */
+
+.greeting-card {
+    background: rgba(56, 220, 255, 0.02) !important;
+    border: 1px solid var(--border-soft) !important;
+    border-radius: var(--radius) !important;
+    min-height: 80px !important;
+    box-shadow: inset 0 0 20px rgba(56, 220, 255, 0.02) !important;
+    position: relative;
+    overflow: hidden;
+    animation: panelSlideIn 0.8s ease 0.6s backwards;
+}
+.greeting-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+    animation: lineScan 4s ease-in-out infinite;
+}
+@keyframes lineScan {
+    0%, 100% { transform: translateX(-100%); opacity: 0; }
+    50% { transform: translateX(0); opacity: 1; }
+}
+.hud-label {
+    color: var(--amber) !important;
+    font-size: 11px !important;
+    letter-spacing: 3px !important;
+}
+.greeting-text h2 {
+    color: var(--text-primary) !important;
+    letter-spacing: 8px !important;
+    font-weight: 200 !important;
+    font-size: 22px !important;
+    text-shadow: 0 0 20px var(--amber-faint);
+}
+.hud-subtext { color: var(--text-secondary) !important; }
+.hud-readout { color: var(--text-faint) !important; }
+
+/* ========================================= */
+/* QUICK ACCESS                              */
+/* ========================================= */
+
+.quick-access { gap: 2px !important; margin-bottom: 10px !important; }
+
+.qa-btn {
+    background: rgba(56, 220, 255, 0.02) !important;
+    border: 1px solid var(--border-soft) !important;
+    border-radius: 0 !important;
+    padding: 12px 4px !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+}
+.qa-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(56, 220, 255, 0.06), transparent);
+    transition: left 0.5s ease;
+}
+.qa-btn:hover::before { left: 100%; }
+.qa-btn:hover {
+    border-color: var(--border-glow) !important;
+    background: rgba(56, 220, 255, 0.05) !important;
+}
+.qa-marker {
+    width: 5px !important;
+    height: 5px !important;
+    background: var(--amber-dim);
+    border-radius: 50%;
+    margin: 0 auto 6px;
+    transition: all 0.3s ease;
+}
+.qa-btn:hover .qa-marker {
+    background: var(--amber-bright);
+    box-shadow: 0 0 10px var(--amber-glow);
+    animation: markerPulse 1s ease-in-out infinite;
+}
+@keyframes markerPulse {
+    0%, 100% { box-shadow: 0 0 4px var(--amber-glow); }
+    50% { box-shadow: 0 0 12px var(--amber-glow); }
+}
+.qa-label {
+    font-size: 8px !important;
+    letter-spacing: 2px !important;
+    color: var(--text-secondary) !important;
+}
+.qa-btn:hover .qa-label { color: var(--text-primary) !important; }
+
+/* ========================================= */
+/* OLD ORB CONTAINER — HIDDEN (replaced)     */
+/* ========================================= */
+
+.orb-container .ring { display: none !important; }
+
+/* ========================================= */
+/* BROWSER                                   */
+/* ========================================= */
+
+.browser-panel {
+    border: 1px solid var(--border-soft) !important;
+    background: var(--bg-void) !important;
+}
+.browser-toolbar {
+    background: rgba(5, 8, 13, 0.9) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+}
+.browser-btn {
+    border: 1px solid var(--border-soft) !important;
+    color: var(--amber) !important;
+    border-radius: 0 !important;
+}
+.browser-btn:hover {
+    background: rgba(56, 220, 255, 0.08) !important;
+    border-color: var(--border-glow) !important;
+}
+.browser-viewport { background: #fff !important; }
+
+/* ========================================= */
+/* PANELS (Memory/Settings/Files)            */
+/* ========================================= */
+
+.memory-panel, .settings-panel, .files-panel {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-soft) !important;
+    animation: panelSlideIn 0.6s ease backwards;
+}
+.panel-header h2 {
+    color: var(--text-primary) !important;
+    letter-spacing: 5px !important;
+    font-weight: 200 !important;
+}
+.panel-header h2::before { background: var(--amber) !important; }
+.panel-kicker { color: var(--amber-dim) !important; }
+.panel-btn {
+    border: 1px solid var(--border-soft) !important;
+    color: var(--amber) !important;
+    background: rgba(56, 220, 255, 0.03) !important;
+}
+.panel-btn:hover { background: rgba(56, 220, 255, 0.1) !important; }
+.panel-btn-danger {
+    color: var(--red) !important;
+    border-color: rgba(255, 94, 71, 0.3) !important;
+    background: rgba(255, 94, 71, 0.05) !important;
+}
+.memory-item, .files-item {
+    border: 1px solid var(--border-soft) !important;
+    background: rgba(56, 220, 255, 0.01) !important;
+}
+.memory-item:hover, .files-item:hover {
+    background: rgba(56, 220, 255, 0.05) !important;
+    border-color: var(--border-glow) !important;
+}
+.memory-item-key { color: var(--amber) !important; }
+.settings-select, .panel-search {
+    border: 1px solid var(--border-soft) !important;
+    background: rgba(5, 8, 13, 0.6) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ========================================= */
+/* HEALTH / BG EVENTS PANELS                 */
+/* ========================================= */
+
+.health-panel, .background-events-panel {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-soft) !important;
+    animation: panelSlideIn 0.6s ease backwards;
+}
+.health-header h2, .background-events-header h2 {
+    letter-spacing: 5px !important;
+    font-weight: 200 !important;
+    color: var(--text-primary) !important;
+}
+.health-bar-fill {
+    background: linear-gradient(90deg, var(--gold), var(--amber)) !important;
+    box-shadow: 0 0 8px var(--amber-glow) !important;
+}
+
+/* ========================================= */
+/* CHAT                                      */
+/* ========================================= */
+
+#chatInput {
+    border: 1px solid var(--border-soft) !important;
+    background: rgba(5, 8, 13, 0.6) !important;
+}
+#chatInput:focus {
+    border-color: var(--border-glow) !important;
+    box-shadow: 0 0 15px var(--amber-faint) !important;
+}
+
+/* ========================================= */
+/* BUTTONS / INPUTS                          */
+/* ========================================= */
+
+.hud-btn {
+    border: 1px solid var(--border-soft) !important;
+    color: var(--amber) !important;
+    background: rgba(56, 220, 255, 0.02) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+}
+.hud-btn:hover {
+    background: rgba(56, 220, 255, 0.08) !important;
+    box-shadow: 0 0 10px var(--amber-faint) !important;
+}
+
+/* ========================================= */
+/* SCROLLBAR / SELECTION                     */
+/* ========================================= */
+
+::-webkit-scrollbar { width: 3px !important; }
+::-webkit-scrollbar-thumb { background: var(--amber-dim) !important; }
+::selection { background: rgba(56, 220, 255, 0.25) !important; }
+
+/* ========================================= */
+/* RESPONSIVE                                */
+/* ========================================= */
+
+@media (max-width: 800px) {
+    .orb-stage { width: 200px; height: 200px; }
+    .boot-lines, .boot-bar { width: 280px; }
+    .boot-title { font-size: 28px; letter-spacing: 10px; }
+}
+
+/* ========================================= */
+/* 3D ENERGY CORE (canvas-based, replaces old CSS orb) */
+/* ========================================= */
+
+.orb-stage3d {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    user-select: none;
+    z-index: 2;
+}
+.orb-stage3d canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

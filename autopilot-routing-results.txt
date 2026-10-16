@@ -1,0 +1,1339 @@
+TAP version 13
+# Subtest: unnamed Notepad editor is found without matching unrelated window labels
+ok 1 - unnamed Notepad editor is found without matching unrelated window labels
+  ---
+  duration_ms: 4.8656
+  type: 'test'
+  ...
+# Subtest: verification requires complete text, not one matching word
+ok 2 - verification requires complete text, not one matching word
+  ---
+  duration_ms: 0.7485
+  type: 'test'
+  ...
+# Subtest: ambiguous or hidden buttons cannot yield an accessibility click
+ok 3 - ambiguous or hidden buttons cannot yield an accessibility click
+  ---
+  duration_ms: 0.9091
+  type: 'test'
+  ...
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# [NCE] 🎤 STT Transcript: Open Microsoft Store and search cloud
+# [NCE] 🧹 Normalized: open microsoft store and search cloud
+# [NCE] 🧠 Intent: APP_TASK_FLOW
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   app: 'microsoft store',
+#   query: 'cloud',
+#   action: 'search',
+#   approvalRequired: true
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Windows accepted the microsoft store search for cloud.
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# [NCE] 🎤 STT Transcript: Open Microsoft Store and search cloud
+# [NCE] 🧹 Normalized: open microsoft store and search cloud
+# [NCE] 🧠 Intent: APP_TASK_FLOW
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   app: 'microsoft store',
+#   query: 'cloud',
+#   action: 'search',
+#   approvalRequired: true
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Store unavailable
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# [NCE] 🎤 STT Transcript: Open Microsoft Store and search cloud
+# [NCE] 🧹 Normalized: open microsoft store and search cloud
+# [NCE] 🧠 Intent: APP_TASK_FLOW
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   app: 'microsoft store',
+#   query: 'cloud',
+#   action: 'search',
+#   approvalRequired: true
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: I couldn't find an official source for cloud.
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# [NCE] 🎤 STT Transcript: Jarvis, open Notepad and type minecraft खेलेगा and open Chrome
+# [NCE] 🧹 Normalized: open notepad and type minecraft खेलेगा and open chrome
+# [NCE] 🧠 Intent: APP_TASK_FLOW
+# [NCE] 📊 Confidence: 1
+# [NCE] 📦 Entities: {
+#   app: 'Notepad',
+#   action: 'type',
+#   text: 'minecraft खेलेगा and open Chrome',
+#   approvalRequired: true
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Notepad unavailable
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# 🧠 JARVIS Chat Kernel V12 Created
+# 🧠 JARVIS CHAT: Routing message: Open Microsoft Store and search cloud
+# [BRAIN] Processing "Open Microsoft Store and search cloud"
+# [NCE] 🎤 STT Transcript: Open Microsoft Store and search cloud
+# [NCE] 🧹 Normalized: open microsoft store and search cloud
+# [NCE] 🧠 Intent: APP_TASK_FLOW
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   app: 'microsoft store',
+#   query: 'cloud',
+#   action: 'search',
+#   approvalRequired: true
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Windows accepted the microsoft store search for cloud.
+# 🧠 JARVIS CHAT: Routing message: Open Notepad
+# [BRAIN] Processing "Open Notepad"
+# [NCE] 🎤 STT Transcript: Open Notepad
+# [NCE] 🧹 Normalized: open notepad
+# [NCE] 🧠 Intent: OPEN_APP
+# [NCE] 📊 Confidence: 0.96
+# [NCE] 📦 Entities: { app: 'notepad' }
+# [NCE] 🧭 Router: system.openApp notepad
+# [NCE] 🔌 Service: SystemController
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Opening notepad.
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# Subtest: Store search works without vision and never falls back to another app
+ok 4 - Store search works without vision and never falls back to another app
+  ---
+  duration_ms: 258.4456
+  type: 'test'
+  ...
+# Subtest: Notepad payload stays literal and launch failure cannot trigger typing
+ok 5 - Notepad payload stays literal and launch failure cannot trigger typing
+  ---
+  duration_ms: 9.1227
+  type: 'test'
+  ...
+# Subtest: chat keeps wake-word app commands atomic and bypasses screen-question interception
+ok 6 - chat keeps wake-word app commands atomic and bypasses screen-question interception
+  ---
+  duration_ms: 19.9748
+  type: 'test'
+  ...
+# Subtest: browser voice fast path leaves local app workflows for ChatEngine
+ok 7 - browser voice fast path leaves local app workflows for ChatEngine
+  ---
+  duration_ms: 26.6361
+  type: 'test'
+  ...
+# Subtest: unknown open targets never become implicit web searches
+ok 8 - unknown open targets never become implicit web searches
+  ---
+  duration_ms: 12.0931
+  type: 'test'
+  ...
+# Subtest: local system commands stay local despite AI-like wording
+ok 9 - local system commands stay local despite AI-like wording
+  ---
+  duration_ms: 3.2577
+  type: 'test'
+  ...
+# Subtest: explicit AI requests go to AI
+ok 10 - explicit AI requests go to AI
+  ---
+  duration_ms: 5.9208
+  type: 'test'
+  ...
+# Subtest: web actions are not misrouted to AI
+ok 11 - web actions are not misrouted to AI
+  ---
+  duration_ms: 0.4526
+  type: 'test'
+  ...
+# Subtest: ordinary mentions remain undecided
+ok 12 - ordinary mentions remain undecided
+  ---
+  duration_ms: 0.5751
+  type: 'test'
+  ...
+# Subtest: Computer Use UI exposes screen inspection without bypassing approvals
+ok 13 - Computer Use UI exposes screen inspection without bypassing approvals
+  ---
+  duration_ms: 4.4211
+  type: 'test'
+  ...
+# Subtest: Computer Use active state has the blue focus frame
+ok 14 - Computer Use active state has the blue focus frame
+  ---
+  duration_ms: 0.5805
+  type: 'test'
+  ...
+# Subtest: Computer Use UI exposes adaptive workflow progress
+ok 15 - Computer Use UI exposes adaptive workflow progress
+  ---
+  duration_ms: 0.7106
+  type: 'test'
+  ...
+# Subtest: Computer Use UI exposes explainable decision evidence for demos
+ok 16 - Computer Use UI exposes explainable decision evidence for demos
+  ---
+  duration_ms: 0.5571
+  type: 'test'
+  ...
+# Subtest: Computer Use UI exposes the voice-first Autopilot experience
+ok 17 - Computer Use UI exposes the voice-first Autopilot experience
+  ---
+  duration_ms: 0.6162
+  type: 'test'
+  ...
+# Subtest: visual click requires approval before any desktop input
+ok 18 - visual click requires approval before any desktop input
+  ---
+  duration_ms: 36.703
+  type: 'test'
+  ...
+# Subtest: emergency stop cancels an open approval
+ok 19 - emergency stop cancels an open approval
+  ---
+  duration_ms: 4.2071
+  type: 'test'
+  ...
+# Subtest: scan completing after emergency stop cannot click
+ok 20 - scan completing after emergency stop cannot click
+  ---
+  duration_ms: 3.7214
+  type: 'test'
+  ...
+# Subtest: typing preserves more than 200 characters and rejects overflow before clicking
+ok 21 - typing preserves more than 200 characters and rejects overflow before clicking
+  ---
+  duration_ms: 6.1232
+  type: 'test'
+  ...
+# Subtest: uncertain targets cannot produce desktop input
+ok 22 - uncertain targets cannot produce desktop input
+  ---
+  duration_ms: 4.0799
+  type: 'test'
+  ...
+# Subtest: native coordinates are not rescaled through browser display size
+ok 23 - native coordinates are not rescaled through browser display size
+  ---
+  duration_ms: 2.5263
+  type: 'test'
+  ...
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# [NCE] PPT intent candidate {
+#   topic: 'ek achhi se',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft currency systems',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft pvp',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft pvp',
+#   slideCount: 5,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'cybersecurity',
+#   slideCount: 15,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'windows 7 for class 9',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 9,
+#   imageCount: 20,
+#   wantsImages: true,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 9,
+#   imageCount: 20,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 9,
+#   imageCount: 20,
+#   wantsImages: true,
+#   language: 'hi'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 9,
+#   imageCount: 20,
+#   wantsImages: true,
+#   language: 'hi'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft pvp',
+#   slideCount: 5,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 11,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'how to use chatgpt',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'how to use chatgpt',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hi'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'माइनक्राफ्ट',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hi'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] 🎤 STT Transcript: minecraft ke upar ek achchhee se peepeetee bao aur usamen but saree imejes lagan
+# [NCE] 🧹 Normalized: minecraft ke upar ek achhi se ppt banao aur usmein bahut saari images lagana
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'polished design' ],
+#   language: 'hinglish',
+#   userRequest: 'minecraft ke upar ek achchhee se peepeetee bao aur usamen but saree imejes lagan'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'polished design' ],
+#   language: 'hinglish'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: PPT बन गई है।
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] 🎤 STT Transcript: Create a PPT on Minecraft
+# [NCE] 🧹 Normalized: create a ppt on minecraft
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'en',
+#   userRequest: 'Create a PPT on Minecraft'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'en'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: I couldn't create the PPT. The presentation service did not confirm that a PPTX file was saved and verified.
+# 🧠 JARVIS Chat Kernel V12 Created
+# ✅ ChatEngine V12 Global Instance Created
+# 🧠 JARVIS Chat Kernel V12 Created
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# 🧠 JARVIS CHAT: [PPT ROUTE] Voice/chat artifact dispatch selected {
+#   inputText: 'minecraft ke upar ek achhi si ppt banao aur usmein bahut saari images lagana',
+#   originalRequest: 'minecraft ke upar ek achchhee se peepeetee bao aur usamen but saree imejes lagan',
+#   topic: 'minecraft',
+#   wantsImages: true,
+#   slideCount: 10,
+#   imageCount: 9,
+#   handler: 'existing-presentations:create'
+# }
+# [NCE] 🎤 STT Transcript: minecraft ke upar ek achchhee se peepeetee bao aur usamen but saree imejes lagan
+# [NCE] 🧹 Normalized: minecraft ke upar ek achhi se ppt banao aur usmein bahut saari images lagana
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'polished design' ],
+#   language: 'hinglish',
+#   userRequest: 'minecraft ke upar ek achchhee se peepeetee bao aur usamen but saree imejes lagan'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'polished design' ],
+#   language: 'hinglish'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: PPT बन गई है।
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# 🧠 JARVIS CHAT: [PPT ROUTE] Voice/chat artifact dispatch selected {
+#   inputText: 'Create a PPT on Minecraft',
+#   originalRequest: 'uh Minecraft please',
+#   topic: 'minecraft',
+#   wantsImages: false,
+#   slideCount: 10,
+#   imageCount: 0,
+#   handler: 'existing-presentations:create'
+# }
+# [NCE] 🎤 STT Transcript: uh Minecraft please
+# [NCE] 🧹 Normalized: create a ppt on minecraft
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'en',
+#   userRequest: 'uh Minecraft please'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'en'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: The PPT is ready.
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] 🎤 STT Transcript: Minecraft ke upar ek achhi si PPT banao.
+# [NCE] 🧹 Normalized: minecraft ke upar ek achhi si ppt banao.
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [ 'polished design' ],
+#   language: 'hinglish',
+#   userRequest: 'Minecraft ke upar ek achhi si PPT banao.'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [ 'polished design' ],
+#   language: 'hinglish'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: PPT बन गई है।
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] 🎤 STT Transcript: Minecraft par ek detailed presentation banao aur bahut saari images lagao.
+# [NCE] 🧹 Normalized: minecraft par ek detailed presentation banao aur bahut saari images lagao.
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'detailed' ],
+#   language: 'hinglish',
+#   userRequest: 'Minecraft par ek detailed presentation banao aur bahut saari images lagao.'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'detailed' ],
+#   language: 'hinglish'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: PPT बन गई है।
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hinglish'
+# }
+# [NCE] 🎤 STT Transcript: Mujhe Minecraft ke upar 10 slides ki PPT bana kar do, images aur achhe design ke saath.
+# [NCE] 🧹 Normalized: mujhe minecraft ke upar 10 slides ki ppt bana kar do images aur achhe design ke saath.
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'good visual design' ],
+#   language: 'hinglish',
+#   userRequest: 'Mujhe Minecraft ke upar 10 slides ki PPT bana kar do, images aur achhe design ke saath.'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [ 'good visual design' ],
+#   language: 'hinglish'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: PPT बन गई है।
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'hinglish'
+# }
+# [NCE] 🎤 STT Transcript: Minecraft ke baare mein presentation taiyar karo.
+# [NCE] 🧹 Normalized: minecraft ke baare mein presentation taiyar karo.
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'hinglish',
+#   userRequest: 'Minecraft ke baare mein presentation taiyar karo.'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'hinglish'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: PPT बन गई है।
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   language: 'hi'
+# }
+# [NCE] 🎤 STT Transcript: Minecraft पर एक शानदार PPT बनाओ, जिसमें बहुत सारी images हों।
+# [NCE] 🧹 Normalized: minecraft पर एक शानदार ppt बनाओ जिसमें बहुत सारी images हों
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [],
+#   language: 'hi',
+#   userRequest: 'Minecraft पर एक शानदार PPT बनाओ, जिसमें बहुत सारी images हों।'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 9,
+#   wantsImages: true,
+#   designPreferences: [],
+#   language: 'hi'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: PPT बन गई है।
+# [NCE] PPT intent candidate {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   language: 'en'
+# }
+# [NCE] 🎤 STT Transcript: Create a PPT on Minecraft
+# [NCE] 🧹 Normalized: create a ppt on minecraft
+# [NCE] 🧠 Intent: CREATE_PRESENTATION
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   topic: 'minecraft',
+#   missingTopic: false,
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'en',
+#   userRequest: 'Create a PPT on Minecraft'
+# }
+# [NCE] PPT action route → existing presentations.create bridge {
+#   topic: 'minecraft',
+#   slideCount: 10,
+#   imageCount: 0,
+#   wantsImages: false,
+#   designPreferences: [],
+#   language: 'en'
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: The PPT is ready.
+# [NCE] 🎤 STT Transcript: Create a CSV for monthly expenses
+# [NCE] 🧹 Normalized: create a csv for monthly expenses
+# [NCE] 🧠 Intent: CREATE_OFFICE_FILE
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   format: 'csv',
+#   request: 'monthly expenses',
+#   fileName: '',
+#   outputLocation: ''
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: The CSV was created and verified. Saved here: C:\\Documents\\csv
+# [NCE] 🎤 STT Transcript: Create a study guide about Minecraft
+# [NCE] 🧹 Normalized: create a study guide about minecraft
+# [NCE] 🧠 Intent: CREATE_OFFICE_FILE
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   format: 'docx',
+#   request: 'Minecraft',
+#   fileName: '',
+#   outputLocation: ''
+# }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: I couldn't create the DOCX. JARVIS did not receive a verified saved-file path, so it cannot confirm that the document was created.
+# [NCE] 🎤 STT Transcript: Create a ZIP archive
+# [NCE] 🧹 Normalized: create a zip archive
+# [NCE] 🧠 Intent: CREATE_OFFICE_FILE
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: { format: 'zip', request: '', fileName: '', outputLocation: '' }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Okay, cancelled.
+# [NCE] 🎤 STT Transcript: Jarvis, add this message to the queue: Hello, ChatGPT!
+# [NCE] 🧹 Normalized: add this message to the queue hello chatgpt
+# [NCE] 🧠 Intent: AI_MESSAGE_QUEUE
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: { action: 'add', message: 'Hello, ChatGPT!', provider: '' }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: 1 message added to the AI queue. Choose a model and say “send message queue” when ready.
+# [NCE] 🎤 STT Transcript: ChatGPT ki taraf se reply aane ke baad system band kar dena
+# [NCE] 🧹 Normalized: chatgpt ki taraf se reply aane ke baad system band kar dena
+# [NCE] 🧠 Intent: SYSTEM_CONTROL
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: { action: 'shutdown-after-provider-reply', provider: 'ChatGPT' }
+# [NCE] 🧭 Router: system shutdown-after-provider-reply
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: The system will shut down after the next reply from ChatGPT. Say “cancel shutdown after ChatGPT reply” to cancel.
+# [NCE] 🎤 STT Transcript: Images of Taj Mahal
+# [NCE] 🧹 Normalized: images of taj mahal
+# [NCE] 🧠 Intent: IMAGE_SEARCH
+# [NCE] 📊 Confidence: 0.95
+# [NCE] 📦 Entities: { query: 'taj mahal' }
+# [NCE] 🧭 Router: imageService
+# [NCE] 🔌 Service: Wikimedia Commons
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: I found 1 image for taj mahal from Google Images.
+# [NCE] 🎤 STT Transcript: Show me images of Minecraft
+# [NCE] 🧹 Normalized: show me images of minecraft
+# [NCE] 🧠 Intent: IMAGE_SEARCH
+# [NCE] 📊 Confidence: 0.95
+# [NCE] 📦 Entities: { query: 'minecraft' }
+# [NCE] 🧭 Router: imageService
+# [NCE] 🔌 Service: Wikimedia Commons
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: I couldn't load image previews for "minecraft". Use the Google Images link below to view results.
+# [NCE] 🎤 STT Transcript: search wikipedia for Ada Lovelace
+# [NCE] 🧹 Normalized: search wikipedia for ada lovelace
+# [NCE] 🧠 Intent: SITE_SEARCH
+# [NCE] 📊 Confidence: 0.98
+# [NCE] 📦 Entities: { site: 'wikipedia', query: 'ada lovelace' }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Searching wikipedia for ada lovelace.
+# [NCE] 🎤 STT Transcript: search headphones on amazon
+# [NCE] 🧹 Normalized: search headphones on amazon
+# [NCE] 🧠 Intent: SITE_SEARCH
+# [NCE] 📊 Confidence: 0.98
+# [NCE] 📦 Entities: { site: 'amazon', query: 'headphones' }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Searching amazon for headphones.
+# [NCE] 🎤 STT Transcript: search keyboards on flipkart
+# [NCE] 🧹 Normalized: search keyboards on flipkart
+# [NCE] 🧠 Intent: SITE_SEARCH
+# [NCE] 📊 Confidence: 0.98
+# [NCE] 📦 Entities: { site: 'flipkart', query: 'keyboards' }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Searching flipkart for keyboards.
+# [NCE] 🎤 STT Transcript: search local AI on reddit
+# [NCE] 🧹 Normalized: search local ai on reddit
+# [NCE] 🧠 Intent: SITE_SEARCH
+# [NCE] 📊 Confidence: 0.98
+# [NCE] 📦 Entities: { site: 'reddit', query: 'local ai' }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Searching reddit for local ai.
+# [NCE] 🎤 STT Transcript: Amazon kholo aur ek accha sa mouse search karo
+# [NCE] 🧹 Normalized: amazon kholo aur ek accha sa mouse search karo
+# [NCE] 🧠 Intent: SITE_SEARCH
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: { site: 'amazon', query: 'ek accha sa mouse' }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Searching amazon for ek accha sa mouse.
+# [NCE] 🎤 STT Transcript: set volume to 50%
+# [NCE] 🧹 Normalized: set volume to 50
+# [NCE] 🧠 Intent: SET_VOLUME
+# [NCE] 📊 Confidence: 0.97
+# [NCE] 📦 Entities: { percent: 50 }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: System volume set to 50%.
+# [NCE] 🎤 STT Transcript: volume 30 percent kar do
+# [NCE] 🧹 Normalized: volume 30 percent kar do
+# [NCE] 🧠 Intent: SET_VOLUME
+# [NCE] 📊 Confidence: 0.97
+# [NCE] 📦 Entities: { percent: 30 }
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Audio endpoint unavailable
+# [NCE] 🎤 STT Transcript: Jarvis, shut down in five minutes
+# [NCE] 🧹 Normalized: shut down in five minutes
+# [NCE] 🧠 Intent: SYSTEM_CONTROL
+# [NCE] 📊 Confidence: 0.99
+# [NCE] 📦 Entities: {
+#   action: 'schedule-shutdown',
+#   delayMs: 300000,
+#   amount: 5,
+#   unit: 'minutes',
+#   multiplier: 60000
+# }
+# [NCE] 🧭 Router: system schedule-shutdown
+# [NCE] 🌐 API Request completed
+# [NCE] 🗣️ TTS Response: Okay, the system will shut down in 5 minutes. Open apps will be forced closed then.
+# Subtest: natural NLU resolves required intent examples
+ok 24 - natural NLU resolves required intent examples
+  ---
+  duration_ms: 334.361
+  type: 'test'
+  ...
+# Subtest: Minecraft launch flow finds a related launcher without changing the selected version
+ok 25 - Minecraft launch flow finds a related launcher without changing the selected version
+  ---
+  duration_ms: 4.6146
+  type: 'test'
+  ...
+# Subtest: voice Computer Use commands locate semantic targets instead of requiring coordinates
+ok 26 - voice Computer Use commands locate semantic targets instead of requiring coordinates
+  ---
+  duration_ms: 6.4511
+  type: 'test'
+  ...
+# Subtest: combined app typing commands stay local and preserve the exact text
+ok 27 - combined app typing commands stay local and preserve the exact text
+  ---
+  duration_ms: 0.9024
+  type: 'test'
+  ...
+# Subtest: foundation commands route to workflow recorder and permission profiles
+ok 28 - foundation commands route to workflow recorder and permission profiles
+  ---
+  duration_ms: 3.9501
+  type: 'test'
+  ...
+# Subtest: voice regressions route Hindi presentation, AccessOS aliases, Minecraft, and local app search
+ok 29 - voice regressions route Hindi presentation, AccessOS aliases, Minecraft, and local app search
+  ---
+  duration_ms: 13.0173
+  type: 'test'
+  ...
+# Subtest: AccessOS voice mode remains a local, approval-gated Computer Use command
+ok 30 - AccessOS voice mode remains a local, approval-gated Computer Use command
+  ---
+  duration_ms: 8.1862
+  type: 'test'
+  ...
+# Subtest: voice engine migration commands stay local and require a safe preflight
+ok 31 - voice engine migration commands stay local and require a safe preflight
+  ---
+  duration_ms: 2.5175
+  type: 'test'
+  ...
+# Subtest: generic change language creates a reviewable local plan
+ok 32 - generic change language creates a reviewable local plan
+  ---
+  duration_ms: 4.0591
+  type: 'test'
+  ...
+# Subtest: photo organizer commands stay local and approval-gated
+ok 33 - photo organizer commands stay local and approval-gated
+  ---
+  duration_ms: 2.7329
+  type: 'test'
+  ...
+# Subtest: destructive file commands become local approval-gated plans
+ok 34 - destructive file commands become local approval-gated plans
+  ---
+  duration_ms: 3.1355
+  type: 'test'
+  ...
+# Subtest: generic app task requests become approval-gated workflows
+ok 35 - generic app task requests become approval-gated workflows
+  ---
+  duration_ms: 1.8772
+  type: 'test'
+  ...
+# Subtest: natural app search and copy requests become bounded visual workflows
+ok 36 - natural app search and copy requests become bounded visual workflows
+  ---
+  duration_ms: 1.1664
+  type: 'test'
+  ...
+# Subtest: combined English app search keeps the app and query separate
+ok 37 - combined English app search keeps the app and query separate
+  ---
+  duration_ms: 2.5628
+  type: 'test'
+  ...
+# Subtest: direct download requests use the official Microsoft Store flow
+ok 38 - direct download requests use the official Microsoft Store flow
+  ---
+  duration_ms: 0.546
+  type: 'test'
+  ...
+# Subtest: task memory commands resolve to safe replay and cleanup actions
+ok 39 - task memory commands resolve to safe replay and cleanup actions
+  ---
+  duration_ms: 4.6339
+  type: 'test'
+  ...
+# Subtest: Google search extracts the subject regardless of word order
+ok 40 - Google search extracts the subject regardless of word order
+  ---
+  duration_ms: 3.8235
+  type: 'test'
+  ...
+# Subtest: currency tools are selected only for an actual currency conversion or rate request
+ok 41 - currency tools are selected only for an actual currency conversion or rate request
+  ---
+  duration_ms: 8.2696
+  type: 'test'
+  ...
+# Subtest: presentation requests extract arbitrary topics and exact total slide counts
+ok 42 - presentation requests extract arbitrary topics and exact total slide counts
+  ---
+  duration_ms: 7.3082
+  type: 'test'
+  ...
+# Subtest: presentation parser accepts conversational requests, count ranges and image targets
+ok 43 - presentation parser accepts conversational requests, count ranges and image targets
+  ---
+  duration_ms: 10.7839
+  type: 'test'
+  ...
+# Subtest: presentation and PDF parsers accept natural voice-first phrasing
+ok 44 - presentation and PDF parsers accept natural voice-first phrasing
+  ---
+  duration_ms: 2.9025
+  type: 'test'
+  ...
+# Subtest: artifact and native app commands stay out of the browser route
+ok 45 - artifact and native app commands stay out of the browser route
+  ---
+  duration_ms: 4.2034
+  type: 'test'
+  ...
+# Subtest: natural Hindi, Hinglish and English PPT requests retain topic, slide and visual requirements
+ok 46 - natural Hindi, Hinglish and English PPT requests retain topic, slide and visual requirements
+  ---
+  duration_ms: 15.0337
+  type: 'test'
+  ...
+# Subtest: real-world Roman Hindi STT errors still route to PPT creation with the full image request
+ok 47 - real-world Roman Hindi STT errors still route to PPT creation with the full image request
+  ---
+  duration_ms: 4.0528
+  type: 'test'
+  ...
+# Subtest: exact Roman Hindi STT request invokes the existing presentation bridge with original preferences
+ok 48 - exact Roman Hindi STT request invokes the existing presentation bridge with original preferences
+  ---
+  duration_ms: 9.5999
+  type: 'test'
+  ...
+# Subtest: PPT completion is never claimed unless the bridge confirms a verified saved file
+ok 49 - PPT completion is never claimed unless the bridge confirms a verified saved file
+  ---
+  duration_ms: 3.1353
+  type: 'test'
+  ...
+# Subtest: ChatEngine voice entry prefers the raw transcript and bypasses generic chat for PPT requests
+ok 50 - ChatEngine voice entry prefers the raw transcript and bypasses generic chat for PPT requests
+  ---
+  duration_ms: 38.0258
+  type: 'test'
+  ...
+# Subtest: all supported natural-language examples execute through the existing PPT bridge
+ok 51 - all supported natural-language examples execute through the existing PPT bridge
+  ---
+  duration_ms: 11.9792
+  type: 'test'
+  ...
+# Subtest: PDF requests extract arbitrary topics in English and Hindi
+ok 52 - PDF requests extract arbitrary topics in English and Hindi
+  ---
+  duration_ms: 3.1451
+  type: 'test'
+  ...
+# Subtest: office-file requests route DOCX, CSV, and ZIP creation in English and Hindi
+ok 53 - office-file requests route DOCX, CSV, and ZIP creation in English and Hindi
+  ---
+  duration_ms: 18.1813
+  type: 'test'
+  ...
+# Subtest: office-file execution calls the secure document bridge and reports cancellation honestly
+ok 54 - office-file execution calls the secure document bridge and reports cancellation honestly
+  ---
+  duration_ms: 5.8838
+  type: 'test'
+  ...
+# Subtest: AI queue voice commands preserve message text and route control actions
+ok 55 - AI queue voice commands preserve message text and route control actions
+  ---
+  duration_ms: 5.4636
+  type: 'test'
+  ...
+# Subtest: AI queue command adds the original unmodified message text
+ok 56 - AI queue command adds the original unmodified message text
+  ---
+  duration_ms: 3.8218
+  type: 'test'
+  ...
+# Subtest: reply-triggered shutdown command arms only the selected provider
+ok 57 - reply-triggered shutdown command arms only the selected provider
+  ---
+  duration_ms: 1.7858
+  type: 'test'
+  ...
+# Subtest: targeted site searches retain a site and query
+ok 58 - targeted site searches retain a site and query
+  ---
+  duration_ms: 3.2119
+  type: 'test'
+  ...
+# Subtest: natural image requests resolve to a clean image search query
+ok 59 - natural image requests resolve to a clean image search query
+  ---
+  duration_ms: 7.0301
+  type: 'test'
+  ...
+# Subtest: image searches return a rich gallery for the chat renderer
+ok 60 - image searches return a rich gallery for the chat renderer
+  ---
+  duration_ms: 3.4826
+  type: 'test'
+  ...
+# Subtest: image requests still offer a Google Images link when previews are unavailable
+ok 61 - image requests still offer a Google Images link when previews are unavailable
+  ---
+  duration_ms: 2.5704
+  type: 'test'
+  ...
+# Subtest: targeted site searches open the matching site's search URL
+ok 62 - targeted site searches open the matching site's search URL
+  ---
+  duration_ms: 10.0616
+  type: 'test'
+  ...
+# Subtest: combined spoken site commands stay local and preserve the search query
+ok 63 - combined spoken site commands stay local and preserve the search query
+  ---
+  duration_ms: 2.7622
+  type: 'test'
+  ...
+# Subtest: volume commands resolve to a bounded system-volume intent
+ok 64 - volume commands resolve to a bounded system-volume intent
+  ---
+  duration_ms: 5.3243
+  type: 'test'
+  ...
+# Subtest: volume action calls only the narrow system.setVolume bridge and reports failure honestly
+ok 65 - volume action calls only the narrow system.setVolume bridge and reports failure honestly
+  ---
+  duration_ms: 4.1507
+  type: 'test'
+  ...
+# Subtest: currency entities are extracted with aliases
+ok 66 - currency entities are extracted with aliases
+  ---
+  duration_ms: 1.4266
+  type: 'test'
+  ...
+# Subtest: wake word is normalized without losing the command
+ok 67 - wake word is normalized without losing the command
+  ---
+  duration_ms: 1.3401
+  type: 'test'
+  ...
+# Subtest: delayed shutdown commands recognize English, Hinglish, Hindi words, and Hindi digits
+ok 68 - delayed shutdown commands recognize English, Hinglish, Hindi words, and Hindi digits
+  ---
+  duration_ms: 8.9602
+  type: 'test'
+  ...
+# Subtest: delayed shutdown calls the existing system bridge and reports the scheduled time
+ok 69 - delayed shutdown calls the existing system bridge and reports the scheduled time
+  ---
+  duration_ms: 4.0132
+  type: 'test'
+  ...
+# Subtest: missing entities produce clarification
+ok 70 - missing entities produce clarification
+  ---
+  duration_ms: 1.5564
+  type: 'test'
+  ...
+# Subtest: app workflows await Autopilot readiness before launching and submit searches
+ok 71 - app workflows await Autopilot readiness before launching and submit searches
+  ---
+  duration_ms: 6.4149
+  type: 'test'
+  ...
+# Subtest: workflow planner normalizes safe targets before any computer action
+ok 72 - workflow planner normalizes safe targets before any computer action
+  ---
+  duration_ms: 8.9658
+  type: 'test'
+  ...
+# Subtest: visual workflow retries failed targets but stops at a bounded limit
+ok 73 - visual workflow retries failed targets but stops at a bounded limit
+  ---
+  duration_ms: 39.0472
+  type: 'test'
+  ...
+# Subtest: visual workflow fails closed when Computer Use is inactive
+ok 74 - visual workflow fails closed when Computer Use is inactive
+  ---
+  duration_ms: 2.5974
+  type: 'test'
+  ...
+# Subtest: visual workflow verifies the next screen state before completing a step
+ok 75 - visual workflow verifies the next screen state before completing a step
+  ---
+  duration_ms: 6.8195
+  type: 'test'
+  ...
+# Subtest: visual workflow does not repeat an ambiguous side effect
+ok 76 - visual workflow does not repeat an ambiguous side effect
+  ---
+  duration_ms: 4.2053
+  type: 'test'
+  ...
+# Subtest: stop during a scan prevents subsequent workflow actions
+ok 77 - stop during a scan prevents subsequent workflow actions
+  ---
+  duration_ms: 6.0546
+  type: 'test'
+  ...
+# Subtest: concurrent workflows are rejected; exceptions clear the running state
+ok 78 - concurrent workflows are rejected; exceptions clear the running state
+  ---
+  duration_ms: 3.2669
+  type: 'test'
+  ...
+# Subtest: failed scans and low confidence detections cannot prove disappearance
+ok 79 - failed scans and low confidence detections cannot prove disappearance
+  ---
+  duration_ms: 3.953
+  type: 'test'
+  ...
+# Subtest: reported action attempts are never retried and zero delay is respected
+ok 80 - reported action attempts are never retried and zero delay is respected
+  ---
+  duration_ms: 5.0911
+  type: 'test'
+  ...
+# Subtest: safe target alternatives are rescanned before a retry
+ok 81 - safe target alternatives are rescanned before a retry
+  ---
+  duration_ms: 8.2717
+  type: 'test'
+  ...
+# Subtest: task replay retains keyboard actions
+ok 82 - task replay retains keyboard actions
+  ---
+  duration_ms: 40.8922
+  type: 'test'
+  ...
+# 🧠 JARVIS Natural Command Engine NCE-V1 READY
+# Subtest: Microphone requests device echo cancellation and suppression without leakage-amplifying AGC
+ok 83 - Microphone requests device echo cancellation and suppression without leakage-amplifying AGC
+  ---
+  duration_ms: 17.6802
+  type: 'test'
+  ...
+# Subtest: Loud delayed self-voice never interrupts TTS or enters the transcription buffer
+ok 84 - Loud delayed self-voice never interrupts TTS or enters the transcription buffer
+  ---
+  duration_ms: 278.2215
+  type: 'test'
+  ...
+# Subtest: User speech mixed with loud TTS interrupts and retained PCM contains the user residual
+ok 85 - User speech mixed with loud TTS interrupts and retained PCM contains the user residual
+  ---
+  duration_ms: 249.0872
+  type: 'test'
+  ...
+# Subtest: Echo tail is removed after output stops, and expired references leave unrelated speech intact
+ok 86 - Echo tail is removed after output stops, and expired references leave unrelated speech intact
+  ---
+  duration_ms: 39.5227
+  type: 'test'
+  ...
+# Subtest: Uncorrelated user speech passes through while a TTS reference exists
+ok 87 - Uncorrelated user speech passes through while a TTS reference exists
+  ---
+  duration_ms: 28.6832
+  type: 'test'
+  ...
+# Subtest: Multiple speaker reflection paths are suppressed without muting capture
+ok 88 - Multiple speaker reflection paths are suppressed without muting capture
+  ---
+  duration_ms: 206.0701
+  type: 'test'
+  ...
+# Subtest: Playback reference decode averages stereo channels at the capture rate and fails safely
+ok 89 - Playback reference decode averages stereo channels at the capture rate and fails safely
+  ---
+  duration_ms: 7.4767
+  type: 'test'
+  ...
+# Subtest: TTS hand-off keeps the mic open and continuous restart works while speaking
+ok 90 - TTS hand-off keeps the mic open and continuous restart works while speaking
+  ---
+  duration_ms: 4.2755
+  type: 'test'
+  ...
+# Subtest: Sustained speech interrupts pending synthesis and preserves opening PCM through transcription
+ok 91 - Sustained speech interrupts pending synthesis and preserves opening PCM through transcription
+  ---
+  duration_ms: 12.498
+  type: 'test'
+  ...
+# Subtest: Low residual echo and isolated noise do not interrupt or reach Whisper
+ok 92 - Low residual echo and isolated noise do not interrupt or reach Whisper
+  ---
+  duration_ms: 12.7272
+  type: 'test'
+  ...
+# Subtest: Muted or manual mode never opens a mic merely because TTS starts
+ok 93 - Muted or manual mode never opens a mic merely because TTS starts
+  ---
+  duration_ms: 3.262
+  type: 'test'
+  ...
+# Subtest: raw app dictation bypasses browser interception even when speech normalization changes it
+ok 94 - raw app dictation bypasses browser interception even when speech normalization changes it
+  ---
+  duration_ms: 34.8309
+  type: 'test'
+  ...
+# \#< CLIXML
+# <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>\#< CLIXML
+# Subtest: PowerShell typing enumerates Unicode characters and supplies key state
+ok 95 - PowerShell typing enumerates Unicode characters and supplies key state
+  ---
+  duration_ms: 1550.9613
+  type: 'test'
+  ...
+# Subtest: PowerShell cursor movement does not resolve the built-in Move-Item alias
+ok 96 - PowerShell cursor movement does not resolve the built-in Move-Item alias
+  ---
+  duration_ms: 1160.6248
+  type: 'test'
+  ...
+# Subtest: computer use requires an active session
+ok 97 - computer use requires an active session
+  ---
+  duration_ms: 0.7746
+  type: 'test'
+  ...
+# Subtest: computer use allows a bounded click after explicit session start
+ok 98 - computer use allows a bounded click after explicit session start
+  ---
+  duration_ms: 1.8154
+  type: 'test'
+  ...
+# Subtest: accessibility inspection returns native UI elements only during an active session
+ok 99 - accessibility inspection returns native UI elements only during an active session
+  ---
+  duration_ms: 0.5281
+  type: 'test'
+  ...
+# Subtest: drag is bounded and requires approval
+ok 100 - drag is bounded and requires approval
+  ---
+  duration_ms: 0.6635
+  type: 'test'
+  ...
+# Subtest: typing and hotkeys require action-time approval
+ok 101 - typing and hotkeys require action-time approval
+  ---
+  duration_ms: 0.6142
+  type: 'test'
+  ...
+# Subtest: validation rejects arbitrary or oversized input
+ok 102 - validation rejects arbitrary or oversized input
+  ---
+  duration_ms: 1.4616
+  type: 'test'
+  ...
+# Subtest: emergency stop invalidates the session
+ok 103 - emergency stop invalidates the session
+  ---
+  duration_ms: 1.0224
+  type: 'test'
+  ...
+# <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+1..103
+# tests 103
+# suites 0
+# pass 103
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3441.2391

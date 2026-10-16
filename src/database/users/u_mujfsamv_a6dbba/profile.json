@@ -1,0 +1,23 @@
+{
+  "name": "PinReject",
+  "preferredName": "PinReject",
+  "email": "",
+  "phone": "",
+  "address": "",
+  "dateOfBirth": "",
+  "language": "en",
+  "secondaryLanguage": "",
+  "autoLanguageDetect": false,
+  "country": "",
+  "region": "",
+  "city": "",
+  "timezone": "",
+  "occupation": "",
+  "education": "",
+  "interests": [],
+  "hobbies": [],
+  "avatarColor": "#FF5252",
+  "avatarInitials": "PI",
+  "userId": "u_mujfsamv_a6dbba",
+  "version": 2
+}

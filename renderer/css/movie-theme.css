@@ -1,0 +1,598 @@
+/* ============================================================
+   JARVIS — MOVIE HUD THEME (Iron Man style)
+   Overrides all existing cartoonish/friendly styles with a
+   cold, technical, cinematic Iron Man JARVIS aesthetic.
+   ============================================================ */
+
+/* ========================================= */
+/* ROOT VARIABLES OVERRIDE                   */
+/* ========================================= */
+
+:root {
+    --bg-void:        #020508;
+    --bg-panel:        rgba(8, 14, 22, 0.82);
+    --bg-panel-solid:  #060b12;
+    --border-glow:     rgba(0, 217, 255, 0.18);
+    --border-soft:     rgba(0, 217, 255, 0.08);
+    --border-hud:      rgba(0, 217, 255, 0.15);
+
+    --cyan:            #00d9ff;
+    --cyan-bright:     #5ef0ff;
+    --cyan-dim:        rgba(0, 217, 255, 0.35);
+    --amber:           #ffb347;
+    --red:             #ff3b5c;
+    --green:           #2dffb0;
+
+    --text-primary:    #d5e8f5;
+    --text-secondary:  #5a7a8e;
+    --text-faint:      #2d4452;
+
+    --font-display:    "SF Mono", "Cascadia Mono", "Consolas", monospace;
+    --font-heading:    "SF Mono", "Cascadia Mono", "Consolas", monospace;
+    --font-body:       "SF Mono", "Cascadia Mono", "Consolas", monospace;
+
+    --radius:          2px;
+    --transition:      0.15s ease;
+}
+
+/* ========================================= */
+/* GLOBAL                                    */
+/* ========================================= */
+
+* {
+    font-family: var(--font-body) !important;
+}
+
+body {
+    background: var(--bg-void) !important;
+    color: var(--text-primary);
+    background-image:
+        linear-gradient(rgba(0, 217, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.015) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+}
+
+/* Scan line overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 217, 255, 0.012) 50%,
+        transparent 100%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: scanLine 8s linear infinite;
+}
+@keyframes scanLine {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100vh; }
+}
+
+/* ========================================= */
+/* LAYOUT                                    */
+/* ========================================= */
+
+.mainLayout {
+    gap: 1px !important;
+    padding: 8px !important;
+}
+
+.sidebar,
+.right-panel,
+.chat-panel,
+.center-panel {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-hud) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(6px);
+}
+
+/* Corner bracket decorations on panels */
+.sidebar::before,
+.right-panel::before,
+.chat-panel::before,
+.center-panel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 12px; height: 12px;
+    border-top: 1px solid var(--cyan);
+    border-left: 1px solid var(--cyan);
+    pointer-events: none;
+}
+.sidebar::after,
+.right-panel::after,
+.chat-panel::after,
+.center-panel::after {
+    content: "";
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 12px; height: 12px;
+    border-bottom: 1px solid var(--cyan);
+    border-right: 1px solid var(--cyan);
+    pointer-events: none;
+}
+
+/* ========================================= */
+/* SIDEBAR                                   */
+/* ========================================= */
+
+.sidebar { padding: 10px !important; }
+
+.profile-card {
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 0 12px 0 !important;
+}
+.profile-card .profile-name {
+    font-size: 14px !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--text-primary) !important;
+}
+.profile-card .profile-role {
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase !important;
+}
+
+/* Nav menu items */
+.menu-item {
+    background: none !important;
+    border: none !important;
+    border-left: 2px solid transparent !important;
+    border-radius: 0 !important;
+    color: var(--text-secondary) !important;
+    font-size: 11px !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    padding: 8px 10px !important;
+    transition: all 0.15s ease !important;
+}
+.menu-item:hover:not(.active) {
+    background: rgba(0, 217, 255, 0.03) !important;
+    color: var(--text-primary) !important;
+    border-left-color: var(--cyan-dim) !important;
+}
+.menu-item.active {
+    background: rgba(0, 217, 255, 0.05) !important;
+    border-left-color: var(--cyan) !important;
+    color: var(--cyan) !important;
+    box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.03) !important;
+}
+
+/* ========================================= */
+/* GREETING CARD (HUD STATUS READOUT)        */
+/* ========================================= */
+
+.greeting-card {
+    background: none !important;
+    border: 1px solid var(--border-hud) !important;
+    border-radius: var(--radius) !important;
+    min-height: 80px !important;
+    box-shadow: none !important;
+    position: relative;
+}
+.greeting-card::before,
+.greeting-card::after {
+    content: "";
+    position: absolute;
+    width: 8px; height: 8px;
+}
+.greeting-card::before {
+    top: 0; left: 0;
+    border-top: 1px solid var(--cyan);
+    border-left: 1px solid var(--cyan);
+}
+.greeting-card::after {
+    bottom: 0; right: 0;
+    border-bottom: 1px solid var(--cyan);
+    border-right: 1px solid var(--cyan);
+}
+.greeting-bg { display: none !important; }
+.greeting-content {
+    padding: 12px 16px !important;
+}
+.hud-label {
+    font-size: 10px !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--cyan) !important;
+    opacity: 0.7;
+}
+.greeting-text h2 {
+    font-size: 20px !important;
+    letter-spacing: 4px !important;
+    font-weight: 300 !important;
+    color: var(--text-primary) !important;
+    margin: 2px 0 !important;
+}
+.hud-subtext {
+    font-size: 10px !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+}
+.greeting-quote,
+.hud-readout {
+    font-size: 10px !important;
+    font-style: normal !important;
+    color: var(--text-secondary) !important;
+    text-align: right !important;
+    max-width: 180px !important;
+    opacity: 0.5;
+    line-height: 1.4 !important;
+}
+
+/* ========================================= */
+/* QUICK ACCESS                              */
+/* ========================================= */
+
+.quick-access {
+    gap: 1px !important;
+    margin-bottom: 8px !important;
+}
+.qa-btn {
+    background: rgba(0, 217, 255, 0.02) !important;
+    border: 1px solid var(--border-soft) !important;
+    border-radius: 0 !important;
+    padding: 10px 4px !important;
+    transition: all 0.15s ease !important;
+}
+.qa-btn:hover {
+    background: rgba(0, 217, 255, 0.06) !important;
+    border-color: var(--cyan-dim) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+.qa-marker {
+    width: 6px !important;
+    height: 6px !important;
+    background: var(--cyan-dim);
+    border-radius: 50%;
+    display: block;
+    margin-bottom: 4px;
+    transition: all 0.15s ease;
+}
+.qa-btn:hover .qa-marker {
+    background: var(--cyan);
+    box-shadow: 0 0 6px var(--cyan);
+}
+.qa-label {
+    font-size: 9px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase !important;
+}
+.qa-btn:hover .qa-label {
+    color: var(--text-primary) !important;
+}
+
+/* ========================================= */
+/* ARC REACTOR                               */
+/* ========================================= */
+
+.orb-container {
+    filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.15)) !important;
+}
+.ring {
+    border-color: rgba(0, 217, 255, 0.08) !important;
+}
+.orb-glow {
+    background: radial-gradient(
+        circle,
+        rgba(0, 217, 255, 0.12) 0%,
+        transparent 70%
+    ) !important;
+}
+
+/* ========================================= */
+/* CORE HEADER                               */
+/* ========================================= */
+
+.core-header h2 {
+    font-size: 12px !important;
+    letter-spacing: 3px !important;
+    font-weight: 400 !important;
+    color: var(--text-secondary) !important;
+}
+#systemStatus {
+    font-size: 10px !important;
+    letter-spacing: 1.5px !important;
+    color: var(--green) !important;
+    text-transform: uppercase !important;
+}
+
+/* ========================================= */
+/* CONSCIOUSNESS PANEL                       */
+/* ========================================= */
+
+.consciousness-panel {
+    background: rgba(2, 5, 8, 0.5) !important;
+    border: 1px solid var(--border-soft) !important;
+    border-radius: var(--radius) !important;
+}
+.consciousness-head h3 {
+    font-size: 10px !important;
+    letter-spacing: 2px !important;
+    color: var(--text-secondary) !important;
+}
+.hud-kicker {
+    font-size: 8px !important;
+    letter-spacing: 1.5px !important;
+    color: var(--cyan-dim) !important;
+}
+.consciousness-pill {
+    font-size: 9px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+}
+
+/* ========================================= */
+/* RIGHT PANEL                               */
+/* ========================================= */
+
+.right-panel { padding: 10px !important; }
+
+.right-panel h3,
+.right-panel .section-title {
+    font-size: 10px !important;
+    letter-spacing: 2px !important;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase !important;
+}
+
+/* Monitor bars */
+.health-bar-fill,
+.monitor-bar-fill,
+.health-bar,
+.monitor-bar {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+.health-bar-fill {
+    background: var(--cyan) !important;
+    box-shadow: 0 0 4px rgba(0, 217, 255, 0.2) !important;
+}
+
+/* Status pills */
+.status-pill {
+    font-size: 9px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* ========================================= */
+/* CHAT PANEL                                */
+/* ========================================= */
+
+.chat-panel { padding: 10px !important; }
+
+.chat-message {
+    animation: none !important;
+}
+
+/* ========================================= */
+/* BROWSER                                   */
+/* ========================================= */
+
+.browser-panel {
+    border: 1px solid var(--border-hud) !important;
+    border-radius: var(--radius) !important;
+    background: var(--bg-void) !important;
+}
+.browser-toolbar {
+    background: rgba(2, 5, 8, 0.8) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    backdrop-filter: blur(4px) !important;
+}
+.browser-btn {
+    border-radius: 0 !important;
+    border: 1px solid var(--border-soft) !important;
+    font-size: 12px !important;
+    width: 26px !important;
+    height: 26px !important;
+}
+.browser-btn:hover {
+    background: rgba(0, 217, 255, 0.06) !important;
+    border-color: var(--cyan-dim) !important;
+    box-shadow: none !important;
+}
+.browser-viewport {
+    background: #fff !important;
+}
+
+/* ========================================= */
+/* PANELS (Memory/Settings/Files)            */
+/* ========================================= */
+
+.memory-panel,
+.settings-panel,
+.files-panel {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-hud) !important;
+    border-radius: var(--radius) !important;
+    padding: 16px !important;
+    box-shadow: none !important;
+    position: relative;
+}
+.panel-header h2 {
+    font-size: 14px !important;
+    letter-spacing: 3px !important;
+    font-weight: 300 !important;
+    padding-left: 10px !important;
+}
+.panel-header h2::before {
+    width: 2px !important;
+    box-shadow: 0 0 4px var(--cyan) !important;
+}
+.panel-kicker {
+    font-size: 8px !important;
+    letter-spacing: 1.5px !important;
+}
+.panel-btn {
+    border-radius: 0 !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+}
+.panel-search {
+    border-radius: 0 !important;
+    font-size: 11px !important;
+}
+.memory-item,
+.files-item {
+    border-radius: 0 !important;
+    border: 1px solid var(--border-soft) !important;
+    background: rgba(0, 217, 255, 0.01) !important;
+    font-size: 11px !important;
+}
+.memory-item:hover,
+.files-item:hover {
+    background: rgba(0, 217, 255, 0.04) !important;
+    border-color: var(--border-hud) !important;
+}
+.settings-group {
+    border-radius: 0 !important;
+    background: rgba(0, 217, 255, 0.01) !important;
+}
+.settings-label {
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: var(--text-secondary) !important;
+}
+.settings-select {
+    border-radius: 0 !important;
+    font-size: 11px !important;
+}
+
+/* ========================================= */
+/* BUTTONS                                   */
+/* ========================================= */
+
+.hud-btn {
+    border-radius: 0 !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    border: 1px solid var(--border-soft) !important;
+    background: rgba(0, 217, 255, 0.02) !important;
+}
+.hud-btn:hover {
+    background: rgba(0, 217, 255, 0.08) !important;
+    border-color: var(--cyan-dim) !important;
+    box-shadow: none !important;
+}
+
+/* ========================================= */
+/* INPUTS                                    */
+/* ========================================= */
+
+#chatInput {
+    border-radius: 0 !important;
+    border: 1px solid var(--border-soft) !important;
+    background: rgba(2, 5, 8, 0.6) !important;
+    font-size: 12px !important;
+}
+#chatInput:focus {
+    box-shadow: 0 0 0 1px var(--cyan-dim) !important;
+    border-color: var(--cyan) !important;
+}
+
+/* ========================================= */
+/* SCROLLBAR                                 */
+/* ========================================= */
+
+::-webkit-scrollbar { width: 4px !important; }
+::-webkit-scrollbar-track { background: transparent !important; }
+::-webkit-scrollbar-thumb {
+    background: var(--cyan-dim) !important;
+    border-radius: 0 !important;
+}
+
+/* ========================================= */
+/* SELECTION                                  */
+/* ========================================= */
+
+::selection {
+    background: rgba(0, 217, 255, 0.2) !important;
+}
+
+/* ========================================= */
+/* HEALTH/BACKGROUND EVENTS PANELS           */
+/* ========================================= */
+
+.health-panel,
+.background-events-panel {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border-hud) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: none !important;
+}
+.health-header h2,
+.background-events-header h2 {
+    font-size: 14px !important;
+    letter-spacing: 3px !important;
+    font-weight: 300 !important;
+}
+.health-kicker,
+.background-events-kicker {
+    font-size: 8px !important;
+    letter-spacing: 1.5px !important;
+}
+.health-card {
+    border: 1px solid var(--border-soft) !important;
+    border-radius: var(--radius) !important;
+    background: rgba(0, 217, 255, 0.01) !important;
+}
+
+/* ========================================= */
+/* TOP HEADER                                */
+/* ========================================= */
+
+.top-header,
+.app-header {
+    background: rgba(2, 5, 8, 0.9) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+}
+
+/* Clock display */
+.clock-display,
+#clock,
+#clockDisplay {
+    font-family: var(--font-display) !important;
+    letter-spacing: 3px !important;
+    color: var(--cyan) !important;
+    font-weight: 300 !important;
+}
+
+/* ========================================= */
+/* RESPONSIVE                                */
+/* ========================================= */
+
+@media (max-width: 800px) {
+    .greeting-content {
+        flex-direction: column !important;
+        text-align: left !important;
+    }
+    .greeting-quote {
+        text-align: left !important;
+        max-width: 100% !important;
+    }
+    .quick-access { flex-wrap: wrap !important; }
+    .qa-btn { min-width: 60px !important; }
+}

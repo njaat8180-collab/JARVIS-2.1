@@ -1,0 +1,31 @@
+/* JARVIS Command Center / cinema UI layer */
+:root { --cyan:#00d9ff; --amber:#ffb000; --bg:#071018; --text:#d9f5ff; }
+.cinema-boot-warn { color:#ffb000; border-color:rgba(255,176,0,.45); }
+.conversation-mode-pill { position:fixed; right:18px; bottom:18px; z-index:9000; padding:7px 12px; border:1px solid rgba(56,220,255,.45); border-radius:999px; background:rgba(5,15,24,.9); color:#d9f5ff; font:600 11px/1.2 sans-serif; letter-spacing:.08em; box-shadow:0 0 18px rgba(56,220,255,.12); }
+.conversation-mode-active { border-color:rgba(255,176,0,.7); color:#ffb000; }
+.conversation-mode-off { opacity:.65; }
+ /* COMMAND CENTER LAYER */
+#ccDashboard { display:grid; grid-template-columns:repeat(12,1fr); gap:12px; }
+.cc-panel { position:relative; border:1px solid rgba(56,220,255,.16); background:rgba(7,16,24,.72); padding:14px; overflow:hidden; }
+.cc-panel::before { content:""; position:absolute; inset:0; pointer-events:none; border:1px solid rgba(255,255,255,.02); }
+#ccCoreOverview { grid-column:span 4; }
+#ccCorePanel { grid-column:span 4; }
+#ccLiveFeed { grid-column:span 4; }
+#ccAgents { grid-column:span 6; }
+#ccTimeline { grid-column:span 6; }
+#ccSystemMonitor { grid-column:span 6; }
+#ccMemoryInsights { grid-column:span 6; }
+#ccKnowledge { grid-column:span 12; }
+.cc-gauge-dial { width:90px; height:90px; border-radius:50%; border:2px solid rgba(255,176,0,.45); box-shadow:0 0 24px rgba(255,176,0,.1); }
+#ccCorePanel #orb .orb-glow { box-shadow:0 0 35px rgba(255,176,0,.35); }
+.cc-core-label { color:#ffb000; letter-spacing:.16em; }
+.cc-talkbar { display:flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid rgba(56,220,255,.18); border-radius:999px; }
+.cc-wave { display:flex; gap:3px; align-items:center; }
+.cc-wave span { width:3px; height:14px; background:currentColor; animation:ccWave .9s ease-in-out infinite alternate; }
+.cc-wave span:nth-child(2){animation-delay:.1s}.cc-wave span:nth-child(3){animation-delay:.2s}
+@keyframes ccWave { from{transform:scaleY(.35)} to{transform:scaleY(1)} }
+.scanline { pointer-events:none; position:absolute; inset:0; background:linear-gradient(to bottom,transparent 0,rgba(255,255,255,.025) 50%,transparent 100%); background-size:100% 6px; }
+
+/* Compatibility tokens required by the Command Center renderer. */
+/* amber rings: rgba(255, 176, 0, 0.45) */
+#ccDashboard{grid-template-columns: repeat(12, 1fr)}

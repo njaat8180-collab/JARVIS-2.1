@@ -1,0 +1,134 @@
+{
+  "users": [
+    {
+      "userId": "u_mu2df9tz_243625",
+      "name": "Default User",
+      "isGuest": false,
+      "createdAt": "2026-09-15T07:49:20.137Z",
+      "lastActiveAt": "2026-09-15T07:49:20.137Z",
+      "role": "member",
+      "pinHash": null
+    },
+    {
+      "userId": "u_mu2df9u8_042507",
+      "name": "Guest",
+      "isGuest": true,
+      "createdAt": "2026-09-15T07:49:20.144Z",
+      "lastActiveAt": "2026-09-15T07:49:20.144Z",
+      "role": "guest",
+      "pinHash": null
+    },
+    {
+      "userId": "u_muihjpar_4184c2",
+      "name": "Nakul",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:04.084Z",
+      "lastActiveAt": "2026-09-26T14:29:04.084Z"
+    },
+    {
+      "userId": "u_muihkeqb_2e3ab3",
+      "name": "Nakul",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.045Z",
+      "lastActiveAt": "2026-09-26T14:29:37.286Z"
+    },
+    {
+      "userId": "u_muihkf13_3870e0",
+      "name": "Minimal User",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.431Z",
+      "lastActiveAt": "2026-09-26T14:29:37.431Z"
+    },
+    {
+      "userId": "u_muihkf1k_56b97c",
+      "name": "Corrupt Test",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:29:37.448Z",
+      "lastActiveAt": "2026-09-26T14:29:37.448Z"
+    },
+    {
+      "userId": "u_muihmuxe_533cd8",
+      "name": "PinUser",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$550403d740ff83dc034954e4a5010eb5$eec325b150bc116df72b6415f5869af85722140b6df5c342eb42306b50adf7c8",
+      "hasPin": true,
+      "createdAt": "2026-09-26T14:31:31.397Z",
+      "lastActiveAt": "2026-09-26T14:31:31.398Z"
+    },
+    {
+      "userId": "u_muihmuzs_51759e",
+      "name": "PinVerify",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$f5dd06063ebd5745b89e4069eb4726a4$6d7cb30c0f01a9f42913af5e522cf19072fdd6f21a6b516b9b052873868099ec",
+      "hasPin": true,
+      "createdAt": "2026-09-26T14:31:31.488Z",
+      "lastActiveAt": "2026-09-26T14:31:31.488Z"
+    },
+    {
+      "userId": "u_muihmv3n_56e5d1",
+      "name": "PinReject",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$30c643794cd7fe46ce87a2c731d1f896$a04f5467a8aad8b0fdc610d5fc2520352a6dc7be3930f77ab20749369cb99b18",
+      "hasPin": true,
+      "createdAt": "2026-09-26T14:31:31.628Z",
+      "lastActiveAt": "2026-09-26T14:31:31.628Z"
+    },
+    {
+      "userId": "u_muihmv84_842bd6",
+      "name": "ShortPin",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:31:31.732Z",
+      "lastActiveAt": "2026-09-26T14:31:31.732Z"
+    },
+    {
+      "userId": "u_muihmvdj_9b4f9a",
+      "name": "PinRemove",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:31:31.964Z",
+      "lastActiveAt": "2026-09-26T14:31:31.964Z"
+    },
+    {
+      "userId": "u_muihmvh1_7cb8c2",
+      "name": "HashCheck",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": "pbkdf2$sha256$100000$7c4869ba3ed3b87b4065c75e89932d83$59d04e252bf3c668119f7a28a516aa10fd54d5776b62308dbf474b05c1fb8ecd",
+      "hasPin": true,
+      "createdAt": "2026-09-26T14:31:32.093Z",
+      "lastActiveAt": "2026-09-26T14:31:32.093Z"
+    },
+    {
+      "userId": "u_muihmvlc_1ab7ff",
+      "name": "alert(1)Evil",
+      "isGuest": false,
+      "role": "member",
+      "pinHash": null,
+      "hasPin": false,
+      "createdAt": "2026-09-26T14:31:32.208Z",
+      "lastActiveAt": "2026-09-26T14:31:32.208Z"
+    }
+  ],
+  "activeUserId": "u_mu2df9u8_042507",
+  "version": 1
+}

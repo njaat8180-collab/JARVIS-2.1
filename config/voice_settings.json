@@ -1,0 +1,17 @@
+{
+  "engine": "auto",
+  "silenceRmsThreshold": 0.002,
+  "minAudioSamples": 1600,
+  "trimSilence": true,
+  "hallucinationRepeatThreshold": 0.75,
+  "enableCorrection": true,
+  "sampleRate": 16000,
+  "whisperModel": "base",
+  "whisperModelPath": "",
+  "whisperExecutable": "",
+  "whisperAutoDownload": true,
+  "whisperTimeoutMs": 120000,
+  "whisperLanguage": "auto",
+  "whisperThreads": 0,
+  "_comment": "Voice Activity Detection + engine settings. 'engine': 'auto' = offline whisper.cpp first with local transformers.js Whisper fallback | 'whisper' = whisper.cpp only, no fallback | 'whisper-js' = in-process transformers.js Whisper only. whisperModel: 'tiny' | 'base' (default — best Hindi+English accuracy/speed balance on 8 GB CPU-only machines) | 'small' (best accuracy, ~3x slower on CPU). whisperAutoDownload: downloads the whisper.cpp runtime + GGML model ONCE on first launch, then fully offline forever. Set whisperModelPath / whisperExecutable to use a manually installed model or binary. Lower silenceRmsThreshold = more sensitive (picks up quieter speech). Increase minAudioSamples to require longer utterances."
+}

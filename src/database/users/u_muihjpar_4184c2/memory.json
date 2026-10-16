@@ -1,0 +1,26 @@
+{
+  "version": 3,
+  "records": [
+    {
+      "id": "dc6719e1-b586-40f4-813c-440216bafd26",
+      "type": "USER_PROFILE",
+      "key": "user.name",
+      "value": "here",
+      "source": "conversation",
+      "createdAt": 1791387794879,
+      "updatedAt": 1791507732571,
+      "confidence": 0.9,
+      "importance": 0.9,
+      "lastUsedAt": 1791507732571,
+      "status": "ACTIVE",
+      "category": "identity",
+      "tags": [],
+      "pinned": false,
+      "expiresAt": null,
+      "accessCount": 0,
+      "lastAccessedAt": 1791387794879,
+      "metadata": {}
+    }
+  ],
+  "episodic": []
+}

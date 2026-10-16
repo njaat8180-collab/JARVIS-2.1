@@ -1,0 +1,26 @@
+{
+  "version": 3,
+  "records": [
+    {
+      "id": "04ff6b9e-2e04-4aaa-8b2b-fc162ce74e21",
+      "type": "USER_FACT",
+      "category": "general",
+      "key": "favorite_language",
+      "value": "Python",
+      "source": "conversation",
+      "createdAt": 1790850903610,
+      "updatedAt": 1790850903610,
+      "confidence": 1,
+      "importance": 0.5,
+      "lastUsedAt": 1790850903621,
+      "lastAccessedAt": 1790850903621,
+      "accessCount": 2,
+      "status": "ACTIVE",
+      "tags": [],
+      "pinned": false,
+      "expiresAt": null,
+      "metadata": {}
+    }
+  ],
+  "episodic": []
+}

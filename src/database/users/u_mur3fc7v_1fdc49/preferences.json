@@ -1,0 +1,23 @@
+{
+  "voice": "",
+  "voiceSpeed": 1,
+  "voicePitch": 1,
+  "ttsEngine": "",
+  "responseStyle": "friendly",
+  "responseLength": "",
+  "personality": [
+    "Friendly"
+  ],
+  "formality": "",
+  "proactiveBehavior": false,
+  "greetingBehavior": "",
+  "adaptiveMode": false,
+  "useNameInResponses": true,
+  "theme": "default",
+  "accentColor": null,
+  "personalityTone": "balanced",
+  "humor": "moderate",
+  "technicalDepth": "medium",
+  "userId": "u_mur3fc7v_1fdc49",
+  "version": 2
+}

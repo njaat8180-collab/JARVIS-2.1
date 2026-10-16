@@ -1,0 +1,23 @@
+{
+  "name": "PinUpdate",
+  "preferredName": "PinUpdate",
+  "email": "",
+  "phone": "",
+  "address": "",
+  "dateOfBirth": "",
+  "language": "en",
+  "secondaryLanguage": "",
+  "autoLanguageDetect": false,
+  "country": "",
+  "region": "",
+  "city": "",
+  "timezone": "",
+  "occupation": "",
+  "education": "",
+  "interests": [],
+  "hobbies": [],
+  "avatarColor": "#FF6B35",
+  "avatarInitials": "PI",
+  "userId": "u_mupebgy4_7a3bea",
+  "version": 2
+}

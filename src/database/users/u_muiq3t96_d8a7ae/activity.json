@@ -1,0 +1,11 @@
+{
+  "loginCount": 0,
+  "lastLoginAt": null,
+  "lastSeenAt": null,
+  "messageCount": 0,
+  "voiceCommandCount": 0,
+  "commandsExecuted": 0,
+  "firstSeenAt": "2026-09-26T18:28:39.266Z",
+  "sessionsCount": 0,
+  "totalSessionMinutes": 0
+}

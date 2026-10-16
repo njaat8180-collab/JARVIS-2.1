@@ -1,0 +1,91 @@
+{
+  "identity": "JARVIS",
+  "role": "personal AI assistant",
+  "mode": "RESPONDING",
+  "mood": "calm",
+  "moodIntensity": 1,
+  "focus": "engaged",
+  "confidence": 0.92,
+  "energy": 0.3,
+  "awarenessLevel": 0.85,
+  "continuity": 466,
+  "lastLanguage": "en",
+  "lastThought": "I processed your input calmly and provided a balanced response.",
+  "thoughtStream": [
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067182909
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067320463
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067320536
+    },
+    {
+      "text": "Maine aapki baat calmly suni aur appropriate answer diya.",
+      "mode": "RESPONDING",
+      "at": 1792067332061
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067332113
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067346659
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067346715
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067355641
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067355698
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067603203
+    },
+    {
+      "text": "Maine aapki baat calmly suni aur appropriate answer diya.",
+      "mode": "RESPONDING",
+      "at": 1792067613707
+    },
+    {
+      "text": "I processed your input calmly and provided a balanced response.",
+      "mode": "RESPONDING",
+      "at": 1792067613751
+    }
+  ],
+  "recentTopics": [
+    "desktop par ek jat nam ka folder bao",
+    "create a folder which name Jaat on my",
+    "create a folder which name jaat on my",
+    "create a folder on my desktop",
+    "Nakul नाम का desktop पर एक folder बना",
+    "nakul nam ka desktop par ek folder ba"
+  ],
+  "activeGoal": null,
+  "goalHistory": [],
+  "trustLevel": 1,
+  "userRelationship": "trusted companion",
+  "responseStyle": "friendly",
+  "lastActivityAt": 1792067613751,
+  "updatedAt": 1792067613751
+}

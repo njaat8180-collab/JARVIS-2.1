@@ -1,0 +1,94 @@
+{
+  "name": "jarvis-4",
+  "productName": "JARVIS",
+  "version": "4.3.6",
+  "description": "Personal desktop assistant — Sarvam AI with Ollama and local knowledge fallbacks",
+  "author": "Nakul Tomar",
+  "license": "MIT",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test": "node --test --test-concurrency=1 test/*.test.js",
+    "test:phase8": "node --test test/long-term-memory-phase8.test.js test/no-ai-verification.test.js",
+    "test:evolution": "node --test test/goal-registry.test.js test/checkpoint.test.js test/evolution-engine.test.js test/research-provider.test.js",
+    "test:assistant": "node --test test/assistant-orchestrator.test.js test/task-verifier.test.js",
+    "test:lab": "node --test test/lab-engine.test.js",
+    "test:deferred-shutdown": "node --test test/deferred-provider-shutdown.test.js",
+    "test:ai-queue": "node --test test/ai-message-queue-engine.test.js",
+    "test:phase7": "node --test test/system-action-adapter.test.js test/browser-action-adapter.test.js test/phase7-assistant-integration.test.js",
+    "test:bilingual": "node test/bilingual-consciousness.test.js",
+    "build": "electron-builder",
+    "dist": "electron-builder --win",
+    "setup:whisper": "node scripts/setup-whisper.js",
+    "test:stt": "node scripts/test-stt.js",
+    "test:stt:mic": "electron scripts/test-stt-mic.js",
+    "test:wikipedia": "node scripts/test-wikipedia.js",
+    "test:whisper": "node --test test/whisper-stt.test.js",
+    "test:ollama": "node --test test/ollama-client.test.js",
+    "test:final": "node --test test/final-integration-regression.test.js",
+    "test:focus-sprint": "node --test test/focus-sprint.test.js",
+    "test:phase9": "node --test test/stt.test.js test/phase9-offline-voice.test.js",
+    "test:phase10-12": "node --test test/phase10-12-final.test.js",
+    "test:multilingual": "node --test test/multilingual-voice.test.js",
+    "test:production": "node test/production-pipeline.test.js",
+    "eval:agent": "node scripts/evaluate-jarvis.js"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^3.7.2",
+    "axios": "^1.11.0",
+    "dotenv": "^17.4.2",
+    "electron-store": "^10.1.0",
+    "jszip": "^3.10.2",
+    "mammoth": "^1.12.3",
+    "node-edge-tts": "^1.2.10",
+    "open": "^10.2.0",
+    "pdf-parse": "^1.1.1",
+    "pptxgenjs": "^4.0.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.nakul.jarvis",
+    "productName": "JARVIS",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "voiceSTT.js",
+      "package.json",
+      "renderer/**",
+      "src/**",
+      "stt/**",
+      "assets/**",
+      "images/**",
+      "sounds/**",
+      "prompts/**",
+      "config/ai_settings.json",
+      "config/voice_settings.json",
+      "config/speech_corrections.json",
+      "scripts/voice_clone_server.py",
+      "scripts/xtts_v2_server.py",
+      "!src/database/**",
+      "!**/.env*",
+      "!**/*.{log,bak,pem,key}",
+      "!**/__pycache__/**"
+    ],
+    "extraResources": [
+      {
+        "from": "models/whisper",
+        "to": "models/whisper"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

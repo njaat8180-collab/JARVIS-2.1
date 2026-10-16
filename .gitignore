@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+
+# Offline STT: whisper.cpp runtime + GGML model binaries are downloaded
+# once at first launch (or via `npm run setup:whisper`) — never commit them.
+models/whisper/bin/
+models/whisper/*.bin
+models/whisper/*.part
+
+# Local AI: per-machine Ollama selection
+config/ai_settings.json
+.env
+.env.*
+!.env.example
+
+# Runtime
+*.log
+.DS_Store
+artifacts/
